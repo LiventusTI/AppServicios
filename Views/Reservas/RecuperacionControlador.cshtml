@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "RecuperacionControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ingresar Recuperacion Controlador <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <label id="Obligatorio" style="color:red; visibility:hidden;">Campos con * son obligatorios</label>
+                <br />
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Controlador (ESN) <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Controlador" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Booking <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Booking" class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Naviera" id="AgregarNaviera"></i>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Contenedor <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Contenedor" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Puerto de Destino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="PuertoDestino" class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Exportador" id="AgregarExportador"></i>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lugar de Recuperacion <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="PuertoDestino" class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <i class="fa fa-plus" title="Agregar FreightForwarder" id="AgregarFreightForwarder"></i>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Coordinador de Retrieval <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Coordinador de Retrieval</option>
+                                    <option value="1">JULIAN ROMERO</option>
+                                    <option value="2">VALESKA FAUNDEZ</option>
+                                    <option value="3">FRANCISCO DEVIVO</option>
+                                    <option value="4">MARKO OLIVARES</option>
+                                    <option value="5">SARA SEPULVEDA</option>
+                                </select>
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Commodity" id="AgregarCommodity"></i>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Retrieval Provider <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Retrieval Provider</option>
+                                    <option value="1">RETRIEVAL PROVIDER 1</option>
+                                    <option value="2">RETRIEVAL PROVIDER 2</option>
+                                    <option value="3">RETRIEVAL PROVIDER 3</option>
+                                    <option value="4">RETRIEVAL PROVIDER 4</option>
+                                    <option value="5">RETRIEVAL PROVIDER 5</option>
+                                    <option value="6">RETRIEVAL PROVIDER 6</option>
+                                </select>
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Commodity" id="AgregarCommodity"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha Recuperacion <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="PuertoDestino" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Cantidad Servicios <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="N_Servicios" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                   
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                            <button type="button" class="btn btn-success" onclick="CrearReservaServicio()">Enviar</button>
+                            @*<p><a class="btn btn-primary btn-lg" href="#" role="button" id="CrearReserva">Guardar</a></p>*@
+                            <button class="btn btn-warning" type="reset">Limpiar</button>
+                            <button class="btn btn-primary" type="reset">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Liventus Web Application</title>
+
+    <!-- Bootstrap -->
+    <link href="~/Vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/Vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+    <script src="~/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Vendors/jquery/dist/jquery-ui.css">
+    <script src="~/Vendors/jquery/dist/jquery-1.12.4.js"></script>
+    <script src="~/Vendors/jquery/dist/jquery-ui.js"></script>
+    <script src="~/build/js/main.js"></script>
+</head>
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <!--<h1 key="inicio" class="tr"  style="text-align:center">Inicio de Sesión</h1>-->
+                <section class="login_content">
+                        
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        <label class="control-label tr" key="usuario" style="text-align:center">Nombre Usuario</label>
+                        <div>
+                            <input type="text" class="form-control" name="user" id="user" style="text-align:center; text-align-last:center;" />
+                        </div>
+                        <label class="control-label tr" key="contrasena" style="text-align:center">Contraseña</label>
+                        <div>
+                            <input type="password" class="form-control" name="pass" id="pass" style="text-align:center; text-align-last:center;" />
+                        </div>
+                        <label class="control-label tr" key="idioma" style="text-align:center">Idioma</label>
+                        <div>
+                            <select  class="form-control" name="lang" id="idioma" style="text-align:center; text-align-last:center;" >
+                                <option value="es_ES">Español</option>
+                                <option value="en_GB">English</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="controls" style="text-align:center">
+                            <button type="submit" key="botoninicio" class="btn btn-default submit tr">Entrar</button>
+                        </div>
+                    }
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><img src="~/images/logo_liventus_blanco.png" /></h1>
+                                <p>©2017 All Rights Reserved </p>
+                                <p>Liventus S.A. <i class="fa fa-registered" id="r"></i></p>
+                            </div>
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

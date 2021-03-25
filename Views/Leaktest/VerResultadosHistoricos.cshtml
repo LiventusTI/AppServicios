@@ -1,0 +1,367 @@
+﻿
+@{
+    ViewBag.Title = "VerResultadosHistoricos";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="historicoresultados">Ver resultados históricos de Leak test</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 class="tr" key="filtrofechas">Filtro de Fechas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="FechaIni" class="control-label tr" key="fechainicio">Fecha Inicio</label>
+                                <input type="text" class="form-control" id="FechaIni" />
+                            </div>
+                            <div class="form-group">
+                                <label for="FechaFin" class="control-label tr" key="entre">Entre</label>
+                                <input type="text" class="form-control" id="FechaFin" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-success tr" key="filtrar" id="FiltroFechas">Filtrar</button>
+                        <button type="button" class="btn btn-warning tr" key="limpiar" id="Limpiar">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content">
+                    <table id="Tb_Resultado" class="display table table-striped table-bordered" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="tr" key="idsolicitud">ID SOLICITUD</th>
+                                <th class="tr" key="navierasolicitud">NAVIERA</th>
+                                <th class="tr" key="paissolicitud">PAIS</th>
+                                <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                                <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                                <th class="tr" key="maquinariatabla">MAQUINARIA</th>
+                                <th class="tr" key="serviceprovidertabla">SERVICE PROVIDER</th>
+                                <th class="tr" key="tecnicotabla">TECNICO</th>
+                                <th class="tr" key="tiempotabla">TIEMPO</th>
+                                <th class="tr" key="controladortabla">CONTROLADOR (ESN)</th>
+                                <th class="tr" key="bateriatabla">BATERIA CONTROLADOR</th>
+                                <th class="tr" key="modemtabla">MODEM (ESN)</th>
+                                <th class="tr" key="modembateriatabla">BATERIA MODEM</th>
+                                <th class="tr" key="contenedortabla">CONTENEDOR</th>
+                                <th class="tr" key="cajacontenedortabla">CAJA CONTENENDOR</th>
+                                <th class="tr" key="anocontenedortabla">AÑO CONTENEDOR</th>
+                                <th class="tr" key="scrubbertabla">LLEVA SCRUBBER</th>
+                                <th class="tr" key="selloperno1tabla">SELLO PERNO 1</th>
+                                <th class="tr" key="selloperno2tabla">SELLO PERNO 2</th>
+                                <th class="tr" key="sellotapatabla">SELLO TAPA</th>
+                                <th class="tr" key="fechaejecuciontabla">FECHA EJECUCION</th>
+                                <th class="tr" key="estadotabla">ESTADO</th>
+                                <th class="tr" key="KitCortina">CONTIENE KIT CORTINA</th>
+                                <th class="tr" key="idresultado">ID RESULTADO</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th class="tr" key="idsolicitud">ID SOLICITUD</th>
+                                <th class="tr" key="navierasolicitud">NAVIERA</th>
+                                <th class="tr" key="paissolicitud">PAIS</th>
+                                <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                                <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                                <th class="tr" key="maquinariatabla">MAQUINARIA</th>
+                                <th class="tr" key="serviceprovidertabla">SERVICE PROVIDER</th>
+                                <th class="tr" key="tecnicotabla">TECNICO</th>
+                                <th class="tr" key="tiempotabla">TIEMPO</th>
+                                <th class="tr" key="controladortabla">CONTROLADOR (ESN)</th>
+                                <th class="tr" key="bateriatabla">BATERIA CONTROLADOR</th>
+                                <th class="tr" key="modemtabla">MODEM (ESN)</th>
+                                <th class="tr" key="modembateriatabla">BATERIA MODEM</th>
+                                <th class="tr" key="contenedortabla">CONTENEDOR</th>
+                                <th class="tr" key="cajacontenedortabla">CAJA CONTENENDOR</th>
+                                <th class="tr" key="anocontenedortabla">AÑO CONTENEDOR</th>
+                                <th class="tr" key="scrubbertabla">LLEVA SCRUBBER</th>
+                                <th class="tr" key="selloperno1tabla">SELLO PERNO 1</th>
+                                <th class="tr" key="selloperno2tabla">SELLO PERNO 2</th>
+                                <th class="tr" key="sellotapatabla">SELLO TAPA</th>
+                                <th class="tr" key="fechaejecuciontabla">FECHA EJECUCION</th>
+                                <th class="tr" key="estadotabla">ESTADO</th>
+                                <th class="tr" key="KitCortina">CONTIENE KIT CORTINA</th>
+                                <th class="tr" key="idresultado">ID RESULTADO</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/build/js/Perfiles.js"></script>
+<script type="text/javascript">
+
+    var lenguaje = getCookie("Lenguaje");
+
+    $(document).ready(function () {
+
+        $('#Tb_Resultado tfoot th').each(function (i) {
+            var title = $('#Tb_ReservasLeaktest thead th').eq($(this).index()).text();
+            if (lenguaje == "es") {
+                $(this).html('<input class="form-control" type="text" placeholder="BUSCAR" />');
+
+            } else {
+                $(this).html('<input class="form-control" type="text" placeholder="FILTER" />');
+
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetAllResultados", "Leaktest")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var Estado = "";
+                $('#Tb_Resultado').show(500);
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].Estado == 0) {
+                        Estado = "APPROVED";
+                    } else if (json[i].Estado == 1) {
+                        Estado = "REJECTED";
+                    } else if (json[i].Estado == 2) {
+                        Estado = "TO PERFORM";
+                    } else if (json[i].Estado == 3) {
+                        Estado = "VISUALLY REJECTED";
+                    }
+
+                    if (json[i].Scrubber == 0) {
+                        var scrubber = 'SI';
+                    } else {
+                        var scrubber = 'NO';
+                    }
+
+                    if (json[i].KitCortina == 0) {
+                        var kit = 'SI';
+                    } else {
+                        var kit = 'NO';
+                    }
+
+                    data.push([ json[i].IdReserva, json[i].Naviera, json[i].NombrePais.toUpperCase(), json[i].NombreCiudad.toUpperCase(),
+                                json[i].NombreDeposito.toUpperCase(), json[i].NombreMaquinaria.toUpperCase(), json[i].NombreServiceProvider,
+                                json[i].NombreUsuario, json[i].Tiempo, json[i].Controlador, json[i].Bateria, json[i].Modem, json[i].BateriaModem, json[i].Contenedor,
+                                json[i].NombreCaja.toUpperCase(), json[i].Ano, scrubber, json[i].Selloperno1, json[i].Selloperno2, json[i].Sellotapa,
+                                formatDate(json[i].Fecha), Estado, kit, json[i].IdLeaktest]);
+                }
+
+
+
+                if (lenguaje == "es") {
+                    var table = $('#Tb_Resultado').DataTable({
+                        data: data,
+                        "language": {
+                            "lengthMenu": "Mostrar _MENU_ Resultados por pagina",
+                            "zeroRecords": "No hay Resultados para mostrar",
+                            "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                            "infoEmpty": "No hay Resultados disponibles",
+                            "search": "Buscar: ",
+                            "paginate": {
+                                "first": "Primera",
+                                "last": "Última",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            }
+                        },
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        scrollX: true
+                    });
+                } else {
+                    var table = $('#Tb_Resultado').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        scrollX: true
+                    });
+                }
+
+                table.columns().every(function () {
+                    var that = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+            },
+        });
+
+        if (lenguaje == "es") {
+            $("#FechaFin,#FechaIni").datepicker({
+                dateFormat: "dd-mm-yy",
+                firstDay: 1,
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                monthNames:
+                    ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthNamesShort:
+                    ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                showWeek: true
+            });
+        } else {
+            $("#FechaFin,#FechaIni").datepicker({
+                dateFormat: "dd-mm-yy",
+                firstDay: 1,
+                showWeek: true
+            });
+        }
+
+    });
+
+    function formatDate(date) {
+        var fecha = date.substring(0, 10);
+        var ano = date.substring(0, 4);
+        var mes = date.substring(5, 7);
+        var dia = date.substring(8, 10);
+        return dia + "/" + mes + "/" + ano;
+    }
+
+    $("#FiltroFechas").click(function () {
+        var IdReserva = parseInt(@ViewBag.IdReserva);
+        var table = $('#Tb_Resultado').DataTable();
+        if ($("#FechaIni").val() != "" && $("#FechaFin").val() != "") {
+            var fechainicio = new Date($('#FechaIni').val()).getTime();
+            var fechatermino = new Date($('#FechaFin').val()).getTime();
+            if (fechatermino < fechainicio) {
+                if (lenguaje == "es") {
+                    swal('Ups!', 'La fecha final no puede ser menor a la fecha inicial.', 'warning');
+                    return false;
+                } else {
+                    swal('Ups!', 'The final date can not be less than the initial date.', 'warning');
+                    return false;
+                }
+            }
+            table.destroy();
+            $.ajax({
+                type: "POST",
+                data: { FechaInicial: $("#FechaIni").val(), FechaFin: $("#FechaFin").val()},
+                url: '@Url.Action("GetAllResultadosByFecha", "Leaktest")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var Estado = "";
+                    $('#Tb_Resultado').show(500);
+                    for (var i = 0 ; i < cuenta ; i++) {
+                        if (json[i].Estado == 0) {
+                            Estado = "APPROVED";
+                        } else if (json[i].Estado == 1) {
+                            Estado = "REJECTED";
+                        } else if (json[i].Estado == 2) {
+                            Estado = "TO PERFORM";
+                        }
+
+                        if (json[i].Scrubber == 0) {
+                            var scrubber = 'SI';
+                        } else {
+                            var scrubber = 'NO';
+                        }
+
+                        if (json[i].KitCortina == 0) {
+                            var kit = 'SI';
+                        } else {
+                            var kit = 'NO';
+                        }
+
+                        data.push([json[i].IdReserva, json[i].Naviera, json[i].NombrePais.toUpperCase(), json[i].NombreCiudad.toUpperCase(),
+                                    json[i].NombreDeposito.toUpperCase(), json[i].NombreMaquinaria.toUpperCase(), json[i].NombreServiceProvider,
+                                    json[i].NombreUsuario, json[i].Tiempo, json[i].Controlador, json[i].Bateria, json[i].Modem, json[i].BateriaModem, json[i].Contenedor,
+                                    json[i].NombreCaja.toUpperCase(), json[i].Ano, scrubber, json[i].Selloperno1, json[i].Selloperno2, json[i].Sellotapa,
+                                    formatDate(json[i].Fecha), Estado, kit, json[i].IdLeaktest]);
+                    }
+
+                    $('#Tb_Resultado tfoot th').each(function (i) {
+                        var title = $('#Tb_ReservasLeaktest thead th').eq($(this).index()).text();
+                        if (lenguaje == "es") {
+                            $(this).html('<input class="form-control" type="text" placeholder="BUSCAR ' + title + '" data-index="' + i + '" />');
+
+                        } else {
+                            $(this).html('<input class="form-control" type="text" placeholder="FILTER ' + title + '" data-index="' + i + '" />');
+
+                        }
+                    });
+
+                    if (lenguaje == "es") {
+                        var table = $('#Tb_Resultado').DataTable({
+                            data: data,
+                            "language": {
+                                "lengthMenu": "Mostrar _MENU_ Resultados por pagina",
+                                "zeroRecords": "No hay Resultados para mostrar",
+                                "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                                "infoEmpty": "No hay Resultados disponibles",
+                                "search": "Buscar: ",
+                                "paginate": {
+                                    "first": "Primera",
+                                    "last": "Última",
+                                    "next": "Siguiente",
+                                    "previous": "Anterior"
+                                }
+                            },
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel'
+                            ],
+                            scrollX: true
+                        });
+                    } else {
+                        var table = $('#Tb_Resultado').DataTable({
+                            data: data,
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel'
+                            ],
+                            scrollX: true
+                        });
+                    }
+
+                    table.columns().every(function () {
+                        var that = this;
+                        $('input', this.footer()).on('keyup change', function () {
+                            if (that.search() !== this.value) {
+                                that
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                    });
+                },
+            });
+        } else {
+            swal('Ups!', '<span class="alerta" key="errorfiltrarsolicitud">Debe completar el formulario para filtrar las solicitudes.</span>', 'warning');
+        }
+    });
+
+    $("#Limpiar").click(function () {
+        location.reload();
+    });
+</script>
+

@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "AgregarRecuperacionControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ingresar Recuperación de Controlador <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                N°Controlador <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="n_controlador" id="n_controlador" value="@ViewBag.Ncontrolador" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Booking <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="booking" value="@ViewBag.Booking" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                N° Contenedor <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="n_contenedor" id="n_contenedor" value="@ViewBag.Ncontenedor" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                ETA <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="eta" id="eta" value="@ViewBag.Eta" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Retrieval Provider <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="retrieval" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                N° Recibo <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="n_recibo" value="" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Monto Cancelado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="monto_cancelado" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                AWB <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                               <input type="text" id="awb" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Fecha AWB <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="fecha_awb" id="fecha_awb" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                            <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Enviar</button>
+                            <button class="btn btn-warning" type="reset">Limpiar</button>
+                            <button class="btn btn-primary" type="reset">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+
+    $(function () {
+        $("#fecha_awb").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#eta").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>
+

@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "IngresarDatos";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ingreso de datos <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Booking <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="Booking" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nave">
+                            Nave <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="Nave" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Naviera">
+                            Naviera <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="Naviera">
+                                <option value="" selected>Seleccione Naviera </option>
+                                <option value="prueba">Naviera Prueba</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Exportador">
+                            Exportador<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="Exportador">
+                                <option value="" selected>Seleccione Exportador </option>
+                                <option value="prueba">Exportador Prueba</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Producto (commoditie) <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="Producto">
+                                <option value="" selected>Seleccione Producto </option>
+                                <option value="prueba">Producto Prueba</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Origen <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="Origen">
+                                <option value="" selected>Seleccione Origen </option>
+                                <option value="prueba">Origen Prueba</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Destino <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="Destino">
+                                <option value="" selected>Seleccione Destino </option>
+                                <option value="prueba">Destino Prueba</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Unidad(Contenedor) <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="Contenedor" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Tamaño Contenedor
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" id="TamContenedor">
+                                <option value="" selected>Seleccione Tamaño </option>
+                                <option value="20 pulgadas">20 Pulgadas</option>
+                                <option value="40 pulgadas">40 Pulgadas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                            <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Enviar</button>
+                            <button class="btn btn-primary" type="reset">Limpiar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ValidarFormulario() {
+        //obtener valores ingresados en el formulario para enviar al controlador.
+        var Booking = $("#Booking").val();
+        var Nave = $("#Nave").val();
+        var Naviera = $("#Naviera").val();
+        var Exportador = $("#Exportador").val();
+        var Producto = $("#Producto").val();
+        var Destino = $("#Destino").val();
+        var Origen = $("#Origen").val();
+        var Contenedor = $("#Contenedor").val();
+        var Tamano = $("#TamContenedor").val();
+
+        //validaciones de que los campos no sean vacios
+        if(Booking == ""){
+            swal('Error...','Campo Booking Obligatorio','error')  
+        }else if (Nave == "") {
+            swal('Error...','Campo Nave Obligatorio','error')
+        }else if (Naviera == "") {
+            swal('Error...', 'Campo Naviera Obligatorio', 'error')
+        }else if (Exportador == "") {
+            swal('Error...', 'Campo Exportador Obligatorio', 'error')
+        }else if (Producto == "") {
+            swal('Error...', 'Campo Producto Obligatorio', 'error')
+        }else if (Destino == "") {
+            swal('Error...', 'Campo Destino Obligatorio', 'error')
+        }else if (Origen == "") {
+            swal('Error...', 'Campo Origen Obligatorio', 'error')
+        }else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        }
+
+            $.ajax({
+                type: "POST",
+                url: "/ControlHorario/GuardarDatos",
+                content: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {
+                    Booking: Booking,
+                    Nave: Nave,
+                    Naviera: Naviera,
+                    Exportador: Exportador,
+                    Producto: Producto,
+                    Destino: Destino,
+                    Origen: Origen,
+                    Contenedor: Contenedor,
+                    Tamano: Tamano
+                },
+                success: function(d) {
+                    if (d.success == true)
+                        alert('Has introducido un nuevo coche!!');
+                    else {}
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Error!!');
+                }
+            });
+    }
+</script>

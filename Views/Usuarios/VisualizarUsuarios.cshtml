@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarUsuarios";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <p><a class="btn btn-primary btn-lg" href="#" role="button" id="CrearUsuario">Crear Usuario</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Id Usuario</th>
+                    <th>Perfil</th>
+                    <th>Nombre Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Naviera</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Administrativo antepuerto</td>
+                    <td>usuarioprueba</td>
+                    <td>prueba</td>
+                    <td>CMC</td>
+                    <td>Activo</td>
+                    <td style="font-size:18px; text-align:center">
+                        <i class="fa fa-cog " id="Editar" title="Editar Usuario"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    //Botón Crear Usuario//
+    $("#CrearUsuario").click(function () {
+        swal({
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            title: 'Crear Usuario',
+            html:
+                '<div class="row">'+
+                    '<div class="form-group col-lg-6"><label for="NombreUsuario">Nombre Usuario</label><input type="text" class="form-control" id="NombreUsuario" placeholder="Escriba Nombre Usuario"></div>' +
+                    '<div class="form-group col-lg-6"><label for="Contrasena">Contraseña</label><input type="text" class="form-control" id="Contrasena" placeholder="Escriba Contraseña"></div>' +
+                '</div>'+
+                '<div class="row">' +
+                    '<div class="form-group col-lg-6"><label for="Perfil">Perfil</label><select class="form-control" id="Perfil"></select></div>' +
+                    '<div class="form-group col-lg-6"><label for="Estado">Estado</label><select class="form-control" id="Estado"><option value="0">Activo</option><option value="1">Deshabilitado</option></select></div>' +
+                '</div>'+
+                '<div><label><input type="checkbox" id="Naviera">¿Usuario es naviera? </label></div>'+
+                '<div class="row Naviera" style="display:none;">' +
+                    '<div class="form-group col-lg-12"><label for="SelectNaviera"></label><select class="form-control" id="SelectNaviera"></select></div>' +
+                '</div>'+
+                 '<div><label><input type="checkbox" id="ServiceProvider"> Asignar Service Provider</label></div>' +
+                '<div class="row SelectServiceProvider" style="display:none;">' +
+                    '<div class="form-group col-lg-12"><label for="ServiceProvider"></label><select class="form-control" id="SelectServiceProvider"></select></div>' +
+                '</div>',
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    resolve([
+                        //asignar valores a las variables
+                    ])
+                })
+            },
+            onOpen: function () {
+                //cargar perfiles atraves de ajax
+                var perfil = $('#Perfil');
+                perfil.empty();
+                $('#Perfil').empty();
+                for (var i = 0; i < 1; i++) {
+                   perfil.append('<option id="1" value="NavieraPrueba">PerfilPrueba</option>');
+                }
+                $('#NombreUsario').focus()
+
+                $('#Naviera').on('click', function () {
+                    if ($(this).prop('checked')) {
+                        //cargar navieras atraves de ajax
+                        var navieras = $('#SelectNaviera');
+                        navieras.empty();
+                        $('#SelectServiceProvider').empty();
+                        for (var i = 0; i < 1; i++) {
+                            navieras.append('<option id="1" value="NavieraPrueba">NavieraPrueba</option>');
+                        }
+                        $('.Naviera').fadeIn();
+                    } else {
+                        //navieras.empty();
+                        $('.Naviera').hide();
+                    }
+                });
+
+                $('#ServiceProvider').on('click', function () {
+                    if ($(this).prop('checked')) {
+                        //cargar navieras atraves de ajax
+                        var Service = $('#SelectServiceProvider');
+                        Service.empty();
+                        $('#SelectServiceProvider').empty();
+                        for (var i = 0; i < 1; i++) {
+                            Service.append('<option id="1" value="ServiceProviderPrueba">ServiceProviderPrueba</option>');
+                        }
+                        $('.SelectServiceProvider').fadeIn();
+                    } else {
+                        //Service.empty();
+                        $('.SelectServiceProvider').hide();
+                    }
+                });
+            }
+        }).then(function (result) {
+            //enviar datos para agregar usuario
+        }).catch(swal.noop)
+    });
+    //Botón Crear Usuario//
+    //Botón Editar Usuario//
+    $("#Editar").click(function () {
+        var valores = [];
+        var i = 0;
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find("td").each(function () {
+            valores[i++] = $(this).html();
+        });
+        //obtener datos del usuario seleccionado
+        swal({
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            title: 'Editar Usuario',
+            html:
+                '<div class="row">' +
+                    '<div class="form-group col-lg-6"><label for="NombreUsuario">Nombre Usuario</label><input type="text" class="form-control" id="NombreUsuario"></div>' +
+                    '<div class="form-group col-lg-6"><label for="Contrasena">Contraseña</label><input type="text" class="form-control" id="Contrasena"></div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="form-group col-lg-6"><label for="Perfil">Perfil</label><select class="form-control" id="Perfil"><option></option></select></div>' +
+                    '<div class="form-group col-lg-6"><label for="Estado">Estado</label><select class="form-control" id="Estado"><option value="0">Activo</option><option value="1">Deshabilitado</option></select></div>' +
+                '</div>' +
+                '<div><label><input type="checkbox" id="Naviera">¿Usuario es naviera? </label></div>' +
+                '<div class="row Naviera" style="display:none;">' +
+                    '<div class="form-group col-lg-12"><label for="SelectNaviera">Naviera</label><select class="form-control" id="SelectNaviera"></select></div>' +
+                '</div>',
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    resolve([
+                        $('#id').val(),
+                        $('#Nombre').val(),
+                        $('#Estado').val(),
+                    ])
+                })
+            },
+            onOpen: function () {
+                //cargar perfiles por ajax
+                //cargar Navieras por ajax según corresponda
+                $('#Nombre').focus()
+            }
+        }).then(function (result) {
+
+        }).catch(swal.noop)
+    });
+    //Botón Editar Usuario//
+
+</script>
+

@@ -1,0 +1,1055 @@
+﻿
+@{
+    ViewBag.Title = "AgregarReservaLeaktest";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<style>
+    .selectpicker, .MaquinariaContenedor {
+        text-align:center; 
+        text-align-last:center;
+    }
+    #Hora, #Eta {
+        text-align:center; 
+        text-align-last:center;
+    }
+
+
+</style>
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="crearsolicitud">Ingresar Solicitud de Leak test</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Naviera" class="control-label col-sm-3 tr" key="naviera">Naviera (*)</label>
+                        <div class="col-sm-6">
+                            <select class="selectpicker form-control" data-live-search="true" id="Naviera">
+                                <option value="0" selected class="tr" key="selectnaviera">Seleccione Naviera</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Pais" class="control-label col-sm-3 tr" key="pais">País</label>
+                        <div class="col-sm-6">
+                            <select class="selectpicker form-control" data-live-search="true" id="Pais">
+                                <option value="0" selected class="tr" key="selectpais">Seleccione Pais</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Ciudad" class="control-label col-sm-3 tr" key="ciudad">Ciudad</label>
+                        <div class="col-sm-6">
+                            <select class="selectpicker form-control" data-live-search="true" id="Ciudad">
+                                <option value="0" selected class="tr" key="selectciudad">Seleccione Ciudad</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Deposito" class="control-label col-sm-3 tr" key="deposito">Deposito (*)</label>
+                        <div class="col-sm-6">
+                            <select class="selectpicker form-control" data-live-search="true" id="Deposito">
+                                <option value="0" selected class="tr" key="selectdeposito">Seleccione Deposito</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="TipoReserva" class="control-label col-sm-3 tr" key="tiposolicituddato">Tipo Solicitud (*)</label>
+                        <div class="col-sm-6">
+                            <select class="selectpicker form-control" data-live-search="true" id="TipoReserva">
+                                <option selected value="0" class="tr" key="selecttiposolicitud">Seleccione Tipo Solicitud</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Eta" class="control-label col-sm-3 tr" key="eta">Fecha estimada ejecución (*)</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="Stacking" id="Eta" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Hora" class="control-label col-sm-3 tr" key="horaejecucion">Hora Ejecución</label>
+                        <div class="col-sm-6">
+                            <input type="time" name="Hora" id="Hora" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="Comentario" class="control-label col-sm-3 tr" key="Comentarios">Comentarios</label>
+                    <div class="col-sm-6">
+                        <textarea id="Comentario" class="form-control" style="resize:none;" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Scrubber" class="control-label col-sm-3 tr" key="ContenedoresScrubber">¿Contenedores C/Scrubber?</label>
+                        <div class="col-sm-1">
+                            <input type="checkbox" name="Scrubber" id="Scrubber" class="form-control Scrubber">
+                        </div>
+                        <label for="Scrubber" id="labelScrubber" class="control-label col-sm-2 tr" key="cantidadscrubber" style="display:none;">Cantidad Contenedores</label>
+                        <div class="col-sm-3">
+                            <input type="number" name="CantidadScrubber" id="CantidadScrubber" class="form-control" style="margin: 4px 0 0; display:none;" min="1"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div id="poraprobar" hidden="hidden">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="form-group">
+                            <label id="lb_tipo_contenedor" class="control-label col-sm-2 tr" key="maquinariacontenedor">Maquinaria Contenedor (*)</label>
+                            <div class="col-sm-3">
+                                <select class="selectpicker form-control Maquinaria" data-live-search="true" id="Maquinaria">
+                                    <option selected value="0" class="tr" key="selectmaquinariatabla">Seleccione Maquinaria</option>
+                                </select>
+                            </div>
+                            <label id="lb_contenedor" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="number" min="1" id="contenedores" class="form-control">
+                            </div>
+                            <div class="col-sm-2 icono" hidden="hidden">
+                                <i class="fa fa-plus-square" onclick="MostrarAgregarLeaktest()" title="Agregar Maquinaria" id="Agregar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div_ingreso1" class="row" hidden="hidden">
+                        <div class="form-group">
+                            <label id="lb_tipo_contenedor" class="control-label col-sm-2 tr" key="maquinariacontenedor">Maquinaria Contenedor (*)</label>
+                            <div class="col-sm-3">
+                                <select class="selectpicker form-control Maquinaria1" data-live-search="true" id="Maquinaria1">
+                                    <option selected value="0" class="tr" key="selectmaquinariatabla">Seleccione Maquinaria</option>
+                                </select>
+                            </div>
+                            <label id="lb_contenedor" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="number" min="1" id="contenedores1" class="form-control">
+                            </div>
+                            <div class="col-sm-2 icono" hidden="hidden">
+                                <i class="fa fa-plus-square" onclick="MostrarAgregarLeaktest2()" title="Agregar Maquinaria" id="Agregar"></i>
+                                <i class="fa fa-trash" onclick="OcultarAgregarLeaktest2()" title="Agregar Maquinaria" id="Eliminar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div_ingreso2" class="row" hidden="hidden">
+                        <div class="form-group">
+                            <label id="lb_tipo_contenedor" class="control-label col-sm-2 tr" key="maquinariacontenedor">Maquinaria Contenedor (*)</label>
+                            <div class="col-sm-3">
+                                <select class="selectpicker form-control Maquinaria2" data-live-search="true" id="Maquinaria2">
+                                    <option selected value="0" class="tr" key="selectmaquinariatabla">Seleccione Maquinaria</option>
+                                </select>
+                            </div>
+                            <label id="lb_contenedor" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="number" min="1" id="contenedores2" class="form-control">
+                            </div>
+                            <div class="col-sm-2 icono" hidden="hidden">
+                                <i class="fa fa-plus-square" onclick="MostrarAgregarLeaktest3()" title="Agregar Maquinaria" id="Agregar"></i>
+                                <i class="fa fa-trash" onclick="OcultarAgregarLeaktest3()" title="Agregar Maquinaria" id="Eliminar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div_ingreso3" class="row" hidden="hidden">
+                        <div class="form-group">
+                            <label id="lb_tipo_contenedor" class="control-label col-sm-2 tr" key="maquinariacontenedor">Maquinaria Contenedor (*)</label>
+                            <div class="col-sm-3">
+                                <select class="selectpicker form-control Maquinaria3" data-live-search="true" id="Maquinaria3">
+                                    <option selected value="0" class="tr" key="selectmaquinariatabla">Seleccione Maquinaria</option>
+                                </select>
+                            </div>
+                            <label id="lb_contenedor" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="number" min="1" id="contenedores3" class="form-control">
+                            </div>
+                            <div class="col-sm-2 icono" hidden="hidden">
+                                <i class="fa fa-trash" onclick="OcultarAgregarLeaktest4()" title="Agregar Maquinaria" id="Eliminar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <button type="button" class="btn btn-success tr" id="CrearReservaLeaktest" key="enviar">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="porcontenedores" hidden="hidden">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="container">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <table class="table table-bordered table-hover" id="tab_logic">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center tr" key="contenedorestabla">Número Contenedor</th>
+                                                <th class="text-center tr" key="maquinariatabla">Maquinaria</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <form name="formulario"> 
+                                                <tr id='addr0'>
+                                                    <td><input id="container0" onkeyup="this.value = this.value.toUpperCase();" type="text" name='name0' class="form-control" minlength="1" maxlength="11" required/></td>
+                                                    <td><select name='maquinaria0' class="form-control MaquinariaContenedorUnico" data-live-search="true">
+                                                            <option value="0" selected></option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <a id="add_row" class="btn btn-success pull-left tr" key="agregarcontenedor">Añadir Contenedor</a>
+                            <a id='delete_row' class="pull-right btn btn-danger tr" key="eliminarcontenedor">Eliminar Contenedor</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <button type="button" class="btn btn-success tr" id="CrearReservaLeaktestContenedores" key="enviar">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>         
+        </div>
+    </div>
+</div>
+<script>
+
+    var lenguaje = getCookie("Lenguaje");
+
+    $(document).ready(function () {
+
+        var i = 0;
+
+        $("#add_row").click(function () {
+            if ($("#Id_contenedor").val() != "")
+            {
+                i++;
+                $('#tab_logic').append('<tr id="addr' + (i) + '"></tr>');
+                $('#addr' + i).html("<td><input id='container" + i + "' name='name" + i + "' onkeyup= 'this.value = this.value.toUpperCase();' type='text' class='form-control' minlength='1' maxlength='11'/></td><td><select name='maquinaria" + i + "' class='form-control MaquinariaContenedorUnico" + i + "'><option value='0' selected class='tr' key='selectmaquinariatabla'></option></select></td>");
+                cargarMaquinaria(i);
+            } else {
+                swal({
+                    title: '',
+                    text: "Ingrese un contenedor",
+                    type: aux,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    //location.reload();
+                })
+            }
+            
+
+            
+        });
+
+        $("#delete_row").click(function () {
+            if (i > 1) {
+                $("#addr" + (i)).remove();
+                $("#addr" + (i - 1)).remove();
+                i--;
+            }
+        });
+
+        $('#Scrubber').change(function () {
+            if ($('.Scrubber').prop('checked')) {+
+                $("#labelScrubber").show();
+                $("#CantidadScrubber").show();
+            } else {
+                $("#labelScrubber").hide();
+                $("#CantidadScrubber").hide();
+            }
+        });
+
+
+        function cargarMaquinaria(aux) {
+            //OBTENER MAQUINARIAS
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    for (var i = 1; i < cuenta; i++) {
+                        if (json[i].Id != 5) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                        }
+                    }
+
+                    $('.MaquinariaContenedorUnico' + aux ).append(optionsAsString);
+                },
+            });
+            //OBTENER MAQUINARIAS
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetTipoSolicitud", "Leaktest")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#TipoReserva').append(optionsAsString);
+                $('#TipoReserva').selectpicker('refresh');
+            },
+        });
+
+        //OBTENER NAVIERAS
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetNavierasActivas", "Naviera")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Naviera').append(optionsAsString);
+                $('#Naviera').selectpicker('refresh');
+            },
+        });
+        //OBTENER NAVIERAS
+
+
+        //OBTENER PAISES
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetPaisesActivos", "Paises")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                for (var key in json) {
+                    if (json.hasOwnProperty(key)) {
+                        optionsAsString += "<option value='" + json[key]["Id"] + "'>" + json[key]["Nombre"] + "</option>";
+                    }
+                }
+
+                $('#Pais').append(optionsAsString);
+                $('#Pais').selectpicker('refresh');
+            },
+        });
+        //OBTENER PAISES
+
+        //OBTENER CIUDADES
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                }
+                $('#Ciudad').append(optionsAsString);
+                $('#Ciudad').selectpicker('refresh');
+            },
+        });
+        //OBTENER CIUDADES
+
+        //OBTENER DEPOSITOS
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDepositosActivos", "Deposito")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                if (cuenta != 0) {
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                    }
+                    $('#Deposito').append(optionsAsString);
+                    $('#Deposito').selectpicker('refresh');
+                }
+            },
+        });
+        //OBTENER DEPOSITOS
+
+        //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+        $("#Pais").change(function () {
+            if ($("#Pais").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        var optionsAsString1 = "";
+                        if (cuenta != 0) {
+                            $('#Ciudad').empty();
+                            optionsAsString += "<option value='0'></option>";
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                            }
+                            $('#Ciudad').append(optionsAsString);
+                            $('#Ciudad').selectpicker('refresh');
+                        } else {
+                            $('#Ciudad').empty();
+                            optionsAsString += "<option value='0'></option>";
+                            $('#Ciudad').append(optionsAsString);
+                            $('#Ciudad').selectpicker('refresh');
+                            $('#Deposito').empty();
+                            optionsAsString1 += "<option value='0'></option>";
+                            $('#Deposito').append(optionsAsString1);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositoPais", "Deposito")',
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        if (cuenta != 0) {
+                            $('#Deposito').empty();
+                            optionsAsString += "<option value='0'></option>";
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        } else {
+                            $('#Deposito').empty();
+                            optionsAsString += "<option value='0'></option>";
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Ciudad').empty();
+                $('#Deposito').empty();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        optionsAsString += "<option value='0'></option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                    },
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        optionsAsString += "<option value='0'></option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            }
+        });
+        //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+
+        //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+        $("#Ciudad").change(function () {
+            if ($("#Ciudad").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetInfoCiudad", "Ciudad")',
+                    data: { IdCiudad: $("#Ciudad").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        if (cuenta != 0) {
+                            $("#Pais").val(json[0].IdPais);
+                            $("#Pais").selectpicker('refresh');
+                        }
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositoCiudad", "Deposito")',
+                    data: { IdCiudad: $("#Ciudad").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Deposito').empty();
+                        optionsAsString += "<option value='0'></option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        } else {
+                            $('#Deposito').empty();
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Deposito').empty();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        optionsAsString += "<option value='0'></option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            }
+        });
+        //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+
+        //CARGAR DATOS SEGUN DEPOSITO
+        $("#Deposito").change(function () {
+            if ($("#Deposito").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetInfoDeposito", "Deposito")',
+                    data: { IdDeposito: $("#Deposito").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        if (cuenta != 0) {
+                            $("#Pais").val(json[0].IdPais);
+                            $("#Pais").selectpicker('refresh');
+                            $("#Ciudad").val(json[0].IdCiudad);
+                            $("#Ciudad").selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $("#Pais").val(0);
+                $("#Pais").selectpicker('refresh');
+                $("#Ciudad").val(0);
+                $("#Ciudad").selectpicker('refresh');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Deposito').empty();
+                        optionsAsString += "<option value='0'></option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Ciudad').empty();
+                        optionsAsString += "<option value='0'></option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                    },
+                });
+            }
+        });
+        //CARGAR DATOS SEGUN DEPOSITO
+
+        //OBTENER MAQUINARIAS
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                var optionsAsString1 = "";
+                for (var i = 0; i < cuenta; i++) {
+                    if (json[i].Id != 5 && json[i].Id != 0) {
+                        optionsAsString1 += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    if (json[i].Id != 0) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    
+                }
+
+                $('#Maquinaria').append(optionsAsString);
+                $('#Maquinaria').selectpicker('refresh');
+                $('#Maquinaria1').append(optionsAsString);
+                $('#Maquinaria1').selectpicker('refresh');
+                $('#Maquinaria2').append(optionsAsString);
+                $('#Maquinaria2').selectpicker('refresh');
+                $('#Maquinaria3').append(optionsAsString);
+                $('#Maquinaria3').selectpicker('refresh');
+                $('.MaquinariaContenedorUnico').append(optionsAsString1);
+            },
+        });
+        //OBTENER MAQUINARIAS
+
+        $("#Maquinaria").change(function () {
+            if ($("#Maquinaria").val() == 5) {
+                $(".icono").hide();
+                $("#div_ingreso1").hide();
+                $("#div_ingreso2").hide();
+                $("#div_ingreso3").hide();
+                $("#div_ingreso4").hide();
+            } else {
+                $(".icono").show();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Maquinaria1').empty();
+                        $('#Maquinaria2').empty();
+                        $('#Maquinaria3').empty();
+                        $('#Maquinaria4').empty();
+                        optionsAsString += "<option value='0' selected></option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            if ($('#Maquinaria').val() != json[i].Id) {
+                                if (json[i].Id != 5 && json[i].Id != 0) {
+                                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                                }
+                            }
+                        }
+
+                        $('#Maquinaria1').append(optionsAsString);
+                        $('#Maquinaria1').selectpicker('refresh');
+                    },
+                });
+            }
+        });
+
+        $("#Maquinaria1").change(function () {
+            $(".icono").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    $('#Maquinaria2').empty();
+                    $('#Maquinaria3').empty();
+                    optionsAsString += "<option value='0' selected></option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        if ($('#Maquinaria1').val() != json[i].Id && $('#Maquinaria').val() != json[i].Id) {
+                            if (json[i].Id != 5 && json[i].Id != 0) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                        }
+                    }
+                    $('#Maquinaria2').append(optionsAsString);
+                    $('#Maquinaria2').selectpicker('refresh');
+                },
+            });
+        });
+        $("#Maquinaria2").change(function () {
+            $(".icono").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    $('#Maquinaria3').empty();
+                    optionsAsString += "<option value='0' selected></option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        if ($('#Maquinaria').val() != json[i].Id && $('#Maquinaria1').val() != json[i].Id && $('#Maquinaria2').val() != json[i].Id) {
+                            if (json[i].Id != 5 && json[i].Id != 0) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                        }
+                    }
+                    $('#Maquinaria3').append(optionsAsString);
+                    $('#Maquinaria3').selectpicker('refresh');
+                },
+            });
+        });
+        $("#Maquinaria3").change(function () {
+            if ($('#Maquinaria').val() != 5 && $('#Maquinaria1').val() != 5 && $('#Maquinaria2').val() != 5 && $('#Maquinaria3').val() != 5) {
+                $(".icono").hide();
+            }
+        });
+
+        if (lenguaje == "es") {
+            $("#Eta").datepicker({
+                dateFormat: "dd-mm-yy",
+                firstDay: 1,
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                monthNames:
+                    ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthNamesShort:
+                    ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                showWeek: true
+            });
+        } else {
+            $("#Eta").datepicker({
+                dateFormat: "dd-mm-yy",
+                firstDay: 1,
+                showWeek: true
+            });
+        }
+    });
+
+    function MostrarAgregarLeaktest() {
+
+        $("#div_ingreso1").show();
+    }
+
+    function MostrarAgregarLeaktest2() {
+
+        $("#div_ingreso2").show();
+    }
+
+    function MostrarAgregarLeaktest3() {
+
+        $("#div_ingreso3").show();
+    }
+
+    function OcultarAgregarLeaktest2() {
+
+        $("#div_ingreso1").hide();
+    }
+
+    function OcultarAgregarLeaktest3() {
+
+        $("#div_ingreso2").hide();
+    }
+
+    function OcultarAgregarLeaktest4() {
+
+        $("#div_ingreso3").hide();
+    }
+
+    $("#CrearReservaLeaktest").click(function () {
+        if ($("#Naviera").val() != 0) {
+            if ($("#Deposito").val() != 0) {
+                if ($("#TipoReserva").val() != 0) {
+                    if ($("#Eta").val() != "") {
+                        if ($("#Maquinaria").val() != 0 && $("#contenedores").val() != 0) {
+                            var auxinfo = { Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#Eta").val(), Estado: 1, Maquinaria: $("#Maquinaria").val(), Cantidad: $("#contenedores").val(), tiporeserva: $("#TipoReserva").val(), Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val(), Comentario: $("#Comentario").val() }
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="MaquinariaCantidadLeaktest"> Campo Maquinaria y Cantidad Obligatorios.</span>', 'error');
+                            return;
+                        }
+                        if ($("#div_ingreso1").is(':visible')) {
+                            if ($("#Maquinaria1").val() != 0 && $("#contenedores1").val() != 0) {
+                                var auxinfo = { Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#Eta").val(), Estado: 1, Maquinaria: $("#Maquinaria").val(), Cantidad: $("#contenedores").val(), tiporeserva: $("#TipoReserva").val(), Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinaria1").val(), Cantidad1: $("#contenedores1").val(), Comentario: $("#Comentario").val() }
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="MaquinariaCantidadLeaktest"> Campo Maquinaria y Cantidad Obligatorios.</span>', 'error');
+                                return;
+                            }
+                        }
+                        if ($("#div_ingreso2").is(':visible')) {
+                            if ($("#Maquinaria2").val() != 0 && $("#contenedores2").val() != 0) {
+                                var auxinfo = { Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#Eta").val(), Estado: 1, Maquinaria: $("#Maquinaria").val(), Cantidad: $("#contenedores").val(), tiporeserva: $("#TipoReserva").val(), Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinaria1").val(), Cantidad1: $("#contenedores1").val(), Maquinaria2: $("#Maquinaria2").val(), Cantidad2: $("#contenedores2").val(), Comentario: $("#Comentario").val() }
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="MaquinariaCantidadLeaktest"> Campo Maquinaria y Cantidad Obligatorios.</span>', 'error');
+                                return;
+                            }
+                        }
+                        if ($("#div_ingreso3").is(':visible')) {
+                            if ($("#Maquinaria3").val() != 0 && $("#contenedores3").val() != 0) {
+                                var auxinfo = { Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#Eta").val(), Estado: 1, Maquinaria: $("#Maquinaria").val(), Cantidad: $("#contenedores").val(), tiporeserva: $("#TipoReserva").val(), Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinaria1").val(), Cantidad1: $("#contenedores1").val(), Maquinaria2: $("#Maquinaria2").val(), Cantidad2: $("#contenedores2").val(), Maquinaria3: $("#Maquinaria3").val(), Cantidad3: $("#contenedores3").val(), Comentario: $("#Comentario").val() }
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="MaquinariaCantidadLeaktest"> Campo Maquinaria y Cantidad Obligatorios.</span>', 'error');
+                                return;
+                            }
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("CrearLeaktest", "Leaktest")',
+                            data: auxinfo,
+                            success: function (response) {
+                                var json = JSON.parse(response);
+                                if (json.validador == -1) {
+                                    swal({
+                                        title: '',
+                                        text: json.Mensaje,
+                                        type: 'warning',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+
+                                    })
+                                } else {
+                                    swal({
+                                        title: 'ID REQUEST ES : ' + json.validador,
+                                        text: json.Mensaje,
+                                        type: 'success',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        if (result == true) {
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            }
+                        });
+                    } else {
+                        swal('Ups!', '<span class="alerta" key="EtaLeaktest">Campo Eta Obligatorio</span>', 'error');
+                    }
+                } else {
+                    swal('Ups!', '<span class="alerta" key="TipoReservaLeaktest">Campo Tipo Reserva Obligatorio</span>', 'error');
+                }
+            } else {
+                swal('Ups!', '<span class="alerta" key="DepositoLeaktest">Campo Deposito Obligatorio</span>', 'error');
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="NavieraLeaktest">Campo Naviera Obligatorio</span>', 'error');
+        }
+    });
+
+    $("#CrearReservaLeaktestContenedores").click(function () {
+
+        var count = $('#tab_logic tr').length - 1;
+        var Contenedores = [];
+        var Maquinarias = [];
+
+
+        for (i = 0; i < count ; i++) {
+            if ($("input[name=name" + i + "]").val() != "") {
+                var validar = validarcontenedor(Contenedores, $("input[name=name" + i + "]").val());
+                if(validar == 0){
+                    Contenedores.push($("input[name=name" + i + "]").val());
+                    Maquinarias.push($("select[name=maquinaria" + i + "]").val());
+                } else {
+                    swal('Ups!', '<span class="alerta" key="ContenedorAlerta">Número contenedor ya existe en el listado.</span>', 'error');
+                    return false;
+                }
+
+            }
+        }
+
+        if (Contenedores.length == 0) {
+            swal('Ups!', '<span class="alerta" key="ContenedoresVacios">Número contenedor obligatorio.</span>', 'error');
+            return false;
+        }
+
+        if (Maquinarias.length == 0) {
+            swal('Ups!', '<span class="alerta" key="MaquinariasVacios">Maquinaria obligatoria.</span>', 'error');
+            return false;
+        }
+    
+        if ($("#Naviera").val() != 0) {
+            if ($("#Deposito").val() != 0) {
+                if ($("#TipoReserva").val() != 0) {
+                    if ($("#Eta").val() != "") {
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("CrearLeaktestContenedores", "Leaktest")',
+                            data: { Contenedores: Contenedores, Maquinarias: Maquinarias, Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#Eta").val(), Estado: 1, tiporeserva: $("#TipoReserva").val(), Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val(), Comentario: $("#Comentario").val() },
+                            success: function (response) {
+                                var json = JSON.parse(response);
+                                if (json.validador == -1) {
+                                    swal({
+                                        title: '',
+                                        text: json.Mensaje,
+                                        type: 'warning',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+
+                                    })
+                                } else {
+                                    swal({
+                                        title: 'ID SOLICITUD ES : ' + json.validador,
+                                        text: json.Mensaje,
+                                        type: 'success',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        if (result == true) {
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            }
+                        });
+                    } else {
+                        swal('Ups!', '<span class="alerta" key="EtaLeaktest">Campo Eta Obligatorio</span>', 'error');
+                    }
+                } else {
+                    swal('Ups!', '<span class="alerta" key="TipoReservaLeaktest">Campo Tipo Reserva Obligatorio</span>', 'error');
+                }
+            } else {
+                swal('Ups!', '<span class="alerta" key="DepositoLeaktest">Campo Deposito Obligatorio</span>', 'error');
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="NavieraLeaktest">Campo Naviera Obligatorio</span>', 'error');
+        }
+    });
+
+    function validarcontenedor(Contenedores, Contenedor) {
+        var count = Contenedores.length;
+        var i = 0;
+        if (count != 0) {
+            while (i != count) {
+                if (Contenedor == Contenedores[i]) {
+                    return 1;
+                } else {
+                    i = i + 1;
+                }
+            }
+            return 0;
+        } else {
+            return 0;
+        }
+    }
+
+    $("#TipoReserva").change(function () {
+        if ($("#TipoReserva").val() == "2") {
+            $("#poraprobar").show();
+            $("#porcontenedores").hide();
+        } else if ($("#TipoReserva").val() == "3") {
+            $("#poraprobar").hide();
+            $("#porcontenedores").show();
+        } else if ($("#TipoReserva").val() == "0") {
+            $("#poraprobar").hide();
+            $("#porcontenedores").hide();
+        }
+    });
+
+    $("#tab_logic").on("blur", "input", function (e) {
+        //alert(e.target);
+        if ($("#" + e.currentTarget.id).val() != "") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValidarNumeroContenedor", "Contenedores")',
+                data: { containerNumberToCheck: $("#" + e.currentTarget.id).val() },
+                success: function (response) {
+                    if (response == "False") {
+                        if (lenguaje == "es") {
+                            swal('Ups!', '<span>Número contenedor inválido.</span>', 'warning');
+                        } else {
+                            swal('Ups!', '<span>Invalid Container Number</span>', 'warning');
+                        }
+                        $("#" + e.currentTarget.id).val("")
+                        return false;
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("ValidarContenedor", "Controlador")',
+                            data: { Contenedor: $("#" + e.currentTarget.id).val() },
+                            success: function (response) {
+                                var json = JSON.parse(response);
+                                if (json.validador == 0) {
+                                    $("#" + e.currentTarget.id).val().toUpperCase();
+                                    if (lenguaje == "es") {
+                                        swal('Ok!', '<span>Número contenedor válido.</span>', 'success');
+                                    } else {
+                                        swal('Ok!', '<span>Valid Container Number.</span>', 'success');
+                                    }
+                                } else {
+                                    if (lenguaje == "es") {
+                                        swal('Ups!', '<span>Número contenedor no puede ser reservado para leak test.</span>', 'warning');
+                                    } else {
+                                        swal('Ups!', '<span>Container number can not be reserved for leak test..</span>', 'warning');
+                                    }
+                                    $("#" + e.currentTarget.id).val("")
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+</script>

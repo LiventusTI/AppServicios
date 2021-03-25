@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "RecuperarControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="x_panel">
+    <div class="x_title">
+        <div class="row">
+            <div class="col-sm-7">
+                <h2 >Ingresar Recuperacion Controlador</h2>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+        <br />
+        <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <h3>Datos de Recuperacion</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                            Tipo de Busqueda Fecha
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-6">
+                            <select class="form-control">
+                                <option selected value="0">Seleccionar un tipo de busqueda</option>
+                                <option value="1">FECHA REGISTRO RESERVA</option>
+                                <option value="2">FECHA INICIO STACKING</option>
+                                <option value="3">FECHA FIN STACKING</option>
+                                <option value="4">FECHA DEADLINE</option>
+                                <option value="5">ETD</option>
+                                <option value="6">ETA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                            Fecha Inicio de Busqueda
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-6">
+                            <input type="text" id="fecha_inicio" class="form-control col-md-8 col-xs-6">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                            Fecha Termino de Busqueda
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-6">
+                            <input type="text" id="fecha_termino" class="form-control col-md-8 col-xs-6">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-sm-4 col-md-4 col-lg-4"></div>
+                    <div class="col-sm-4 col-md-4 col-lg-4" align="center"><button type="button" class="btn btn-primary" id="Buscar">Buscar</button></div>
+                    <div class="col-sm-4 col-md-4 col-lg-4"></div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <table id="Tb_Reserva" class="table table-striped table-bordered display nowrap">
+                    <thead>
+                        <tr>
+                            <th>CONTROLADOR (ESN)</th>
+                            <th>ESTADO LOGISTICO</th>
+                            <th>BOOKING ASOCIADO</th>
+                            <th>CONTENEDOR ASOCIADO</th>
+                            <th>ETA</th>
+                            <th>COORDINADOR DE RETRIEVAL</th>
+                            <th>RETRIEVAL PROVIDER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00078002B208</td>
+                            <td>NO RECUPERADO</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                            <td>LOGISTICS IPS</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003C47</td>
+                            <td>NO RECUPERADO</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>FRANCISCO DEVIVO</td>
+                            <td>LOGISTICS IPS</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003C48</td>
+                            <td>NO RECUPERADO</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>FRANCISCO DEVIVO</td>
+                            <td>LOGISTICS IPS</td>
+                        </tr>
+                        @*<tr>
+                            <td>000780A350BB</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>000780A34DE2</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>000780147186</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003BE8</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003BE8</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003BE8</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>
+                        <tr>
+                            <td>886B0F003BE8</td>
+                            <td>TRAVELING</td>
+                            <td>EN VIAJE</td>
+                            <td>1.2.8</td>
+                            <td>087LIM231233</td>
+                            <td>SEGU9458164</td>
+                            <td>15-08-2017</td>
+                            <td>JULIAN ROMERO</td>
+                        </tr>*@
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>CONTROLADOR (ESN)</th>
+                            <th>ESTADO LOGISTICO</th>
+                            <th>BOOKING ASOCIADO</th>
+                            <th>CONTENEDOR ASOCIADO</th>
+                            <th>ETA</th>
+                            <th>COORDINADOR DE RETRIEVAL</th>
+                            <th>RETRIEVAL PROVIDER</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </form>
+            <br />
+            <div class="col-lg-8 col-sm-12">
+                <input type="text" class="input form_control" id="IdReserva" disabled="disabled" placeholder="Id Reserva Servicio" style="text-align:center; text-align-last:center; display:none;" />
+                <input type="text" class="input form_control" id="Booking" disabled="disabled" style="text-align:center; text-align-last:center;" />
+                <button type="button" class="btn btn-primary editar tr" id="Editar">Editar Reserva</button>
+                <button type="button" class="btn btn-info detalle tr" id="Detalle">Ver Resumen de Reserva</button>
+                <button type="button" class="btn btn-success tr" id="Agregar">Gestionar / Agregar Servicios</button>
+                <button type="button" class="btn btn-danger cancelar tr" id="Cancelar">Cancelar Reserva</button>
+            </div>
+        
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+            $(".fa-times").click(function () {
+                swal(
+                    'Error...',
+                    'Mostrar Error o Aceptación Según Corresponda',
+                    'error'
+                )
+            });
+
+            //Botón Editar Reserva//
+            $("#Recuperar").click(function () {
+                var valores = [];
+                var i = 0;
+                // Obtenemos todos los valores contenidos en los <td> de la fila
+                // seleccionada
+                $(this).parents("tr").find("td").each(function () {
+                    valores[i++] = $(this).html();
+                });
+                var url = '@Url.Action("AgregarRecuperacionControlador", "Controlador")?ncontrolador=' + valores[0] + '&estadoTecnico=' + valores[1] + '&estadoLogistico=' + valores[2] +  '&version=' + valores[3] + '&booking=' + valores[4] + '&ncontenedor=' + valores[5] + '&eta=' + valores[6] + '&retrieval=' + valores[7];
+                window.location.href = url;
+            });
+            //Botón Editar Reserva//
+
+
+
+            //Botón Detalle Reserva//
+            $("#Informacion").click(function () {
+                var valores = [];
+                var i = 0;
+                // Obtenemos todos los valores contenidos en los <td> de la fila
+                // seleccionada
+                $(this).parents("tr").find("td").each(function () {
+                    valores[i++] = $(this).html();
+                });
+                var url = '@Url.Action("DetalleReserva", "Reservas")?id=' + valores[0] + '&booking=' + valores[1];
+                window.location.href = url;
+            });
+            //Botón Detalle Reserva//
+
+</script>

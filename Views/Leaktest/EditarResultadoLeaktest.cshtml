@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "EditarResultadoLeaktest";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Editar Resultado LeakTest <small></small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+            <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_id" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            ID Solicitud <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="id" value="@ViewBag.Id" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_deposito" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Depósito <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="deposito" value="@ViewBag.Deposito" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Naviera <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="naviera" value="@ViewBag.Naviera" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Fecha Solicitud <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="fecha_solicitud" value="20-10-2017" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Fecha de Realización Estimada <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="fecha_realizacion_estimada" value="@ViewBag.FechaRealizacionEstimada" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Fecha de Realización Real <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="fecha_realizacion_real" value="@ViewBag.FechaRealizacionReal" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Contenedor<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="contenedor" value="@ViewBag.Contenedor" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_estado" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Estado Resultado LeakTest <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <select class="custom-select form-control col-md-7 col-xs-12">
+                                <option value="0">Seleccione un estado</option>
+                                <option selected>APROBADO</option>
+                                <option value="2">RECHAZADO</option>
+                                <option value="3">PENDIENTE POR CONTABILIZAR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Estado de reserva <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="estado" value="@ViewBag.Estado" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Duración <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="duracion" value="@ViewBag.Duracion" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Tecnico realizador <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="tecnico" value="@ViewBag.Tecnico" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Adjuntar archivo <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="adjunto" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <i class="fa fa-plus" title="Adjuntar" id="Adjuntar"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                        <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Ingresar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+            $(".fa-times").click(function () {
+                swal(
+                    'Error...',
+                    'Mostrar Error o Aceptación Según Corresponda',
+                    'error'
+                )
+            });
+
+            //Botón Editar Reserva//
+            $("#Agregar").click(function () {
+                var valores = [];
+                var i = 0;
+                // Obtenemos todos los valores contenidos en los <td> de la fila
+                // seleccionada
+                $(this).parents("tr").find("td").each(function () {
+                    valores[i++] = $(this).html();
+                });
+                var url = '@Url.Action("IngresarResultadoLeaktest", "Leaktest")?id=' + valores[0] + '&deposito=' + valores[1] + '&naviera=' + valores[2] +  '&total=' + valores[3] + '&realizados=' + valores[4] + '&pendientes=' + valores[5] + '&fechaSolicitud=' + valores[6] + '&fechaRealizacion=' + valores[7] + '&estado=' + valores[8];
+                window.location.href = url;
+            });
+            //Botón Editar Reserva//
+
+
+
+            //Botón Detalle Reserva//
+            $("#Informacion").click(function () {
+                var valores = [];
+                var i = 0;
+                // Obtenemos todos los valores contenidos en los <td> de la fila
+                // seleccionada
+                $(this).parents("tr").find("td").each(function () {
+                    valores[i++] = $(this).html();
+                });
+                var url = '@Url.Action("DetalleReserva", "Reservas")?id=' + valores[0] + '&booking=' + valores[1];
+                window.location.href = url;
+            });
+    //Botón Detalle Reserva//
+
+    $(function () {
+        $("#fecha_realizacion_estimada").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#fecha_realizacion_real").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#fecha_solicitud").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+
+</script>
+

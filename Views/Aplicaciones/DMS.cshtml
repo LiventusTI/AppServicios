@@ -1,0 +1,19 @@
+﻿@{
+        ViewBag.Title = "DMS";
+        Layout = "~/Views/MasterPage.cshtml";
+
+    if (Session["user"].ToString() != "admin") {
+        Session["user"] = Session["user"].ToString().ToUpper();
+    }
+
+    string Url = "?user=" + Session["user"].ToString() + "&pass=" + Session["pass"] + "&lang=" + Session["lang"];
+}
+
+<div class="row">
+    <div class="clearfix"></div>
+
+    <div class="x_content">
+        <iframe src="http://132.255.70.203/dms/seeddms/out/out.Login.php@(Url)" style="width:100%; min-height:700px;" frameborder=1 scrolling=auto name="FramePadre" id="FramePadre"></iframe>
+    </div>
+</div>
+

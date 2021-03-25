@@ -1,0 +1,338 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarDeadline";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2 class="tr" key="mantenedordeadline">Gestionar / Visualizar DeadLine</h2>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-success editar tr" id="CrearDeadLine" key="botonagregardeadline">Agregar Deadline</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table id="Tb_DeadLine" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th >ID DEADLINE</th>
+                                <th class="tr" key="tablanombredeadline">NOMBRE</th>
+                                <th class="tr" key="tablapaisdeadline">PAIS</th>
+                                <th class="tr" key="tabladiasdeadline">DIAS LIMITE</th>
+                                <th class="tr" key="tablaestado">ESTADO</th>
+                                <th class="tr" key="tablaopciones">OPCIONES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para agregar datos-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Deadline" class="alerta col-sm-2 control-label">Deadline (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="Deadline" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Pais" class="alerta col-sm-2 control-label" key="paisadeadline">País (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Pais"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Diaslimite" class="alerta col-sm-2 control-label" key="diaslimitedeadline">Días Límite (*)</label>
+                            <div class="col-sm-10">
+                                <input type="number" min="1" class="form-control" id="Diaslimite">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Estado">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tr" id="IngresarInformacion" key="botonagregardeadline">Agregar Deadline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para agregar datos-->
+
+    <!--Modal para editar datos-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="DeadlineEditar" class="alerta col-sm-2 control-label">Deadline (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="DeadlineEditar" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="PaisEditar" class="alerta col-sm-2 control-label" key="paisadeadline">País (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="PaisEditar"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DiaslimiteEditar" class="alerta col-sm-2 control-label" key="diaslimitedeadline">Días Límite (*)</label>
+                            <div class="col-sm-10">
+                                <input type="number" min="1" class="form-control" id="DiaslimiteEditar">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EstadoEditar" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="EstadoEditar">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tr" id="EditarInformacion" key="botoneditardeadline">Editar Deadline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para editar datos-->
+
+    <input type="text" class="input form_control" id="iddeadline" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="CrearDeadlineModal" style="display:none;"></button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="EditarDeadlineModal" style="display:none;"></button>
+</div>
+
+<script>
+
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '/Deadline/GetDeadLine/',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                $('#Tb_DeadLine').show(500);
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].Activo == 0) {
+                        var estado = 'Activo';
+                    } else {
+                        var estado = 'No Activo';
+                    }
+                    data.push([json[i].Id, json[i].Descripcion.toUpperCase(), json[i].NombrePais.toUpperCase(), json[i].DiasLimite, estado]);
+                }
+                var table = $('#Tb_DeadLine').DataTable({
+                    data: data,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                    },
+                    fixedColumns: true,
+                    "columnDefs": [{
+                        "targets": -1,
+                        "data": null,
+                        "defaultContent": "<i class='fa fa-edit fa-2x' title='Editar DeadLine'></i>"
+                    }],
+                    "rowCallback": function (row, data, index) {
+                        if (data[0] == 0) {
+                            $('td:eq(5)', row).html(' ');
+                        }
+                    }
+                });
+
+                $('#Tb_DeadLine tbody').on('click', 'i', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    $("#DeadlineEditar").val(data[1]);
+                    $("#DeadlineEditar").css("background-color", "rgba(255, 0, 0, 0)");
+
+                    $("#PaisEditar").css("background-color", "rgba(255, 0, 0, 0)");
+
+                    $("#DiaslimiteEditar").val(data[3]);
+                    $("#DiaslimiteEditar").css("background-color", "rgba(255, 0, 0, 0)");
+
+                    $("#iddeadline").val(data[0]);
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Paises/GetPaisesActivos/',
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            var optionsAsString = "";
+                            $('#PaisEditar').empty();
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                            $('#PaisEditar').append(optionsAsString);
+                        },
+                    });
+                    $('#EditarDeadlineModal').trigger('click');
+                });
+            },
+        });
+    });
+
+    //boton crear deadline//
+    $("#CrearDeadLine").click(function () {
+        $('#CrearDeadlineModal').trigger('click');
+
+        $("#Deadline").val("");
+        $("#Deadline").css("background-color", "rgba(255, 0, 0, 0)");
+        $('#Deadline').focus();
+
+        $("#Pais").val(0);
+        $("#Pais").css("background-color", "rgba(255, 0, 0, 0)");
+
+        $("#Diaslimite").val("");
+        $("#Diaslimite").css("background-color", "rgba(255, 0, 0, 0)");
+        $.ajax({
+            type: "POST",
+            url: '/Paises/GetPaisesActivos/',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Pais').empty();
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Pais').append(optionsAsString);
+            },
+        });
+    });
+    //boton crear deadline//
+
+    //Ingresar Información//
+    $("#IngresarInformacion").click(function () {
+        if ($("#Deadline").val() != "") {
+            $("#Deadline").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#Pais").val != 0) {
+                $("#Pais").css("background-color", "rgba(255, 0, 0, 0)");
+                if ($("#Diaslimite").val() >= 0 && $("#Diaslimite").val() <= 15) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("CrearDeadLine", "Deadline")',
+                        data: { Descripcion: $("#Deadline").val(), IdPais: $("#Pais").val(), DiasLimite: $("#Diaslimite").val(), Estado: $("#Estado").val() },
+                        success: function (response) {
+                            var json = JSON.parse(response);
+                            if (json.validador == 0) {
+                                var aux = 'success';
+                            } else {
+                                var aux = 'warning';
+                            }
+                            swal({
+                                title: '',
+                                text: json.Mensaje,
+                                type: aux,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    });
+                } else {
+                    $("#Diaslimite").css("background-color", "rgba(255, 0, 0, 0.4)");
+                    if (lenguaje == "es") {
+                        alert("Insertar un valor entre 1 y 15 días.");
+                    } else {
+                        alert("Insert value between 1 and 15 days.");
+                    }
+                }
+            } else {
+                $("#Pais").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#Deadline").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Ingresar Información//
+
+    //Editar Información//
+    $("#EditarInformacion").click(function () {
+        if ($("#DeadlineEditar").val() != "") {
+            $("#DeadlineEditar").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#PaisEditar").val != 0) {
+                $("#PaisEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                if ($("#DiaslimiteEditar").val() >= 0 && $("#DiaslimiteEditar").val() <= 15) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("EditarDeadLine", "Deadline")',
+                        data: { Descripcion: $("#DeadlineEditar").val(), IdPais: $("#PaisEditar").val(), DiasLimite: $("#DiaslimiteEditar").val(), Estado: $("#Estado").val(), IdDeadLine: $("#iddeadline").val() },
+                        success: function (response) {
+                            var json = JSON.parse(response);
+                            if (json.validador == 0) {
+                                var aux = 'success';
+                            } else {
+                                var aux = 'warning';
+                            }
+                            swal({
+                                title: '',
+                                text: json.Mensaje,
+                                type: aux,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    });
+                } else {
+                    $("#DiaslimiteEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+                    if (lenguaje == "es") {
+                        alert("Insertar un valor entre 1 y 15 días.");
+                    } else {
+                        alert("Insert value between 1 and 15 days.");
+                    }
+                }
+            } else {
+                $("#PaisEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#DeadlineEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Editar Información//
+</script>
+

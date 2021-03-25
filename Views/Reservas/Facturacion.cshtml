@@ -1,0 +1,2044 @@
+﻿
+@{
+    ViewBag.Title = "Facturacion";
+    Layout = "~/Views/MasterPage.cshtml";
+    int PerfilInterior = Convert.ToInt32(Session["PerfilInterior"]);
+    string Usuario = Session["User"].ToString().ToUpper();
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h3 class="tr" key="gestionreservas">Facturación de Servicios</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center">
+                        <label class="control-label">Semana Inicio</label>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center">
+                        <input type="number" class="form-control" min="1" max="52" style="text-align:center" id="Semanaini" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center">
+                        <label class="control-label">Entre Semana</label>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center">
+                        <input type="number" class="form-control" min="1" max="52" style="text-align:center" id="Semanafin" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center">
+                        <button type="button" class="btn btn-primary tr btn-sm" key="" id="Filtro">Filtrar Semanas</button>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="text-align:center">
+                        <button type="button" class="btn btn-primary tr btn-sm" key="" id="Limpiar">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <div id="guardadocorrectamente" hidden="hidden"><p style="color:red">Guardado Correctamente</p></div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div id="guardadocorrectamente" hidden="hidden"><p style="color:red">Guardado Correctamente</p></div>
+                    <table id="Tb_Servicios" class="table table-striped table-bordered display nowrap">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="tr" key="">CONTINENTE DESTINO</th>
+                                <th class="tr" key="">SERVICE PROVIDER</th>
+                                <th>PAIS ORIGEN</th>
+                                <th>PUERTO ORIGEN</th>
+                                <th class="tr" key="">PUERTO DESTINO</th>
+                                <th class="tr" key="">PAIS LEAKTEST</th>
+                                <th class="tr" key="">CONTENEDOR</th>
+                                <th class="tr" key="">NAVIERA</th>
+                                <th>NAVE</th>
+                                <th class="tr" key="">VIAJE</th>
+                                <th class="tr" key="">COMMODITY</th>
+                                <th class="tr" key="">TRATAMIENTO CO2</th>
+                                <th class="tr" key="">FECHA SERVICIO</th>
+                                <th class="tr" key="">SEMANA</th>
+                                <th>BOOKING</th>
+                                <th>TAMAÑO CONTENEDOR</th>
+                                <th class="tr" key="">ETD</th>
+                                <th class="tr" key="">EXPORTADOR</th>
+                                <th class="tr" key="">ESTADO FACTURACION</th>
+                                <th class="tr" key="">CODIGO SOFTLAND</th>
+                                <th class="tr" key="">FACTURA</th>
+                                <th class="tr" key="">PRECIO SERVICIO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO FACTURA</th>
+                                <th class="tr" key="">FECHA FACTURACION</th>
+                                <th class="tr" key="">MES FACTURACION</th>
+                                <th class="tr" key="">GESTION FACTURACION</th>
+                                <th class="tr" key="">FECHA ULTIMA GESTION</th>
+                                <th class="tr" key="">CENTRO COSTOS</th>
+                                <th class="tr" key="">NOTA CREDITO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO NOTA CREDITO</th>
+                                <th class="tr" key="">PRECIO SERVICIO (PESOS)</th>
+                                <th class="tr" key="">PRECIO ORIGINAL (PESOS)</th>
+                                <th class="tr" key="">ID SERVICIO</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th class="tr" key="">CONTINENTE DESTINO</th>
+                                <th class="tr" key="">SERVICE PROVIDER</th>
+                                <th>PAIS ORIGEN</th>
+                                <th>PUERTO ORIGEN</th>
+                                <th class="tr" key="">PUERTO DESTINO</th>
+                                <th class="tr" key="">PAIS LEAKTEST</th>
+                                <th class="tr" key="">CONTENEDOR</th>
+                                <th class="tr" key="">NAVIERA</th>
+                                <th>NAVE</th>
+                                <th class="tr" key="">VIAJE</th>
+                                <th class="tr" key="">COMMODITY</th>
+                                <th class="tr" key="">TRATAMIENTO CO2</th>
+                                <th class="tr" key="">FECHA SERVICIO</th>
+                                <th class="tr" key="">SEMANA</th>
+                                <th>BOOKING</th>
+                                <th>TAMAÑO CONTENEDOR</th>
+                                <th class="tr" key="">ETD</th>
+                                <th class="tr" key="">EXPORTADOR</th>
+                                <th class="tr" key="">ESTADO FACTURACION</th>
+                                <th class="tr" key="">CODIGO SOFTLAND</th>
+                                <th class="tr" key="">N° FACTURA</th>
+                                <th class="tr" key="">PRECIO SERVICIO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO FACTURA</th>
+                                <th class="tr" key="">FECHA FACTURACION</th>
+                                <th class="tr" key="">MES FACTURACION</th>
+                                <th class="tr" key="">GESTION FACTURACION</th>
+                                <th class="tr" key="">FECHA ULTIMA GESTION</th>
+                                <th class="tr" key="">CENTRO COSTOS</th>
+                                <th class="tr" key="">NOTA CREDITO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO NOTA CREDITO</th>
+                                <th class="tr" key="">PRECIO SERVICIO (PESOS)</th>
+                                <th class="tr" key="">PRECIO ORIGINAL (PESOS)</th>
+                                <th class="tr" key="">ID SERVICIO</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th class="tr" key="">CONTINENTE DESTINO</th>
+                                <th class="tr" key="">SERVICE PROVIDER</th>
+                                <th>PAIS ORIGEN</th>
+                                <th>PUERTO ORIGEN</th>
+                                <th class="tr" key="">PUERTO DESTINO</th>
+                                <th class="tr" key="">PAIS LEAKTEST</th>
+                                <th class="tr" key="">CONTENEDOR</th>
+                                <th class="tr" key="">NAVIERA</th>
+                                <th>NAVE</th>
+                                <th class="tr" key="">VIAJE</th>
+                                <th class="tr" key="">COMMODITY</th>
+                                <th class="tr" key="">TRATAMIENTO CO2</th>
+                                <th class="tr" key="">FECHA SERVICIO</th>
+                                <th class="tr" key="">SEMANA</th>
+                                <th>BOOKING</th>
+                                <th>TAMAÑO CONTENEDOR</th>
+                                <th class="tr" key="">ETD</th>
+                                <th class="tr" key="">EXPORTADOR</th>
+                                <th class="tr" key="">ESTADO FACTURACION</th>
+                                <th class="tr" key="">CODIGO SOFTLAND</th>
+                                <th class="tr" key="">N° FACTURA</th>
+                                <th class="tr" key="">PRECIO SERVICIO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO FACTURA</th>
+                                <th class="tr" key="">FECHA FACTURACION</th>
+                                <th class="tr" key="">MES FACTURACION</th>
+                                <th class="tr" key="">GESTION FACTURACION</th>
+                                <th class="tr" key="">FECHA ULTIMA GESTION</th>
+                                <th class="tr" key="">CENTRO COSTOS</th>
+                                <th class="tr" key="">NOTA CREDITO (USD)</th>
+                                <th class="tr" key="">TIPO CAMBIO NOTA CREDITO</th>
+                                <th class="tr" key="">PRECIO SERVICIO (PESOS)</th>
+                                <th class="tr" key="">PRECIO ORIGINAL (PESOS)</th>
+                                <th class="tr" key="">ID SERVICIO</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row" id="botonesaccionesFacturacion">
+                <div class="col-lg-11 col-lg-offset-1">
+                    <button type="button" class="btn btn-primary tr btn-sm" key="" id="EditarCeldasMasivas">Editar Celdas Masivas</button>
+                    <button type="button" class="btn btn-primary tr btn-sm" key="" id="CompararServicios">Comparar Servicios</button>
+                    <button type="button" class="btn btn-primary tr btn-sm" key="" id="EliminarFactura">Anular Facturas</button>
+                    <button type="button" class="btn btn-primary tr btn-sm" key="" id="FacturarServicio">Re-Facturar Servicios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Editar Celdas-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:100px; margin-right:10px; width:85%">
+    <div class="modal-dialog" role="document" style="width:100%">
+        <div class="modal-content">
+            <div class="modal-header titulo">
+                <button type="button" class="close closeCelda" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title tr" id="titulocelda"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="ColumnaFactura" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Número Factura</label>
+                        <div>
+                            <input  type="text" class="form-control"  id="EditarFactura" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaPrecio" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Precio Servicio (USD)</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarPrecio" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaTipoCambio" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Tipo Cambio</label>
+                        <div>
+                            <input type="number" step="any" class="form-control" id="EditarTipoCambio" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaGestion" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Gestión Facturación</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarGestion" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaPrecioNota" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Precio Nota Credito (USD)</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarPrecioNota" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaTipoCambioNota" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Tipo Cambio</label>
+                        <div>
+                            <input type="number" step="any" class="form-control" id="EditarTipoCambioNota" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaCentro" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Centro Costos</label>
+                        <div>
+                            <select class="selectpicker form-control" data-live-search="true" name="EditarCentro" id="EditarCentro" style="text-align:center"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaTamano" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Tamaño Contenedor (PIES)</label>
+                        <div>
+                            <select class="selectpicker form-control" data-live-search="true" name="EditarTamano" id="EditarTamano" style="text-align:center">
+                                <option selected value="0">SELECT COLUMN</option>
+                                <option value="20">20 </option>
+                                <option value="40">40 </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaFecha" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Fecha Facturación</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarFecha" style="text-align:center" autocomplete="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaFechaUltimaGestion" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Fecha Última Gestión</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarFechaUltimaGestion" style="text-align:center" autocomplete="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer EditarCelda" style="text-align:center">
+                <button type="button" class="btn btn-success btn-lg" id="EditarCelda">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Editar Celdas-->
+
+<!--Modal Editar Celdas Masivas-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog" role="document" style="width:100%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title tr" id="myModalLabel" key="tituloposturacortinaagregar">Editar Reserva</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                            <label class="control-label tr">Columna a Editar (*)</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" name="columnaseditar" id="columnaseditar">
+                                    <option selected value="0">SELECT COLUMN</option>
+                                    <option value="1">NUMERO FACTURA</option>
+                                    <option value="2">PRECIO SERVICIO (USD)</option>
+                                    <option value="3">TIPO DE CAMBIO PRECIO</option>
+                                    <option value="4">CENTRO DE COSTOS</option>
+                                    <option value="5">PRECIO NOTA CREDITO</option>
+                                    <option value="6">TIPO CAMBIO NOTA CREDITO</option>
+                                    <option value="7">TAMAÑO CONTENEDOR</option>
+                                    <option value="8">FECHA FACTURACION</option>
+                                    <option value="9">GESTION FACTURACION</option>
+                                    <option value="10">FECHA GESTION FACTURACION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row" id="ColumnaFactura1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">NUMERO FACTURA</label>
+                        <div>
+                            <input type="text" id="EditarFactura1" class="form-control" onkeyup="this.value = this.value.toUpperCase();" style="text-align:center" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaPrecio1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">PRECIO (USD)</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarPrecio1" style="text-align:center">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaTipoCambio1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">TIPO CAMBIO</label>
+                        <div>
+                            <input type="number" step="any" class="form-control" id="EditarTipoCambio1" style="text-align:center">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaCentro1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">CENTRO COSTO</label>
+                        <div>
+                            <select class="selectpicker form-control" data-live-search="true" name="EditarCentro1" id="EditarCentro1" style="text-align:center"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaPrecioNota1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">PRECIO NOTA CREDITO (USD)</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarPrecioNota1" style="text-align:center">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaTipoCambioNota1" hidden="hidden">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">TIPO CAMBIO NOTA CREDITO</label>
+                        <div>
+                            <input type="number" step="any" class="form-control" id="EditarTipoCambioNota1" style="text-align:center">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center"></div>
+                </div>
+                <div class="row" id="ColumnaTamano1" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Tamaño Contenedor (PIES)</label>
+                        <div>
+                            <select class="selectpicker form-control" data-live-search="true" name="EditarTamano1" id="EditarTamano1" style="text-align:center">
+                                <option selected value="0">SELECT COLUMN</option>
+                                <option value="20">20</option>
+                                <option value="40">40</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaFecha1" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Fecha Facturación</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarFecha1" style="text-align:center" autocomplete="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaGestion1" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Gestión Facturación</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarGestion1" style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ColumnaFechaGestion1" hidden="hidden">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center">
+                        <label class="control-label tr">Fecha Última Gestión</label>
+                        <div>
+                            <input type="text" class="form-control" id="EditarFechaGestion1" style="text-align:center" autocomplete="false">
+                        </div>
+                    </div>
+                </div>              
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="button" class="btn btn-success btn-lg" id="EditarDatos">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Editar Celdas Masivas-->
+
+<!--Modal Comparacion-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog" role="document" style="width:100%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title tr" id="myModalLabel" key="">Comparar Servicios</h2>
+            </div>
+            <div class="modal-body">
+                <div class="x_content">
+                    <div class="x_panel">
+                        <div>
+                            <h3>Información Servicio</h3>
+                        </div>
+                        <table id="Tb_Servicios1" class="table table-striped table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="tr" key="">CONTINENTE DESTINO</th>
+                                    <th class="tr" key="">SERVICE PROVIDER</th>
+                                    <th>PAIS ORIGEN</th>
+                                    <th>PUERTO ORIGEN</th>
+                                    <th class="tr" key="">PUERTO DESTINO</th>
+                                    <th class="tr" key="">CONTENEDOR</th>
+                                    <th class="tr" key="">NAVIERA</th>
+                                    <th>NAVE</th>
+                                    <th class="tr" key="">VIAJE</th>
+                                    <th class="tr" key="">COMMODITY</th>
+                                    <th class="tr" key="">TRATAMIENTO</th>
+                                    <th class="tr" key="">FECHA CONTROLADOR</th>
+                                    <th class="tr" key="">SEMANA</th>
+                                    <th>BOOKING</th>
+                                    <th class="tr" key="">ETD</th>
+                                    <th class="tr" key="">EXPORTADOR</th>
+                                    <th class="tr" key="">ID SERVICIO</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div> 
+                 </div>  
+                <div class="x_content">
+                    <div>
+                        <h3>Información Servicio Facturado</h3>
+                    </div>
+                    <div class="x_panel">
+                        <table id="Tb_Servicios2" class="table table-striped table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="tr" key="">CONTINENTE DESTINO</th>
+                                    <th class="tr" key="">SERVICE PROVIDER</th>
+                                    <th>PAIS ORIGEN</th>
+                                    <th>PUERTO ORIGEN</th>
+                                    <th class="tr" key="">PUERTO DESTINO</th>
+                                    <th class="tr" key="">CONTENEDOR</th>
+                                    <th class="tr" key="">NAVIERA</th>
+                                    <th>NAVE</th>
+                                    <th class="tr" key="">VIAJE</th>
+                                    <th class="tr" key="">COMMODITY</th>
+                                    <th class="tr" key="">TRATAMIENTO</th>
+                                    <th class="tr" key="">FECHA CONTROLADOR</th>
+                                    <th class="tr" key="">SEMANA</th>
+                                    <th>BOOKING</th>
+                                    <th class="tr" key="">ETD</th>
+                                    <th class="tr" key="">EXPORTADOR</th>
+                                    <th class="tr" key="">ID SERVICIO</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>              
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Comparacion-->
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="EditarCeldasMasivasTrigger" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1" id="CompararServiciosTrigger" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="EditarCeldas" style="display:none;"></button>
+
+
+
+<script type="text/javascript">
+
+    if( @PerfilInterior == 1 || @PerfilInterior == 2 || @PerfilInterior == 3 || @PerfilInterior == 4){
+        $("#botonesaccionesFacturacion").hide();
+    }
+
+    $(function () {
+        $("#EditarFecha, #EditarFecha1, #EditarFechaUltimaGestion, #EditarFechaGestion1").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            showWeek: true
+        });
+
+        $('#EditarFechaControlador').datetimepicker({});
+    });
+
+    function getCurrentDate() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = dd + '-' + mm + '-' + yyyy;
+        return today;
+    }
+
+    function getMonthDate() {
+        var today = new Date();
+        var mm = today.getMonth() + 1; //January is 0!
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        return mm;
+    }
+
+    function getMonthDateTabla(data) {
+        var dateString = data.substr(6);
+        var currentTime = new Date(parseInt(dateString));
+        var month = currentTime.getMonth() + 1;
+
+        if (month < 10) {
+            month = "0" + month;
+        } else {
+            month;
+        }
+        return month;
+    }
+
+    function FormatDateSemana(data) {
+        var dateString = data.substr(6);
+        var currentTime = new Date(parseInt(dateString));
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+        var date = month + "-" + day + "-" + year;
+        return date;
+    }
+
+    function FormatDateControlador(data) {
+        var dateString = data.substr(6);
+        var currentTime = new Date(parseInt(dateString));
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+        var Hora = currentTime.getHours();
+        var Minutos = currentTime.getMinutes();
+
+        if (month < 10) {
+            month = "0" + month;
+        } else {
+            month;
+        }
+
+        if (day < 10) {
+            day = "0" + day;
+        } else {
+            day;
+        }
+
+        if (Hora < 10 && Hora != 0) {
+            Hora = "0" + Hora;
+        } else if (Hora == 0) {
+            Hora = "00";
+        } else {
+            Hora;
+        }
+
+        if (Minutos < 10 && Minutos != 0) {
+            Minutos = "0" + Minutos;
+        } else if (Minutos == 0) {
+            Minutos = "00";
+        } else {
+            Minutos;
+        }
+
+        var date = day + "-" + month + "-" + year;
+        return date;
+    }
+
+    function FormatDate(data) {
+        var dateString = data.substr(6);
+        var currentTime = new Date(parseInt(dateString));
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+
+        if (month < 10) {
+            month = "0" + month;
+        } else {
+            month;
+        }
+
+        if (day < 10) {
+            day = "0" + day;
+        } else {
+            day;
+        }
+
+        var date = day + "-" + month + "-" + year;
+        return date;
+    }
+
+
+    $(document).ready(function () {
+
+        $('#Tb_Servicios thead tr:eq(1) th').each(function (i) {
+            var title = $('#example thead tr:eq(0) th').eq($(this).index()).text();
+            if ($(this).index() != 0) {
+                $(this).html('<input type="text" class="form-control" placeholder="FILTER" data-index="' + i + '"/>');
+            }
+        });
+
+        var table = $("#Tb_Servicios").DataTable({
+            orderCellsTop:  true,
+            fixedColumns:   true,
+            scrollX: true,
+            "aLengthMenu": [[15, 50, 75, -1], [15, 50, 75, "All"]],
+            dom: 'lBfrtip',
+
+            buttons: [
+                {
+                    extend: 'excel',
+                }
+            ],
+            ajax: {
+                "url": "@Url.Action("GetServiciosFacturacion", "Reservas")",
+                "dataSrc": ''
+            },
+            "fnFooterCallback": function (nRow, aaData, iStart, iEnd, aiDisplay) {
+                /*
+                 * Calculate the total market share for all browsers in this table (ie inc. outside
+                 * the pagination)
+                 */
+                var iTotalMarket = 0;
+                var iTotalMarket1 = 0;
+                var iTotalMarket2 = 0;
+                for (var i = 0 ; i < aaData.length ; i++) {
+                    iTotalMarket += (aaData[i]["Precio"] * 1) * (aaData[i]["TipoCambio"] * 1);
+                    iTotalMarket1 += (aaData[i]["Precio"] * 1) * (aaData[i]["TipoCambio"] * 1) + (aaData[i]["NotaCredito"] * 1) * (aaData[i]["TipoCambioNota"] * 1);
+                    iTotalMarket2 += (aaData[i]["Precio"] * 1);
+                }
+
+                /* Calculate the market share for browsers on this page */
+                var iPageMarket = 0;
+                var iPageMarket1 = 0;
+                var iPageMarket2 = 0;
+                for (var i = iStart ; i < iEnd ; i++) {
+                    iPageMarket += (aaData[aiDisplay[i]]["Precio"] * 1) * (aaData[aiDisplay[i]]["TipoCambio"] * 1);
+                    iPageMarket1 += (aaData[aiDisplay[i]]["Precio"] * 1) * (aaData[aiDisplay[i]]["TipoCambio"] * 1) + (aaData[aiDisplay[i]]["NotaCredito"] * 1) * (aaData[aiDisplay[i]]["TipoCambioNota"] * 1);
+                    iPageMarket2 += (aaData[aiDisplay[i]]["Precio"] * 1);
+                }
+
+                /* Modify the footer row to match what we want */
+                var nCells = nRow.getElementsByTagName('th');
+                nCells[31].innerHTML = '$' + (parseInt(iPageMarket * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' CLP';
+
+                /* Modify the footer row to match what we want */
+                var nCells1 = nRow.getElementsByTagName('th');
+                nCells1[32].innerHTML = '$' + (parseInt(iPageMarket1 * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' CLP';
+
+                var nCells2 = nRow.getElementsByTagName('th');
+                nCells2[22].innerHTML = '$' + (parseInt(iPageMarket2 * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' USD';
+            },
+            columns: [
+            { "data": "Checkbox" },
+            { "data": "Continente" },
+            { "data": "ServiceProvider" },
+            { "data": "Pais" },
+            { "data": "PuertoOrigen" },
+            { "data": "PuertoDestino" },
+            { "data": "PaisDeposito" },
+            { "data": "Contenedor" },
+            { "data": "Naviera" },
+            { "data": "Nave" },
+            { "data": "Viaje" },
+            { "data": "Commodity" },
+            { "data": "Tratamiento" },
+            {
+                "data": "FechaControlador",
+                "render":
+                function (data, type, row, meta) {
+                    if (data != null) {
+                        var fecha = FormatDateControlador(data);
+                        return fecha;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "data": "Semana"
+            },
+            { "data": "Booking" },
+            { "data": "Tamano" },
+            {
+                "data": "Etd",
+                "render":
+                function (data, type, row, meta) {
+                    if (data != null) {
+                        var fecha = FormatDate(data);
+                        return fecha;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            { "data": "Exportador" },
+            {
+                "data": "EstadoFacturacion",
+                "render":
+                function (data, type, row, meta) {
+                    if (data == 0) {
+                        return "PENDIENTE FACTURACIÓN";
+                    } else if(data == 1) {
+                        return "FACTURADO";
+                    } else if (data == 2) {
+                        return "PENDIENTE VALIDACIÓN";
+                    } else if (data == 3) {
+                        return "FACTURADO CON ERRORES";
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "data": "CodigoSoftland",
+                "render": function (data, type, row, meta) {
+                    var codigo = '01-';
+                    if (row["Pais"].trim() == "CHILE") {
+                        codigo = codigo + "01-";
+                    } else if (row["Pais"].trim() == "MEXICO") {
+                        codigo = codigo + "02-";
+                    } else if (row["Pais"].trim() == "PERU") {
+                        codigo = codigo + "03-";
+                    } else if (row["Pais"].trim() == "ARGENTINA") {
+                        codigo = codigo + "04-";
+                    } else if (row["Pais"].trim() == "SOUTH AFRICA") {
+                        codigo = codigo + "05-";
+                    } else if (row["Pais"].trim() == "ECUADOR") {
+                        codigo = codigo + "06-";
+                    } else if (row["Pais"].trim() == "COLOMBIA") {
+                        codigo = codigo + "07-";
+                    } else if (row["Pais"].trim() == "UNITED STATES ") {
+                        codigo = codigo + "08-";
+                    } else if (row["Pais"].trim() == "KENIA") {
+                        codigo = codigo + "13-";
+                    } else {
+                        codigo = codigo + "00-";
+                    }
+
+                    if (row["Commodity"].trim() == "AVOCADOS") {
+                        codigo = codigo + "01-";
+                    } else if (row["Commodity"].trim() == "BLUEBERRIES") {
+                        codigo = codigo + "02-";
+                    } else if (row["Commodity"].trim() == "LIME TAHIT" || row["Commodity"].trim() == "LEMON") {
+                        codigo = codigo + "03-";
+                    } else if (row["Commodity"].trim() == "ASPARAGUS") {
+                        codigo = codigo + "04-";
+                    } else if (row["Commodity"].trim() == "SNOW PEAS") {
+                        codigo = codigo + "05-";
+                    } else if (row["Commodity"].trim() == "BANANAS") {
+                        codigo = codigo + "06-";
+                    } else if (row["Commodity"].trim() == "CHERRY") {
+                        codigo = codigo + "07-";
+                    } else if (row["Commodity"].trim() == "GARLICS") {
+                        codigo = codigo + "08-";
+                    } else if (row["Commodity"].trim() == "GRAPES") {
+                        codigo = codigo + "09-";
+                    } else if (row["Commodity"].trim() == "KIWI FRUIT") {
+                        codigo = codigo + "10-";
+                    } else if (row["Commodity"].trim() == "NECTARINES") {
+                        codigo = codigo + "11-";
+                    } else if (row["Commodity"].trim() == "PEACHES") {
+                        codigo = codigo + "12-";
+                    } else if (row["Commodity"].trim() == "PLUMS") {
+                        codigo = codigo + "13-";
+                    } else if (row["Commodity"].trim() == "PAPAYA") {
+                        codigo = codigo + "14-";
+                    } else if (row["Commodity"].trim() == "MANGOS") {
+                        codigo = codigo + "15-";
+                    } else if (row["Commodity"].trim() == "TOMATO") {
+                        codigo = codigo + "16-";
+                    } else {
+                        codigo = codigo + "00-";
+                    }
+
+                    if (row["Naviera"].trim() == "HAPAG LLOYD") {
+                        codigo = codigo + "01-";
+                    } else if (row["Naviera"].trim() == "CMA-CGM") {
+                        codigo = codigo + "02-";
+                    } else if (row["Naviera"].trim() == "MSC") {
+                        codigo = codigo + "03-";
+                    } else if (row["Naviera"].trim() == "K-LINE") {
+                        codigo = codigo + "04-";
+                    } else if (row["Naviera"].trim() == "MOL") {
+                        codigo = codigo + "05-";
+                    } else if (row["Naviera"].trim() == "MAERSK") {
+                        codigo = codigo + "06-";
+                    } else if (row["Naviera"].trim() == "HAMBURG SUD") {
+                        codigo = codigo + "07-";
+                    } else if (row["Naviera"].trim() == "WAN HAI") {
+                        codigo = codigo + "08-";
+                    } else if (row["Naviera"].trim() == "HYUNDAI") {
+                        codigo = codigo + "09-";
+                    } else if (row["Naviera"].trim() == "NYK") {
+                        codigo = codigo + "10-";
+                    } else if (row["Naviera"].trim() == "EVERGREEN / ANDESGREEN" || row["Naviera"].trim() == "EVERGREEN") {
+                        codigo = codigo + "11-";
+                    } else if (row["Naviera"].trim() == "COOL CARRIER") {
+                        codigo = codigo + "12-";
+                    } else if (row["Naviera"].trim() == "GLOBAL REEFER") {
+                        codigo = codigo + "13-";
+                    } else if (row["Naviera"].trim() == "SEATRADE") {
+                        codigo = codigo + "14-";
+                    } else if (row["Naviera"].trim() == "KING OCEAN") {
+                        codigo = codigo + "15-";
+                    } else if (row["Naviera"].trim() == "SEABOARD") {
+                        codigo = codigo + "16-";
+                    } else if (row["Naviera"].trim() == "MATSON USA") {
+                        codigo = codigo + "17-";
+                    } else if (row["Naviera"].trim() == "COSCO") {
+                        codigo = codigo + "18-";
+                    } else if (row["Naviera"].trim() == "AGL") {
+                        codigo = codigo + "19-";
+                    } else if (row["Naviera"].trim() == "ONE LINE") {
+                        codigo = codigo + "21-";
+                    } else {
+                        codigo = codigo + "00-";
+                    }
+
+                    if (row["Continente"].trim() == "AMERICA") {
+                        codigo = codigo + "01-";
+                    } else if (row["Continente"].trim() == "EUROPE") {
+                        codigo = codigo + "02-";
+                    } else if (row["Continente"].trim() == "ASIA") {
+                        codigo = codigo + "03-";
+                    } else {
+                        codigo = codigo + "00-";
+                    }
+
+                    if (row["Tratamiento"].trim() == "WITH SCRUBBER FILTER") {
+                        codigo = codigo + "02-";
+                    } else {
+                        codigo = codigo + "01-";
+                    }
+
+                    if (row["Tamano"] == 40) {
+                        codigo = codigo + "01";
+                    } else if (row["Tamano"] == 20) {
+                        codigo = codigo + "02";
+                    } else {
+                        codigo = codigo + "00";
+                    }
+
+                    return codigo;
+                }
+            },
+            { "data": "NumeroFactura" },
+            {
+                "data": "Precio",
+                "render": $.fn.dataTable.render.number('\,', '.', 0, '')
+            },
+            {
+                "data": "TipoCambio",
+                "render": $.fn.dataTable.render.number(',', '.', 2, '')
+            },
+            {
+                "data": "FechaFacturacion",
+                "render":
+                function (data, type, row, meta) {
+                    if (data != null) {
+                        var fecha = FormatDate(data);
+                        return fecha;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "data": "MesFacturacion",
+                "render":
+                    function (data, type, row, meta) {
+                        if (row.FechaFacturacion != null) {
+                            return getMonthDateTabla(row.FechaFacturacion);
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            { "data": "Gestion" },
+            {
+                "data": "FechaGestion",
+                "render":
+                function (data, type, row, meta) {
+                    if (data != null) {
+                        var fecha = FormatDate(data);
+                        return fecha;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            { "data": "CentroCosto" },
+            {
+                "data": "NotaCredito",
+                "render": $.fn.dataTable.render.number('\,', '.', 0, '')
+            },
+            {
+                "data": "TipoCambioNota",
+                "render": $.fn.dataTable.render.number('\,', '', 2, '')
+            },
+            {
+                "data": "PrecioServicioPesos",
+                "render":
+                    function (data, type, row, meta) {
+                        if (row.Precio != null && row.TipoCambio) {
+                            var precio = (row.Precio);
+                            var TipoCambio = (row.TipoCambio);
+                            return (precio * TipoCambio).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            {
+                "data": "PrecioOriginalPesos",
+                "render":
+                    function (data, type, row, meta) {
+                        if (row.Precio != null && row.TipoCambio) {
+                            return ((row.Precio * row.TipoCambio) + (row.NotaCredito * row.TipoCambioNota)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            { "data": "IdServicio" },
+            ],
+            columnDefs: [
+                {
+                    'targets': 0,
+                    'checkboxes': {
+                        'selectRow': true
+                    }
+                }
+            ],
+            select: {
+                'style': 'multi'
+            },
+        });
+
+        $(table.table().container()).on('keyup', 'thead input', function () {
+            if (($(this).data('index') == 13) && this.value != "") {
+                table
+               .column($(this).data('index'))
+               .search("^" + this.value + "$", true, false, true)
+               .draw();
+            } else {
+                table
+               .column($(this).data('index'))
+               .search(this.value)
+               .draw();
+            }
+
+        });
+
+        $('#example-select-all').on('click', function () {
+            // Get all rows with search applied
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            // Check/uncheck checkboxes for all rows in the table
+            $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+
+
+    });
+
+    $('#Tb_Servicios').on('click', 'tbody td:not(:first-child)', function (e) {
+        if( @PerfilInterior == 1 || @PerfilInterior == 2 || @PerfilInterior == 3 ||
+            @PerfilInterior == 4){
+            return false;
+        }
+
+        var Cabecera = $('#Tb_Servicios thead tr th').eq($(this).index()).text().trim();
+        var texto = "EDITAR " + Cabecera;
+        $(".titulo").find('h2').text("");
+        $(".titulo").find('h2').text(texto);
+        $("#guardadocorrectamente").hide();
+
+        if (Cabecera == "FACTURA") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Factura");
+            localStorage.setItem("CampoBase", "FACTURA");
+
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').show();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "PRECIO SERVICIO (USD)") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Precio");
+            localStorage.setItem("CampoBase", "PRECIO");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "FACTURADO") {
+                swal('Ups!', 'No es posible cambiar precio a un servicio facturado.', 'error');
+                return false;
+            } else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').show();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "TIPO CAMBIO FACTURA") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "TipoCambio");
+            localStorage.setItem("CampoBase", "TIPOCAMBIO");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaTipoCambio').show();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "GESTION FACTURACION") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Gestion");
+            localStorage.setItem("CampoBase", "GESTION");
+            var servicio = $('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(33)').text()
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetGestionFacturacion", "Reservas")',
+                data: { idServicio: servicio },
+                async: false,
+                success: function (response) {
+                    if (response != "") {
+                        $('#EditarGestion').val(response);
+                    } else {
+                        $('#EditarGestion').val("");
+                    }
+
+                },
+            });
+            $('#ColumnaFactura').hide();
+            $('#ColumnaPrecio').hide();
+            $('#ColumnaTipoCambio').hide();
+            $('#ColumnaGestion').show();
+            $('#ColumnaTipoCambioNota').hide();
+            $('#ColumnaPrecioNota').hide();
+            $('#ColumnaCentro').hide();
+            $('#ColumnaTamano').hide();
+            $('#ColumnaFecha').hide();
+            $('#ColumnaFechaUltimaGestion').hide();
+            $('#EditarCeldas').trigger('click');
+
+        } else if (Cabecera == "NOTA CREDITO (USD)") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "PrecioNota");
+            localStorage.setItem("CampoBase", "PRECIONOTA");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').show();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "TIPO CAMBIO NOTA CREDITO") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "TipoCambioNota");
+            localStorage.setItem("CampoBase", "TIPOCAMBIONOTA");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaTipoCambioNota').show();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "CENTRO COSTOS") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Centro");
+            localStorage.setItem("CampoBase", "CENTRO");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCentroCostos", "Reservas")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = ""
+                        $('#EditarCentro').empty();
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].IdCentro + "'>" + json[i].Nombre + "</option>";
+                        }
+                        $('#EditarCentro').append(optionsAsString);
+                        $('#EditarCentro').selectpicker('refresh');
+                    },
+                });
+
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').show();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "TAMAÑO CONTENEDOR") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Tamano");
+            localStorage.setItem("CampoBase", "TAMANO");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').show();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "FECHA FACTURACION") {
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "Fecha");
+            localStorage.setItem("CampoBase", "FECHA");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').show();
+                $('#ColumnaFechaUltimaGestion').hide();
+                $('#EditarCeldas').trigger('click');
+            }
+
+        } else if (Cabecera == "FECHA ULTIMA GESTION") {
+
+            var gestion = $('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(26)').text()
+            if (gestion == "")
+            {
+                swal('Ups!', 'Debe contener una gestión de facturación.', 'error');
+                return false;
+            }
+
+            localStorage.setItem("Fila", $(this).parent().index());
+            localStorage.setItem("Columna", $(this).parent().children().index($(this)));
+            localStorage.setItem("Campo", "FechaUltimaGestion");
+            localStorage.setItem("CampoBase", "FECHAULTIMAGESTION");
+            if ($('#Tb_Servicios tbody tr:eq(' + $(this).parent().index() + ') td:eq(19)').text() == "PENDIENTE VALIDACIÓN") {
+                swal('Ups!', 'No es posible editar esta celda ya que el servicio no se encuentra validado.', 'error');
+                return false;
+            }
+            else {
+                $('#ColumnaFactura').hide();
+                $('#ColumnaPrecio').hide();
+                $('#ColumnaPrecioNota').hide();
+                $('#ColumnaTipoCambio').hide();
+                $('#ColumnaTipoCambioNota').hide();
+                $('#ColumnaGestion').hide();
+                $('#ColumnaCentro').hide();
+                $('#ColumnaTamano').hide();
+                $('#ColumnaFecha').hide();
+                $('#ColumnaFechaUltimaGestion').show();
+                $('#EditarCeldas').trigger('click');
+            }
+        }
+    });
+
+
+    $("#EditarCelda").click(function () {
+        var fila = localStorage.getItem("Fila");
+        var Columna = localStorage.getItem("Columna");
+        var dato = $("#Editar" + localStorage.getItem("Campo")).val();
+
+        if (localStorage.getItem("Campo") == "Factura") {
+            if ($("#EditarFactura").val() == "" || $("#EditarFactura").val() == null) {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "Precio") {
+            if ($("#EditarPrecio").val() == "" || $("#EditarPrecio").val() == null || $("#EditarPrecio").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "TipoCambio") {
+            if ($("#EditarTipoCambio").val() == "" || $("#EditarTipoCambio").val() == null || $("#EditarTipoCambio").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "Gestion") {
+            if ($("#EditarGestion").val() == "" || $("#EditarGestion").val() == null || $("#EditarGestion").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "PrecioNota") {
+            if ($("#EditarPrecioNota").val() == "" || $("#EditarPrecioNota").val() == null || $("#EditarPrecioNota").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "TipoCambioNota") {
+            if ($("#EditarTipoCambioNota").val() == "" || $("#EditarTipoCambioNota").val() == null || $("#EditarTipoCambioNota").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "Centro") {
+            if ($("#EditarCentro").val() != "0") {
+                $("button[data-id=EditarCentro]").css("background", "rgba(255, 0, 0, 0)");
+            } else {
+                $("button[data-id=EditarCentro]").css("background", "rgba(255, 0, 0, 0.4)");
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "Tamano") {
+            if ($("#EditarTamano").val() != "0") {
+                $("button[data-id=EditarTamano]").css("background", "rgba(255, 0, 0, 0)");
+            } else {
+                $("button[data-id=EditarTamano]").css("background", "rgba(255, 0, 0, 0.4)");
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "Fecha") {
+            if ($("#EditarFecha").val() == "" || $("#EditarFecha").val() == null || $("#EditarFecha").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+        if (localStorage.getItem("Campo") == "FechaUltimaGestion") {
+            if ($("#EditarFechaUltimaGestion").val() == "" || $("#EditarFechaUltimaGestion").val() == null || $("#EditarFechaUltimaGestion").val() == "0") {
+                swal('Ups!', 'Debe seleccionar un dato.', 'error');
+                return false;
+            }
+        }
+
+
+
+
+        //$('#Tb_Servicios tbody tr:eq('+fila+') td:eq('+Columna+')').text(dato);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("EditarCeldaFacturacion", "Reservas")',
+            data: {
+                IdServicio: $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(33)').text(),
+                Campo: localStorage.getItem("Campo"),
+                Valor: dato.toString(),
+                Columna: localStorage.getItem("CampoBase"),
+                IdCentro: $("#EditarCentro").val(),
+                Tamano: $("#EditarTamano").val(),
+            },
+            success: function (response) {
+                var json = JSON.parse(response);
+                if (json.validador == 0) {
+                    $("#guardadocorrectamente").show();
+                    if ($("#Editar" + localStorage.getItem("Campo") + " option:selected").text() == "") {
+                        if (localStorage.getItem("Campo") == "Factura") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(24)').text(getCurrentDate);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(25)').text(getMonthDate);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(19)').text('FACTURADO');
+                        } else if (localStorage.getItem("Campo") == "Precio") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text((dato - $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '')).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                            if ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text() != "") {
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(31)').text(($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(32)').text((($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')) + ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text().replace(/\,/g, ''))).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                            }
+                        } else if (localStorage.getItem("Campo") == "TipoCambio") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                            if ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text() != "") {
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(31)').text(($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(32)').text((($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')) + ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text().replace(/\,/g, ''))).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+                            }
+                        } else if (localStorage.getItem("Campo") == "Gestion") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(27)').text(getCurrentDate);
+                        } else if (localStorage.getItem("Campo") == "PrecioNota") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            if ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text() != "") {
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text(($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') - $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '')).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(31)').text(($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(32)').text((($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')) + ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text().replace(/\,/g, ''))).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                            }
+                        } else if (localStorage.getItem("Campo") == "TipoCambioNota") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                            if ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text() != "") {
+                                $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(32)').text((($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(22)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(23)').text().replace(/\,/g, '')) + ($('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(29)').text().replace(/\,/g, '') * $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(30)').text().replace(/\,/g, ''))).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                            }
+                        } else if (localStorage.getItem("Campo") == "Fecha") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato);
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(25)').text(dato.substring(3, 5));
+                        } else if (localStorage.getItem("Campo") == "FechaUltimaGestion") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text(dato);
+                        }
+                    } else {
+                        if (localStorage.getItem("Campo") == "Centro") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text($("#Editar" + localStorage.getItem("Campo") + " option:selected").text());
+                        } else if (localStorage.getItem("Campo") == "Tamano") {
+                            $('#Tb_Servicios tbody tr:eq(' + fila + ') td:eq(' + Columna + ')').text($("#Editar" + localStorage.getItem("Campo") + " option:selected").text());
+                        }
+                    }
+                }
+            }
+        });
+
+        $('.closeCelda').trigger('click');
+    });
+
+    $("#EditarCeldasMasivas").click(function () {
+        var Servicios = [];
+        var count = 0;
+        var cuenta = $("#Tb_Servicios tbody tr").length;
+
+        $("#Tb_Servicios tbody tr").each(function () {
+            if ($(this).find(".dt-checkboxes").is(":checked")) {
+                Servicios.push($(this).find("td:eq(33)").html());
+            } else {
+                count = count + 1;
+                if (count == cuenta) {
+                    Bookings = [];
+                    swal('Ups!', 'Debe seleccionar al menos un registro.', 'error');
+                    return false;
+                }
+            }
+        });
+        $("#EditarFactura1").val("");
+        $("#EditarPrecio1").val("");
+        $("#EditarTipoCambio1").val("");
+        $("#EditarCentro1").val("");
+        $("#EditarPrecioNota1").val("");
+        $("#EditarTipoCambioNota1").val("");
+        $("#EditarTamano1").val("");
+        $("#EditarFecha1").val("");
+        $("#EditarGestion1").val("");
+        $("#EditarFechaGestion1").val("");
+        $("#ColumnaFactura1").hide();
+        $("#ColumnaPrecio1").hide();
+        $("#ColumnaTipoCambio1").hide();
+        $("#ColumnaCentro1").hide();
+        $("#ColumnaPrecioNota1").hide();
+        $("#EditarTipoCambioNota1").hide();
+        $("#ColumnaTamano1").hide();
+        $("#ColumnaFecha1").hide();
+        $("#ColumnaGestion1").hide();
+
+        if (Servicios.length != 0) {
+            localStorage.setItem("Servicios", JSON.stringify(Servicios));
+            $("#columnaseditar").val("0");
+            $('#columnaseditar').selectpicker('refresh');
+            $("#ColumnaFactura1s").hide();
+            $('#EditarCeldasMasivasTrigger').trigger('click');
+        }
+    });
+
+    $("#columnaseditar").change(function () {
+        if ($("#columnaseditar").val() == "1") {
+            $("#ColumnaFactura1").show();
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#EditarTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "2") {
+            $("#ColumnaPrecio1").show();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#EditarTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "3") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").show();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#EditarTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "4") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").show();
+            $("#ColumnaPrecioNota1").hide();
+            $("#EditarTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCentroCostos", "Reservas")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = ""
+                    $('#EditarCentro1').empty();
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].IdCentro + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#EditarCentro1').append(optionsAsString);
+                    $('#EditarCentro1').selectpicker('refresh');
+                },
+            });
+
+        } else if ($("#columnaseditar").val() == "5") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").show();
+            $("#EditarTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "6") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#ColumnaTipoCambioNota1").show();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "7") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#ColumnaTipoCambioNota1").hide();
+            $("#ColumnaTamano1").show();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "8") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#ColumnaTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").show();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "9") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#ColumnaTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").show();
+            $("#ColumnaFechaGestion1").hide();
+        } else if ($("#columnaseditar").val() == "10") {
+            $("#ColumnaPrecio1").hide();
+            $("#ColumnaFactura1").hide();
+            $("#ColumnaTipoCambio1").hide();
+            $("#ColumnaCentro1").hide();
+            $("#ColumnaPrecioNota1").hide();
+            $("#ColumnaTipoCambioNota1").hide();
+            $("#ColumnaTamano1").hide();
+            $("#ColumnaFecha1").hide();
+            $("#ColumnaGestion1").hide();
+            $("#ColumnaFechaGestion1").show();
+        }
+    });
+
+    $("#EditarDatos").click(function () {
+        if ($("#columnaseditar").val() == "1" && $("#EditarFactura1").val() == "") {
+            swal('Ups!', 'Campo Número Factura Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "2" && $("#EditarPrecio1").val() == "") {
+            swal('Ups!', 'Campo Precio Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "3" && $("#EditarTipoCambio1").val() == "") {
+            swal('Ups!', 'Campo TipoCambio Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "4" && $("#EditarCentro1").val() == "0") {
+            swal('Ups!', 'Campo Centro Costo Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "5" && $("#EditarPrecioNota1").val() == "") {
+            swal('Ups!', 'Campo Precio Nota Credito Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "6" && $("#EditarTipoCambioNota1").val() == "") {
+            swal('Ups!', 'Campo Tipo Cambio Nota Credito Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "7" && $("#EditarTamano1").val() == "0") {
+            swal('Ups!', 'Campo Tamaño contenedor Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "8" && $("#EditarFecha1").val() == "") {
+            swal('Ups!', 'Campo Fecha Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "9" && $("#EditarGestion1").val() == "") {
+            swal('Ups!', 'Campo Gestion Obligatorio.', 'error');
+            return false;
+        } else if ($("#columnaseditar").val() == "10") {
+            if ($("#EditarFechaGestion1").val() == "") {
+                swal('Ups!', 'Campo Fecha Obligatorio.', 'error');
+                return false;
+            }
+
+            /////***** FALTA *****/////
+            //Si algún servicio seleccionado no posee "Gestión" enviar mensaje de error
+
+            /*var Servicios = JSON.parse(localStorage.getItem("Servicios"));
+            Servicios.forEach(function (element) {
+                alert(element);
+            });*/
+        }
+
+        var Servicios = JSON.parse(localStorage.getItem("Servicios"));
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("EdicionMasivaFactura", "Reservas")',
+            data: {
+                Servicios: Servicios,
+                Factura: $("#EditarFactura1").val(),
+                Precio: $("#EditarPrecio1").val(),
+                TipoCambio: $("#EditarTipoCambio1").val(),
+                Centro: $("#EditarCentro1").val(),
+                PrecioNota: $("#EditarPrecioNota1").val(),
+                TipoCambioNota: $("#EditarTipoCambioNota1").val(),
+                Tamano: $("#EditarTamano1").val(),
+                Fecha: $("#EditarFecha1").val(),
+                Gestion: $("#EditarGestion1").val(),
+                FechaGestion: $("#EditarFechaGestion1").val(),
+            },
+            success: function (response) {
+                var json = JSON.parse(response);
+                if (json.validador == 0) {
+                    var aux = 'success';
+                } else {
+                    var aux = 'warning';
+                }
+                swal({
+                    title: '',
+                    text: json.Mensaje,
+                    type: aux,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    $('#Tb_Servicios').DataTable().ajax.reload();
+                })
+            }
+        });
+    });
+
+    $("#CompararServicios").click(function () {
+
+        var contadorCheck = 0;
+        var contadorNoCheck = 0;
+        var cuenta = $("#Tb_Servicios tbody tr").length;
+        var servicio = "";
+
+        $("#Tb_Servicios tbody tr").each(function () {
+            if ($(this).find(".dt-checkboxes").is(":checked")) {
+                contadorCheck = contadorCheck + 1;
+                if (contadorCheck >= 2) {
+                    swal('Ups!', 'Solo se puede Visualizar un servicio a la vez', 'error');
+                    return false;
+                }
+            } else {
+                contadorNoCheck = contadorNoCheck + 1;
+                if (contadorNoCheck == cuenta) {
+                    Bookings = [];
+                    swal('Ups!', 'Debe seleccionar al menos un registro.', 'error');
+                    return false;
+                }
+            }
+        });
+
+        if (contadorCheck == 1) {
+            $("#Tb_Servicios tbody tr").each(function () {
+                if ($(this).find(".dt-checkboxes").is(":checked")) {
+                    servicio = $(this).find("td:eq(33)").html();
+                }
+            });
+
+            var table = $('#Tb_Servicios1').DataTable();
+            table.destroy();
+
+            var table1 = $('#Tb_Servicios2').DataTable();
+            table1.destroy();
+
+            var table = $("#Tb_Servicios1").DataTable({
+                ajax: {
+                    "url": "@Url.Action("GetServiciosFacturacionById", "Reservas")",
+                    "data": {
+                        servicio: servicio,
+                    },
+                    "dataSrc": ''
+                },
+                columns: [
+                    { "data": "Continente" },
+                    { "data": "ServiceProvider" },
+                    { "data": "Pais" },
+                    { "data": "PuertoOrigen" },
+                    { "data": "PuertoDestino" },
+                    { "data": "Contenedor" },
+                    { "data": "Naviera" },
+                    { "data": "Nave" },
+                    { "data": "Viaje" },
+                    { "data": "Commodity" },
+                    { "data": "Tratamiento" },
+                    {
+                        "data": "FechaControlador",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (data != null) {
+                                var fecha = FormatDateControlador(data);
+                                return fecha;
+                            } else {
+                                return "";
+                            }
+                        }
+                    },
+                    {
+                        "data": "Semana",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (row.FechaControlador != null) {
+                                var fechaControlador = FormatDateSemana(row.FechaControlador);
+                                var semana = new Date(fechaControlador).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            } else if (row.FechaCancelacion != null) {
+                                var FechaCancelacion = FormatDateSemana(row.FechaCancelacion);
+                                var semana = new Date(FechaCancelacion).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            } else {
+                                var f = new Date();
+                                var semana = new Date((f.getMonth() + 1) + "/" + f.getDate() + "/" + f.getFullYear()).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            }
+                        }
+                    },
+                    { "data": "Booking" },
+                    {
+                        "data": "Etd",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (data != null) {
+                                var fecha = FormatDate(data);
+                                return fecha;
+                            } else {
+                                return "";
+                            }
+                        }
+                    },
+                    { "data": "Exportador" },
+                    { "data": "IdServicio" },
+                ],
+            });
+
+            var table1 = $("#Tb_Servicios2").DataTable({
+                ajax: {
+                    "url": "@Url.Action("GetServiciosById", "Reservas")",
+                    "data": {
+                        servicio: servicio,
+                    },
+                    "dataSrc": ''
+                },
+                columns: [
+                    { "data": "Continente" },
+                    { "data": "ServiceProvider" },
+                    { "data": "Pais" },
+                    { "data": "PuertoOrigen" },
+                    { "data": "PuertoDestino" },
+                    { "data": "Contenedor" },
+                    { "data": "Naviera" },
+                    { "data": "Nave" },
+                    { "data": "Viaje" },
+                    { "data": "Commodity" },
+                    { "data": "Tratamiento" },
+                    {
+                        "data": "FechaControlador",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (data != null) {
+                                var fecha = FormatDateControlador(data);
+                                return fecha;
+                            } else {
+                                return "";
+                            }
+                        }
+                    },
+                    {
+                        "data": "Semana",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (row.FechaControlador != null) {
+                                var fechaControlador = FormatDateSemana(row.FechaControlador);
+                                var semana = new Date(fechaControlador).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            } else if (row.FechaCancelacion != null) {
+                                var FechaCancelacion = FormatDateSemana(row.FechaCancelacion);
+                                var semana = new Date(FechaCancelacion).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            } else {
+                                var f = new Date();
+                                var semana = new Date((f.getMonth() + 1) + "/" + f.getDate() + "/" + f.getFullYear()).format('W');
+                                if (semana > 15) {
+                                    return semana - 1;
+                                }
+                                return semana;
+                            }
+                        }
+                    },
+                    { "data": "Booking" },
+                    {
+                        "data": "Etd",
+                        "render":
+                        function (data, type, row, meta) {
+                            if (data != null) {
+                                var fecha = FormatDate(data);
+                                return fecha;
+                            } else {
+                                return "";
+                            }
+                        }
+                    },
+                    { "data": "Exportador" },
+                    { "data": "IdServicio" },
+                ],
+            });
+
+            $('#CompararServiciosTrigger').trigger('click');
+        }
+    });
+
+    $("#EliminarFactura").click(function () {
+        var Servicios = [];
+        var count = 0;
+        var cuenta = $("#Tb_Servicios tbody tr").length;
+
+        $("#Tb_Servicios tbody tr").each(function () {
+            if ($(this).find(".dt-checkboxes").is(":checked")) {
+                Servicios.push($(this).find("td:eq(33)").html());
+            } else {
+                count = count + 1;
+                if (count == cuenta) {
+                    Bookings = [];
+                    swal('Ups!', 'Debe seleccionar al menos un registro.', 'error');
+                    return false;
+                }
+            }
+        });
+
+        if (Servicios.length != 0) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EliminarFacturas", "Reservas")',
+                data: {
+                    Servicios: Servicios,
+                },
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    if (json.validador == 0) {
+                        var aux = 'success';
+                    } else {
+                        var aux = 'warning';
+                    }
+                    swal({
+                        title: '',
+                        text: json.Mensaje,
+                        type: aux,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+    });
+
+    $("#FacturarServicio").click(function () {
+        var Servicios = [];
+        var count = 0;
+        var cuenta = $("#Tb_Servicios tbody tr").length;
+
+        $("#Tb_Servicios tbody tr").each(function () {
+            if ($(this).find(".dt-checkboxes").is(":checked")) {
+                Servicios.push($(this).find("td:eq(33)").html());
+            } else {
+                count = count + 1;
+                if (count == cuenta) {
+                    Bookings = [];
+                    swal('Ups!', 'Debe seleccionar al menos un registro.', 'error');
+                    return false;
+                }
+            }
+        });
+
+        if (Servicios.length != 0) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FacturarServicio", "Reservas")',
+                data: {
+                    Servicios: Servicios,
+                },
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    if (json.validador == 0) {
+                        var aux = 'success';
+                    } else {
+                        var aux = 'warning';
+                    }
+                    swal({
+                        title: '',
+                        text: json.Mensaje,
+                        type: aux,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        location.reload();
+                    })
+                }
+            });
+        }
+    });
+
+    $('#Filtro').on('click', function (e) {
+
+        var $tableSel = $('#Tb_Servicios');
+
+        e.preventDefault();
+        var startDate = $('#Semanaini').val(),
+            endDate = $('#Semanafin').val();
+
+        filterByDate(14, startDate, endDate); // We call our filter function
+
+        $tableSel.dataTable().fnDraw(); // Manually redraw the table after filtering
+    });
+
+
+    $('#Limpiar').on('click', function (e) {
+        var $tableSel = $('#Tb_Servicios');
+        e.preventDefault();
+        $.fn.dataTableExt.afnFiltering.length = 0;
+        $tableSel.dataTable().fnDraw();
+    });
+
+    var filterByDate = function (column, startDate, endDate) {
+        // Custom filter syntax requires pushing the new filter to the global filter array
+        $.fn.dataTableExt.afnFiltering.push(
+		   	function (oSettings, aData, iDataIndex) {
+		   	    var rowDate = aData[column],
+              start = startDate,
+              end = endDate;
+
+		   	    // If our date from the row is between the start and end
+		   	    if (parseInt(start, 10) <= parseInt(rowDate, 10) && parseInt(rowDate, 10) <= parseInt(end, 10)) {
+		   	        return true;
+		   	    } else if (parseInt(rowDate, 10) >= parseInt(start, 10) && parseInt(end, 10) === '' && parseInt(start, 10) !== '') {
+		   	        return true;
+		   	    } else if (parseInt(rowDate, 10) >= parseInt(end, 10) && parseInt(start, 10) === '' && parseInt(end, 10) !== '') {
+		   	        return true;
+		   	    } else {
+		   	        return false;
+		   	    }
+		   	}
+		);
+    };
+</script>
+

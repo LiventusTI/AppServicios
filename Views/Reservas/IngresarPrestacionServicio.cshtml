@@ -1,0 +1,695 @@
+﻿
+@{
+    ViewBag.Title = "IngresarPrestacionServicio";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ingreso de datos para Nuevo Servicio <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_booking" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Booking
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Booking" value="070ISA0610891" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Naviera
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select id="Naviera" class="custom-select form-control col-md-7 col-xs-12" disabled="disabled">
+                                    <option value="0">Seleccione una Naviera</option>
+                                    <option value="1">MOL</option>
+                                    <option selected>MSC</option>
+                                    <option value="3">SEABOARD</option>
+                                    <option value="4">SEALAND</option>
+                                    <option value="5">SEATRADE</option>
+                                    <option value="6">CCNI</option>
+                                    <option value="7">CMA CGM</option>
+                                    <option value="8">COOL CARRIERS</option>
+                                    <option value="9">COSCO</option>
+                                    <option value="10">EVERGREEN</option>
+                                    <option value="11">GLOBAL REEFERS</option>
+                                    <option value="12">HAMBURG SUD</option>
+                                    <option value="13">HAPAG LLOYD</option>
+                                    <option value="14">K LINE</option>
+                                    <option value="15">MAERSK</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Viaje
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Viaje" value="030AMN" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_exportador" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Exportador
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select id="Exportador" class="custom-select form-control col-md-7 col-xs-12" disabled="disabled">
+                                    <option value="0">Seleccione un Exportador</option>
+                                    <option value="1">EXPORTADORA PROPAL S.A.</option>
+                                    <option selected>SOUTH PACIFIC LOGISTICS SAC</option>
+                                    <option value="3">COMERCIALIZADORA FRUFIVA</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_contenedor" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Contenedor <span class="required">(*)</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Contenedor" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <a type="button" class="btn btn-primary">Validar</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_fecha_servicio" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Fecha Instalacion de Controlador <span class="required">(*)</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="FechaInstControlador" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_pallets" class="control-label col-md3 col-sm-3 col-xs-6">
+                                N° Pallets 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Pallets" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_contenedor" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                N° Cajas 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Cajas" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_pallets" class="control-label col-md3 col-sm-3 col-xs-6">
+                               Consignatario
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="Consignatario" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_leaktest" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Leak Test Aprobado
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input id="Leaktest" type="checkbox" value="" class="checkbox-inline">
+                            </div>
+                        </div>
+                        @*<div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_cortina" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Cortina Instalada <span class="required">(*)</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input id="Cortina" type="checkbox" value="" class="checkbox-inline">
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_lugar_cortina" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Lugar Postura Cortina
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="LugarInstCortina" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_lugar_esn" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Instalador de cortina (*)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select id="InstCortina" class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Instalador de Cortina</option>
+                                    <option value="1">PACKING</option>
+                                    <option value="2">LIVENTUS</option>
+                                </select>
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Instalador Cortina" id="AgregarInstaladorCortina"></i>
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_lugar_esn" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Lugar Instalación Controlador
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="LugarInstCortina" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                   </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_hora_inicio" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                    Hora Inicio Servicio 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="time" id="HoraInicio" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_hora_termino" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    Hora Termino Servicio
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="time" id="HoraTermino" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_controlador" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                    Controlador (ESN) <span class="required">(*)</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="Controlador" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    N° Bateria <span class="required">(*)</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="Bateria" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    Packing
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <select id="Packing" class="custom-select form-control col-md-7 col-xs-12">
+                                        <option selected>Seleccione un Packing</option>
+                                        <option value="1">PACKING 1</option>
+                                        <option value="2">PACKING 2</option>
+                                        <option value="3">PACKING 3</option>
+                                        <option value="3">PACKING 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    Service Report
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="ServiceReport" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_gasificado" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                    Gasificado <span class="required">(*)</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input id="Gasificado" type="checkbox" value="" class="checkbox-inline">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_filtro" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    C/Filtro <span class="required">(*)</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input id="Filtro" type="checkbox" value="" class="checkbox-inline">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Tipo Cal
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <select id="TipoCal" class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Tipo de Cal</option>
+                                    <option value="1">TIPO 1</option>
+                                    <option value="2">TIPO 2</option>
+                                    <option value="3">TIPO 3</option>
+                                </select>
+                            </div>
+                            <i class="fa fa-plus" title="Agregar Tipo Cal" id="AgregarTipoCal"></i>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Cantidad Cal (Kg)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="CantCal" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    O2 inyectado
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="O2Real" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    CO2 inyectado
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="CO2Real" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    N2 inyectado
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="N2Real" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    N° Adhesivo
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="Adhesivo" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_service_report" class="control-label col-md3 col-sm-3 col-xs-6">
+                                    N° Candado
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="Candado" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label id="lb_tecnico" class="control-label col-md3 col-sm-3 col-xs-6">
+                                   Tecnico Instalador
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <select id="Tecnico" class="custom-select form-control col-md-7 col-xs-12">
+                                        <option selected>Seleccione un Tecnico</option>
+                                        <option value="1">JUAN OYARCE</option>
+                                        <option value="2">CARLOS TRONCOSO</option>
+                                        <option value="3">JULIO ROMERO</option>
+                                        <option value="3">CLAUDIO HIDALGO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-18 col-sm-18 col-xs-18">
+                                <label id="lb_gasificado" class="control-label col-md-6 col-sm-6 col-xs-6">
+                                    Es habilitación
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="Habilitacion" type="checkbox" value="" class="checkbox-inline">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                                    Adjuntar archivo
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="Adjunto" class="form-control col-md-7 col-xs-12">
+                                </div>
+                                <i class="fa fa-plus" title="Adjuntar" id="Adjuntar"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-18 col-sm-18 col-xs-18">
+                                <label id="lb_gasificado" class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Observaciones
+                                </label>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <textarea name="Observaciones" class="form-control" rows="5" id="observaciones"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h3>Servicios prestados asociado a la reserva <small></small></h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Booking</th>
+                                        <th>Contenedor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>070ISA0610891</td>
+                                        <td>GESU9533509</td>
+                                    </tr>
+                                    <tr>
+                                        <td>070ISA0610891</td>
+                                        <td>TTNU8460232</td>
+                                    </tr>
+                                    <tr>
+                                        <td>087LIM230642</td>
+                                        <td>8455DHJK44</td>
+                                    </tr>
+                                    <tr>
+                                        <td>087LIM230816</td>
+                                        <td>SEGU9129889</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                                <a type="button" class="btn btn-success" onclick="CrearServicio()"> Finalizar</a>
+                                <a type="button" class="btn btn-default" onclick="MostrarIngresoPrestacionServicio()">Imprimir N° Atencion</a>
+                                <a type="button" class="btn btn-primary" onclick="ExportarServiceReport()"> Generar ServiceReport</a>
+                            </div>
+                        </div>
+                    <br />
+                </div>
+       
+                </form>
+           </div>
+        </div>
+
+<script>
+
+    function CrearServicio() {
+
+        var Booking = $("#Booking").val();
+        var Viaje = $("#Viaje").val();
+        var Exportador = "1";
+        var Naviera = "33";
+        var Contenedor = $("#Contenedor").val();
+        var HoraLLegada = $("#HoraLlegada").val();
+        var FechaInstControlador = $("#FechaInstControlador").val();
+        var Pallets = $("#Pallets").val();
+        var Cajas = $("#Cajas").val();
+        var Leaktest = "1";
+        var Cortina = "1";
+        var LugarInstCortina = $("#LugarInstCortina").val();
+        var InstCortina = "JUANITO PEREZ";
+        var LugarInstControlador = $("#LugarInstControlador").val();
+        var HoraInicio = $("#HoraInicio").val();
+        var HoraTermino = $("#HoraTermino").val();
+        var Controlador = $("#Controlador").val();
+        var Bateria = $("#Bateria").val();
+        var Packing = "PACKING PRUEBA"
+        var ServiceReport = $("#ServiceReport").val();
+        var Gasificado = "1";
+        var Filtrado = "1";
+        var TipoCal = "1";
+        var CantCal = $("#CantCal").val();
+        var O2Real = $("#O2Real").val();
+        var CO2Real = $("#CO2Real").val();
+        var N2Real = $("#N2Real").val();
+        var Adhesivo = $("#Adhesivo").val();
+        var Candado = $("#Candado").val();
+        var Tecnico = "1";
+        var Estado = "1";
+        var NumAtencion = "1";
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Nave == "") {
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/CrearServicio/",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Viaje: Viaje,
+                IdExportador: Exportador,
+                IdNaviera: Naviera,
+                Contenedor: Contenedor,
+                HoraLlegada: HoraLLegada,
+                FechaInstControlador: FechaInstControlador,
+                Pallets: Pallets,
+                Cajas: Cajas,
+                Leaktest: Leaktest,
+                Cortina: Cortina,
+                LugarInstCortina: LugarInstCortina,
+                InstCortina: InstCortina,
+                LugarInstControlador: LugarInstControlador,
+                HoraInicio: HoraInicio,
+                HoraTermino: HoraTermino,
+                Controlador: Controlador,
+                Bateria: Bateria,
+                Packing: Packing,
+                ServiceReport: ServiceReport,
+                Gasificado: Gasificado,
+                Filtrado: Filtrado,
+                TipoCal: TipoCal,
+                CantCal: CantCal,
+                O2Real: O2Real,
+                CO2Real: CO2Real,
+                N2Real: N2Real,
+                Adhesivo: Adhesivo,
+                Candado: Candado,
+                Tecnico: Tecnico,
+                Estado: Estado,
+                NumAtencion: NumAtencion
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Haz ingresado una nueva reserva');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    function FinalizarServicio()
+    {
+        var Contenedor = $("#contenedor").val();
+
+        if (Contenedor = "") {
+            swal('Error al guardar los datos', 'Debes ingresar el numero de contenedor', 'Debes ingresar el numero de contenedor')
+        }
+    }
+
+    function ExportarServiceReport()
+    {
+        var Contenedor = $("#Contenedor").val();
+        var Controlador = $("#Controlador").val();
+        var FechaServicio = "10-01-2018";
+        var SetPoint = "8 o2, 12co2";
+        var Cortina = "x";
+        var CO2Real =  parseInt($("#CO2Real").val());
+        var O2Real = $("#O2Real").val();
+        var N2Real = $("#N2Real").val();
+        var Bateria = $("#Bateria").val();
+        var Exportador = $("#Exportador").val();
+        var Consignatario = $("#Consignatario").val();
+        var PuertoDestino = "PHILLADELPHIA"
+        var Packing = "PACKING 1";
+        var PuertoOrigen = "VALPARAISO";
+        var HoraInicioLeaktest = "10:52";
+        var HoraTerminoLeaktest = "11:07";
+        var HoraInicioServicio = $("#HoraInicio").val();
+        var HoraTerminoServicio = $("#HoraTermino").val();
+        var TecnicoLeaktest = "Jorge Diaz";
+        var TecnicoServicio = "Luis Lopez";
+        var Commodity = "AVOCADOS";
+        var TipoCommodity = "AVOCADOS 1";
+        var CantidadCajas = $("#Cajas").val();
+        var Etd = "20-01-2018";
+        var Eta = "20-04-2018";
+        var Booking = $("#Booking").val();
+        var Naviera = $("#Naviera").val();
+        var Nave = "MSC SASHA";
+        var Viaje = $("#Viaje").val();
+        var Adhesivo = $("#Adhesivo").val();
+        var Temperatura = "5";
+        var TiempoEstanquedad = "3"
+        var Candado = $("#Candado").val();
+
+        if (Contenedor == "" || Controlador == "" || FechaServicio == "" || SetPoint == "" || Cortina == "" || CO2Real == "" || O2Real == "" || N2Real == "" || Bateria == "" || Exportador == "" || Consignatario == "" || PuertoDestino == "" || Packing == "" || PuertoOrigen == "" || HoraInicioLeaktest == "" || HoraTerminoLeaktest == "" || TecnicoLeaktest == "" || TecnicoServicio == "" || Commodity == "" || TipoCommodity == "" || CantidadCajas == "" || Etd == "" || Eta == "" || Booking == "" || Naviera == "" || Nave == "" || Viaje == "" || Adhesivo == "" || Temperatura == "" || TiempoEstanquedad == "" || Candado == "") {
+            swal('Error al Generar Service Report', 'Debes ingresar todos los datos para generar el Service Report', 'Debes ingresar todos los datos para generar el Service Report')
+
+        } else {
+            var url = '@Url.Action("ExportarServiceReport", "Reservas")?setpoint=' + SetPoint + "&cortina=" + Cortina + "&co2Real=" + CO2Real + "&o2Real=" + O2Real + "&n2Real=" + N2Real + "&bateria=" + Bateria + "&contenedor=" + Contenedor + "&controlador=" + Controlador + "&exportador=" + Exportador + "&consignatario=" + Consignatario + "&puertoDestino=" + PuertoDestino + "&packing=" + Packing + "&PuertoOrigen=" + PuertoOrigen + "&horaInicioLeaktest=" + HoraInicioLeaktest + "&horaTerminoLeaktest=" + HoraTerminoLeaktest + "&horaInicioServicio=" + HoraInicioServicio + "&horaTerminoServicio=" + HoraTerminoServicio + "&tecnicoLeaktest=" + TecnicoLeaktest + "&tecnicoServicio=" + TecnicoServicio + "&commodity=" + Commodity + "&tipoCommodity=" + TipoCommodity + "&cantidadCajas=" + CantidadCajas + "&etd=" + Etd + "&eta=" + Eta + "&booking=" + Booking + "&naviera=" + Naviera + "&nave=" + Nave + "&viaje=" + Viaje + "&adhesivo=" + Adhesivo + "&temperatura=" + Temperatura + "&tiempoEstanquedad=" + TiempoEstanquedad + "&candado=" + Candado;
+            window.location.href = url;
+        }
+
+    }
+
+    function MostrarIngresoPrestacionServicio()
+    {
+        var FechaServicio = $("#fecha_servicio").val();
+        var HoraLlegada = $("#hora_llegada").val();
+
+        if (HoraLlegada == "") {
+            swal('Error...', 'Debes ingresar la hora de llegada', 'Debes ingresar la hora de llegada')
+        } else {
+            swal('Imprimiendo...', 'N° Atencion', 'N° Atencion')
+        }
+
+    }
+
+    function MostrarTerminoPrestacionServicio() {
+        var FechaServicio = $("#fecha_servicio").val();
+        var HoraLlegad = $("#hora_llegada").val();
+
+        //if (Booking == "") {
+        //    swal('Error...', 'Campo Booking Obligatorio', 'error')
+        //} else if (Nave == "") {
+        //    swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        //}
+        swal('Imprimiendo...', 'Informe de finalización de servicio', 'Informe de finalización de servicio')
+        document.getElementById("div2").style.visibility = "visible";
+        //document.getElementById("lb_contenedor").style.visibility = "visible";
+        //document.getElementById("contenedor").style.visibility = "visible";
+        //document.getElementById("lb_fecha_servicio").style.visibility = "visible";
+        //document.getElementById("fecha_servicio").style.visibility = "visible";
+        //document.getElementById("lb_hora_llegada").style.visibility = "visible";
+        //document.getElementById("hora_llegada").style.visibility = "visible";
+    }
+
+    function ValidarFormulario() {
+        var Booking = $("#booking").val();
+        var Contenedor = $("#contenedor").val();
+        var Viaje = $("#viaje").val();
+        var FechaServicio = $("#fecha_servicio").val();
+        var HoraLlegada = $("#hora_llegada").val();
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        } else if (Viaje == "") {
+            swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        } else if (FechaServicio == "") {
+            swal('Error...', 'Campo Fecha Servicio Obligatorio', 'error')
+        } else if (HoraLlegada == "") {
+            swal('Error...', 'Campo Hora Llegada Obligatorio', 'error')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/IngresarDatos",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Nave: Nave,
+                Naviera: Naviera,
+                Exportador: Exportador,
+                Producto: Producto,
+                Destino: Destino,
+                Origen: Origen,
+                Viaje: Viaje,
+                FechaArribo: Eta,
+                FechaSalida: Etd,
+                CantidadCO: CantidadCo,
+                CantidadO: CantiadO,
+                Temperatura: Temperatura,
+                Tamano: Tamano
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Has introducido un nuevo coche!!');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    $(function () {
+        $("#fecha_servicio").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#Etd").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#FechaInstControlador").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>

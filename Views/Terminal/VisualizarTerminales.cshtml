@@ -1,0 +1,423 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarTerminales";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2 class="tr" key="mantenedorterminal">Gestionar / Visualizar Terminales</h2>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-success tr" id="CrearTerminal" key="botonagregarterminal">Agregar Terminal</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table id="Tb_Terminal" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="tr" key="tablaidterminal">ID TERMINAL</th>
+                                <th class="tr" key="tablanombre">NOMBRE</th>
+                                <th class="tr" key="tablaciudad">CIUDAD</th>
+                                <th class="tr" key="tablalatitud">LATITUD</th>
+                                <th class="tr" key="tablalongitud">LONGITUD</th>
+                                <th class="tr" key="tablaradio">RADIO</th>
+                                <th class="tr" key="tablaestado">ESTADO</th>
+                                <th class="tr" key="tablaopciones">OPCIONES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para agregar datos-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Terminal" class="alerta col-sm-2 control-label" key="nombreterminal">Terminal (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="NombreTerminal" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Pais" class="alerta col-sm-2 control-label" key="nombrepais">País</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Pais"><option value="0" selected>Seleccione País</option></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Ciudad" class="alerta col-sm-2 control-label" key="ciudaddeposito">Ciudad</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Ciudad" disabled>
+                                    <option value="0" selected>Seleccione Ciudad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Latitud" class="alerta col-sm-2 control-label" key="latitud">Latitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Latitud" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Longitud" class="alerta col-sm-2 control-label" key="longitud">Longitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Longitud" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Radio" class="alerta col-sm-2 control-label" key="radio">Radio</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Radio" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Estado">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tr" id="IngresarInformacion" key="botonagregarterminal">Agregar Terminal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para agregar datos-->
+    <!--Modal para editar datos-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Terminal" class="alerta col-sm-2 control-label" key="nombreantepuerto">Terminal (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="NombreTerminalEditar" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Pais" class="alerta col-sm-2 control-label" key="nombrepais">País</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="PaisEditar"><option value="0" selected>Seleccione País</option></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Ciudad" class="alerta col-sm-2 control-label" key="ciudaddeposito">Ciudad</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="CiudadEditar" disabled>
+                                    <option value="0" selected>Seleccione Ciudad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="LatitudEditar" class="alerta col-sm-2 control-label" key="latitud">Latitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="LatitudEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="LongitudEditar" class="alerta col-sm-2 control-label" key="latitud">Longitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="LongitudEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="RadioEditar" class="alerta col-sm-2 control-label" key="radio">Radio</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="RadioEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="EstadoEditar">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tr" id="EditarInformacion" key="botoneditarterminal">Editar Terminal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para editar datos-->
+</div>
+
+<input type="text" class="input form_control" id="idTerminal" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="CrearTerminalModal" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="EditarTerminalModal" style="display:none;"></button>
+
+
+<script>
+
+    var lenguaje = document.cookie;
+
+    //Botón Crear Ciudad//
+    $("#CrearTerminal").click(function () {
+        $('#CrearTerminalModal').trigger('click');
+        $("#NombreTerminal").val("");
+        $('#NombreTerminal').focus();
+        $("#Pais").val(0);
+        $("#Pais").css("background-color", "rgba(255, 0, 0, 0)");
+        $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0)");
+        $("#Ciudad").val(0);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetPaisesActivos", "Paises")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Pais').empty();
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Pais').append(optionsAsString);
+            },
+        });
+
+        $("#Pais").change(function () {
+            $('#Ciudad').removeAttr('disabled');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                data: { IdPais: $("#Pais").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    $('#Ciudad').empty();
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                    }
+                },
+            });
+        });
+    });
+    //Botón Crear Ciudad//
+
+    //Ingresar Información//
+    $("#IngresarInformacion").click(function () {
+        if ($("#NombreTerminal").val() != "") {
+            $("#NombreTerminal").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#Ciudad").val() != 0) {
+                $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0)");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("CrearTerminal", "Terminal")',
+                    data: {
+                        NombreTerminal: $("#NombreTerminal").val(), IdCiudad: $("#Ciudad").val(), Estado: $("#Estado").val(), Latitud: $("#Latitud").val(), Longitud: $("#Longitud").val(), Radio: $("#Radio").val()
+                    },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        if (json.validador == 0) {
+                            var aux = 'success';
+                        } else {
+                            var aux = 'warning';
+                        }
+                        swal({
+                            title: '',
+                            text: json.Mensaje,
+                            type: aux,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    }
+                });
+            } else {
+                $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#NombreTerminal").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Ingresar Información//
+    //Botón Editar AntePuerto//
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetTerminales", "Terminal")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                $('#Tb_Terminal').show(500);
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].Activo == 0) {
+                        var estado = 'Activo';
+                    } else {
+                        var estado = 'No Activo';
+                    }
+                    data.push([json[i].Id, json[i].Nombre.toUpperCase(), json[i].NombreCiudad.toUpperCase(), json[i].Latitud, json[i].Longitud, json[i].Radio, estado]);
+                }
+                if (lenguaje == "es") {
+                    var table = $('#Tb_Terminal').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                        },
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i class='fa fa-edit fa-2x' title='Editar Terminal'></i>"
+                        }],
+                    });
+                } else {
+                    var table = $('#Tb_Terminal').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i class='fa fa-edit fa-2x' title='Edit Terminal'></i>"
+                        }],
+                    });
+                }
+
+
+                $('#Tb_Terminal tbody').on('click', 'i', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    $('#NombreTerminalEditar').focus();
+                    $('#NombreTerminalEditar').val(data[1]);
+                    $('#CiudadEditar').val(data[2]);
+                    $('#LatitudEditar').val(data[3]);
+                    $('#LongitudEditar').val(data[4]);
+                    $('#RadioEditar').val(data[5]);
+                    $('#idTerminal').val(data[0]);
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetPaisesActivos", "Paises")',
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            var optionsAsString = "";
+                            $('#PaisEditar').empty();
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                            $('#PaisEditar').append(optionsAsString);
+                        },
+                    });
+                    $("#PaisEditar").change(function () {
+                        $('#CiudadEditar').removeAttr('disabled');
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                            data: { IdPais: $("#PaisEditar").val() },
+                            success: function (response) {
+                                var data = [];
+                                var json = JSON.parse(response);
+                                var cuenta = json.length;
+                                var optionsAsString = "";
+                                $('#CiudadEditar').empty();
+                                if (cuenta != 0) {
+                                    for (var i = 0; i < cuenta; i++) {
+                                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                                    }
+                                    $('#CiudadEditar').append(optionsAsString);
+                                }
+                            },
+                        });
+                    });
+
+                    $('#EditarTerminalModal').trigger('click');
+                });
+            },
+        });
+    });
+    //Botón Editar AntePuerto//
+
+
+
+    //Editar Información//
+    $("#EditarInformacion").click(function () {
+        if ($("#CiudadEditar").val() != "") {
+            $("#CiudadEditar").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#PaisEditar").val() != 0) {
+                $("#PaisEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("EditarTerminal", "Terminal")',
+                    data: {
+                        NombreTerminal: $("#NombreTerminalEditar").val(), IdCiudad: $("#CiudadEditar").val(), Estado: $("#EstadoEditar").val(), IdTerminal: $("#idTerminal").val(), Latitud: $("#LatitudEditar").val(), Longitud: $("#LongitudEditar").val(), Radio: $("#RadioEditar").val()
+                    },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        if (json.validador == 0) {
+                            var aux = 'success';
+                        } else {
+                            var aux = 'warning';
+                        }
+                        swal({
+                            title: '',
+                            text: json.Mensaje,
+                            type: aux,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    }
+                });
+            } else {
+                $("#PaisEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#CiudadEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Editar Información//
+</script>
+
+

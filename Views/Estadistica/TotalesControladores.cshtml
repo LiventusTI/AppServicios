@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "TotalesControladores";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Controladores alrededor del mundo"
+            },
+            axisY: {
+                title: "Numero de Controladores"
+            },
+            data: [{
+                type: "column",
+                showInLegend: false,
+                legendMarkerColor: "grey",
+                legendText: "MMbbl = one million barrels",
+                dataPoints: [
+                    { y: 378, label: "Chile" },
+                    { y: 255, label: "Peru" },
+                    { y: 109, label: "Colombia" },
+                    { y: 100, label: "Argentina" },
+                    { y: 103, label: "Mexico" },
+                    { y: 100, label: "EEUU" },
+                    { y: 98, label: "Holanda" },
+                    { y: 80, label: "Sudafrica" }
+                ]
+            }]
+        });
+        chart.render();
+
+    }
+</script>
+
+
+

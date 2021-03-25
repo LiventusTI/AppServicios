@@ -1,0 +1,438 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarDepositos";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2 class="tr" key="mantenedordepositos">Gestionar / Visualizar Depositos</h2>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-success editar tr" id="CrearDeposito" key="botonagregardeposito">Agregar Deposito</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table id="Tb_Depositos" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="tr" key="tablaiddeposito">ID DEPOSITO</th>
+                                <th class="tr" key="tablanombre">NOMBRE</th>
+                                <th class="tr" key="tablaciudad">CIUDAD</th>
+                                <th class="tr" key="tablalatitud">LATITUD</th>
+                                <th class="tr" key="tablalongitud">LONGITUD</th>
+                                <th class="tr" key="tablaradio">RADIO</th>
+                                <th class="tr" key="tablaestado">ESTADO</th>
+                                <th class="tr" key="tablaopciones">OPCIONES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para agregar datos-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Deposito" class="alerta col-sm-2 control-label" key="nombredeposito">Deposito (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="Deposito" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Pais" class="alerta col-sm-2 control-label" key="paisdeposito">País (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Pais">
+                                    <option value="0" selected>Seleccione País</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Ciudad" class="alerta col-sm-2 control-label" key="ciudaddeposito">Ciudad (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Ciudad" disabled></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Latitud" class="alerta col-sm-2 control-label" key="latitud">Latitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Latitud" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Longitud" class="alerta col-sm-2 control-label" key="longitud">Longitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Longitud" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Radio" class="alerta col-sm-2 control-label" key="radio">Radio</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="Radio" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="Estado">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tr" id="IngresarInformacion" key="botonagregardeposito">Agregar Deposito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para agregar datos-->
+
+    <!--Modal para editar datos-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="DepositoEditar" class="alerta col-sm-2 control-label" key="nombredeposito">Deposito (*)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="DepositoEditar" onkeyup="this.value = this.value.toUpperCase();">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="PaisEditar" class="alerta col-sm-2 control-label" key="paisdeposito">País (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="PaisEditar">
+                                    <option value="0" selected>Seleccione País</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="CiudadEditar" class="alerta col-sm-2 control-label" key="ciudaddeposito">Ciudad (*)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="CiudadEditar" disabled></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="LatitudEditar" class="alerta col-sm-2 control-label" key="latitud">Latitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="LatitudEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="LongitudEditar" class="alerta col-sm-2 control-label" key="longitud">Longitud</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="LongitudEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="RadioEditar" class="alerta col-sm-2 control-label" key="radio">Radio</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="RadioEditar" onkeyup="this.value = this.value.toUpperCase();" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EstadoEditar" class="alerta col-sm-2 control-label" key="estado">Estado</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="EstadoEditar">
+                                    <option value="0">Activo</option>
+                                    <option value="1">Deshabilitado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editar tr" id="EditarInformacion" key="botoneditardeposito">Editar Deposito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para editar datos-->
+
+    <input type="text" class="input form_control" id="iddeposito" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="CrearDepositoModal" style="display:none;"></button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="EditarDepositoModal" style="display:none;"></button>
+</div>
+
+<script>
+
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDepositos", "Deposito")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                $('#Tb_Depositos').show(500);
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].Activo == 0) {
+                        var estado = 'Activo';
+                    } else {
+                        var estado = 'No Activo';
+                    }
+                    data.push([json[i].Id, json[i].Nombre.toUpperCase(), json[i].NombreCiudad.toUpperCase(), json[i].Latitud, json[i].Longitud, json[i].Radio, estado]);
+                }
+                if (lenguaje == "es") {
+                    var table = $('#Tb_Depositos').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                        },
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i class='fa fa-edit fa-2x' title='Editar Deposito'></i>"
+                        }],
+                        "rowCallback": function (row, data, index) {
+                            if (data[0] == 0) {
+                                $('td:eq(4)', row).html(' ');
+                            }
+                        }
+                    });
+                } else {
+                    var table = $('#Tb_Depositos').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i class='fa fa-edit fa-2x' title='Editar Deposito'></i>"
+                        }],
+                        "rowCallback": function (row, data, index) {
+                            if (data[0] == 0) {
+                                $('td:eq(4)', row).html(' ');
+                            }
+                        }
+                    });
+                }
+
+
+                $('#Tb_Depositos tbody').on('click', 'i', function () {
+                    var data = table.row($(this).parents('tr')).data();
+
+                    $("#DepositoEditar").val(data[1]);
+                    $("#DepositoEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $('#DepositoEditar').focus();
+
+                    $("#PaisEditar").val(0);
+                    $("#iddeposito").val(data[0]);
+
+                    $('#CiudadEditar').empty();
+                    $('#CiudadEditar').prop('disabled', 'disabled');
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetPaisesActivos", "Paises")',
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            var optionsAsString = "";
+                            $('#PaisEditar').empty();
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                            $('#PaisEditar').append(optionsAsString);
+                        },
+                    });
+
+                    $("#PaisEditar").change(function () {
+                        $('#CiudadEditar').removeAttr('disabled');
+                        $("#CiudadEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                            data: { IdPais: $("#PaisEditar").val() },
+                            success: function (response) {
+                                var data = [];
+                                var json = JSON.parse(response);
+                                var cuenta = json.length;
+                                var optionsAsString = "";
+                                $('#CiudadEditar').empty();
+                                if (cuenta != 0) {
+                                    for (var i = 0; i < cuenta; i++) {
+                                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                                    }
+                                    $('#CiudadEditar').append(optionsAsString);
+                                }
+                            },
+                        });
+                    });
+                    $('#EditarDepositoModal').trigger('click');
+                });
+            },
+        });
+    });
+
+    //boton crear deposito//
+    $("#CrearDeposito").click(function () {
+        $('#CrearDepositoModal').trigger('click');
+        $("#Deposito").val("");
+        $("#Deposito").css("background-color", "rgba(255, 0, 0, 0)");
+        $('#Deposito').focus();
+
+        $("#Pais").val(0);
+
+        $('#Ciudad').empty();
+        $('#Ciudad').prop('disabled', 'disabled');
+ 
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetPaisesActivos", "Paises")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Pais').empty();
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Pais').append(optionsAsString);
+            },
+        });
+
+        $("#Pais").change(function () {
+            $('#Ciudad').removeAttr('disabled');
+            $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0)");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                data : {IdPais : $("#Pais").val()},
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    $('#Ciudad').empty();
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                    }
+                },
+            });
+        });
+    });
+    //boton crear deposito//
+
+    //Ingresar Información//
+    $("#IngresarInformacion").click(function () {
+        if ($("#Deposito").val() != "") {
+            $("#Deposito").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#Ciudad").val() != null && $("#Ciudad").val() != 0) {
+                $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0)");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("CrearDeposito", "Deposito")',
+                    data: {
+                        NombreDeposito: $("#Deposito").val(), IdCiudad: $("#Ciudad").val(), Estado: $("#Estado").val(), Latitud: $("#Latitud").val(), Longitud: $("#Longitud").val(), Radio: $("#Radio").val()
+                    },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        if (json.validador == 0) {
+                            var aux = 'success';
+                        } else {
+                            var aux = 'warning';
+                        }
+                        swal({
+                            title: '',
+                            text: json.Mensaje,
+                            type: aux,
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    }
+                });
+            } else {
+                $("#Ciudad").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#Deposito").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Ingresar Información//
+
+    //Editar Información//
+    $("#EditarInformacion").click(function () {
+        if ($("#DepositoEditar").val() != "") {
+            $("#DepositoEditar").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#CiudadEditar").val() != null && $("#CiudadEditar").val() != 0) {
+                $("#CiudadEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("EditarDeposito", "Deposito")',
+                        data: {
+                            NombreDeposito: $("#DepositoEditar").val(), IdCiudad: $("#CiudadEditar").val(), Estado: $("#EstadoEditar").val(), IdDeposito: $("#iddeposito").val(), Latitud: $("#LatitudEditar").val(), Longitud: $("#LongitudEditar").val(), Radio: $("#RadioEditar").val()
+                        },
+                        success: function (response) {
+                            var json = JSON.parse(response);
+                            if (json.validador == 0) {
+                                var aux = 'success';
+                            } else {
+                                var aux = 'warning';
+                            }
+                            swal({
+                                title: '',
+                                text: json.Mensaje,
+                                type: aux,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    });
+            } else {
+                $("#CiudadEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#DepositoEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Editar Información//
+
+</script>
+

@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Gráfico de Mediciones";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div>
+    <div class="clearfix"></div>
+    <div class="x_content"></div>
+
+    <!--GRAFICO CHART JS-->
+    <div id="div_grafico1" class="chart-container1">
+        <canvas id="myChart" style="display:none; width:700px; height:500px;"></canvas>
+    </div>
+
+    <!--EMBEBIDO-->
+    <div id="div_grafico2" class="chart-container2">
+        <iframe id="GraficoImagen" style="display:none; width:700px; height:500px;"></iframe>
+    </div>
+
+</div>
+
+<style>
+    .chart-container1 {
+        display: none;
+        text-align: center;
+        width: 50%;
+    }
+
+    .chart-container2 {
+        display: none;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+
+
+
+<script src="~/Vendors/Chart.js-2.9.4/dist/Chart.min.js"></script>
+
+<script>
+
+
+    $('document').ready(function () {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id_servicio = urlParams.get('IdServicio');
+        construirGrafico(id_servicio);
+    });
+
+    function construirGrafico(id_servicio) {
+        var labels = [];
+        var data_co2 = [];
+        var data_o2 = [];
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ObtenerMuestrasServicio", "Reservas")',
+            async: false,
+            data: {
+                IdServicio: id_servicio
+            },
+            success: function (response) {
+                var json = JSON.parse(response);
+
+                if (json.length != 0) {
+                    for (var i = 0; i < json.length; i++) {
+
+                        var fecha_array = json[i].fecha.split('T');
+                        var fecha = fecha_array[0];
+                        var hora = fecha_array[1];
+
+                        var fecha_completa = new Intl.DateTimeFormat('es-MX',
+                            {
+                                month: 'long',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric'
+                            }).format(new Date(json[i].fecha));
+
+                        labels[i] = fecha_completa;
+
+
+                        var muestra_co2 = { x: fecha_completa, y: json[i].co2 };
+                        var muestra_o2 = { x: fecha_completa, y: json[i].o2 };
+                        data_co2.push(muestra_co2);
+                        data_o2.push(muestra_o2);
+                    }
+
+                    document.getElementById('div_grafico1').style.display = "block";
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    document.getElementById('myChart').style.display = "block";
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: "%CO2",
+                                data: data_co2,
+                                backgroundColor: "rgb(192, 217, 255)",
+                                borderColor: "rgb(0, 98, 251)",
+                                lineTension: 0.2
+                            }, {
+                                label: "%O2",
+                                data: data_o2,
+                                backgroundColor: "rgb(134, 255, 101)",
+                                borderColor: "rgb(49, 156, 20)",
+                                lineTension: 0.2
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Gráfico de Mediciones %CO2 y %O2',
+                                fontSize: 20,
+                                padding: 30,
+                                fontColor: '#12619c',
+                            },
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 30,
+                                    boxWidth: 15,
+                                    fontFamily: 'system-ui',
+                                    fontColor: 'black',
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            },
+                            layout: {
+                                padding: {
+                                    left: 50,
+                                    right: 50,
+                                    top: 20,
+                                    bottom: 20
+                                }
+                            },
+                            tooltips: {
+                                backgroundColor: '#0584f6',
+                                titleFontSize: 20,
+                                xPadding: 20,
+                                yPadding: 20,
+                                bodyFontSize: 15,
+                                bodySpacing: 10,
+                                //mode: 'x',
+                            },
+                            elements: {
+                                line: {
+                                    borderWidth: 8,
+                                    fill: false,
+                                },
+                                point: {
+                                    radius: 6,
+                                    borderWidth: 4,
+                                    backgroundColor: 'white',
+                                    hoverRadius: 8,
+                                    hoverBorderWidth: 4,
+                                }
+                            }
+                        }
+                    });
+
+                }
+                else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("ObtenerInfoServicio", "Reservas")',
+                        async: false,
+                        data: {
+                            IdServicio: id_servicio
+                        },
+                        success: function (response) {
+
+                            if (response != null && response != "") {
+                                var json = JSON.parse(response);
+                                if (json.Controlador != null && json.Controlador != "" && json.FechaInstControlador != null && json.FechaInstControlador != "") {
+                                    var controlador = json.Controlador;
+                                    var fecha_procesada = ""
+                                    if (json.FechaInstControlador != null || json.FechaInstControlador != "") {
+                                        fecha_procesada = FormatDateControlador(json.FechaInstControlador);
+                                    }
+                                    var url = "http://132.255.70.203/Grafico/Grafico.php?Controller=" + controlador + "&Fecha=" + fecha_procesada;
+                                    document.getElementById('div_grafico2').style.display = "block";
+                                    document.getElementById('GraficoImagen').style.display = "block";
+                                    document.getElementById("GraficoImagen").src = url;
+                                    console.log(url);
+                                }
+                                else {
+                                    swal({
+                                        title: 'Ups!',
+                                        text: 'Algo anda mal con la llamada a los gráficos',
+                                        type: 'error',
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        window.close();
+                                    });
+                                }
+
+                            }
+                            else {
+                                swal({
+                                    title: 'Ups!',
+                                    text: 'El servicio no posee mediciones en los registros de base de datos',
+                                    type: 'error',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                    window.close();
+                                });
+                            }
+
+
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                            swal({
+                                title: 'Ups!',
+                                text: 'Algo anda mal con la llamada a los gráficos (ajax)',
+                                type: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                window.close();
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+
+    function FormatDateControlador(data) {
+        var datetime = new Date(data);
+        var año = datetime.getFullYear();
+        var mes = datetime.getMonth();
+        if (mes == 0) mes = "01";
+        else if (mes == 1) mes = "02";
+        else if (mes == 2) mes = "03";
+        else if (mes == 3) mes = "04";
+        else if (mes == 4) mes = "05";
+        else if (mes == 5) mes = "06";
+        else if (mes == 6) mes = "07";
+        else if (mes == 7) mes = "08";
+        else if (mes == 8) mes = "09";
+        else if (mes == 9) mes = "10";
+        else if (mes == 10) mes = "11";
+        else if (mes == 11) mes = "12";
+        var dia = datetime.getDate();
+        var hora = datetime.getHours();
+        var minutos = datetime.getMinutes();
+        var fecha_procesada = dia + "-" + mes + "-" + año + " " + hora + ":" + minutos;
+        return fecha_procesada;
+    }
+
+</script>

@@ -1,0 +1,486 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarResumenContenedores";
+    Layout = "~/Views/MasterPage.cshtml";
+    int PerfilInterior = Convert.ToInt32(Session["PerfilInterior"]);
+    string Usuario = Session["User"].ToString().ToUpper();
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="verinventariocontenedores">Ver Resumen Inventario</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <form class="form-horizontal">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="Pais" class="control-label tr" key="pais">País</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Pais">
+                                    <option value="0" selected class="tr" key="selectpais">Seleccione Pais</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center" >
+                            <label for="Ciudad" class="control-label tr" key="ciudad">Ciudad</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Ciudad">
+                                    <option value="0" selected class="tr" key="selectciudad">Seleccione Ciudad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="Deposito" class="control-label tr" key="depositocontenedor">Deposito</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Deposito">
+                                    <option value="0" selected class="tr" key="selectdeposito">Seleccione Deposito</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="divider"></div>
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-6">
+                        <button type="button" class="btn btn-success tr" key="filtrar" id="Filtrar" style="margin-bottom: 0px;">Filtrar</button>
+                        <button type="button" class="btn btn-warning tr" key="limpiar" id="Limpiar" style="margin-bottom: 0px;">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="x_panel" style="display:none;" id="tablapais">
+                <table id="Tb_Inventariodisponible_pais" class="display table table-striped table-bordered" cellspacing="0" style="display:none; width:100%">
+                    <thead>
+                        <tr>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="cantidadinvetariado">TOTAL LEAKTEST APROBADOS</th>
+                            <th class="tr" key="ScrubberContenedor">CANTIDAD CON SCRUBBER</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="x_panel" style="display:none;" id="tablaciudad">
+                <table id="Tb_Inventariodisponible_ciudad" class="display table table-striped table-bordered" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                            <th class="tr" key="cantidadinvetariado">TOTAL LEAKTEST APROBADOS</th>
+                            <th class="tr" key="ScrubberContenedor">CANTIDAD CON SCRUBBER</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="x_panel" style="display:none;" id="tabladeposito">
+                <table id="Tb_Inventariodisponible_deposito" class="display table table-striped table-bordered" cellspacing="0"  style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                            <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                            <th class="tr" key="cantidadinvetariado">TOTAL LEAKTEST APROBADOS</th>
+                            <th class="tr" key="ScrubberContenedor">CANTIDAD CON SCRUBBER</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="x_panel" style="display:none;" id="tablanavieras">
+                <table id="Tb_Navieras" class="display table table-striped table-bordered" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="tr" key="navierasolicitud">NAVIERA</th>
+                            <th class="tr" key="cantidadinvetariado">TOTAL LEAKTEST APROBADOS</th>
+                            <th class="tr" key="ScrubberContenedor">CANTIDAD CON SCRUBBER</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/build/js/Perfiles.js"></script>
+<script>
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        var data = [];
+        ObtenerPaises();
+        ObtenerCiudades();
+        ObtenerDepositos();
+    });
+
+    //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+    $("#Pais").change(function () {
+        //$('#Ciudad').removeAttr('disabled');
+        if ($("#Pais").val() == "0") {
+            ObtenerCiudades();
+            ObtenerDepositos();
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                data: { IdPais: $("#Pais").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    var optionsAsString1 = "";
+                    if (cuenta != 0) {
+                        $('#Ciudad').empty();
+                        optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "-" + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                    }
+                },
+            });
+        }
+
+    });
+    //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+
+    //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+    $("#Ciudad").change(function () {
+        //$('#Deposito').removeAttr('disabled');
+        if ($("#Ciudad").val() != "0") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetInfoCiudad", "Ciudad")',
+                data: { IdCiudad: $("#Ciudad").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    if (cuenta != 0) {
+                        $("#Pais").val(json[0].IdPais);
+                        $("#Pais").selectpicker('refresh');
+
+                    }
+                },
+            });
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDepositoCiudad", "Deposito")',
+                data: { IdCiudad: $("#Ciudad").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                    $('#Deposito').empty();
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $('#Deposito').append(optionsAsString);
+                        $('#Deposito').selectpicker('refresh');
+
+                    }else
+                    {
+                        $('#Deposito').append(optionsAsString);
+                        $('#Deposito').selectpicker('refresh');
+                    }
+                },
+            });
+        } else {
+            ObtenerDepositos();
+        }
+
+    });
+
+    //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+
+    $("#Deposito").change(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetInfoDeposito", "Deposito")',
+            data: { IdDeposito: $("#Deposito").val() },
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                if (cuenta != 0) {
+                    $("#Pais").val(json[0].IdPais);
+                    $("#Pais").selectpicker('refresh');
+                    $("#Ciudad").val(json[0].IdCiudad);
+                    $("#Ciudad").selectpicker('refresh');
+                }
+            },
+        });
+    });
+
+    $("#Filtrar").click(function () {
+
+        if ($("#Pais").val() != "0" && $("#Ciudad").val() == "0" && $("#Deposito").val() == "0" ) {
+            var table = $('#Tb_Inventariodisponible_pais').DataTable();
+            table.destroy();
+            var table1 = $('#Tb_Navieras').DataTable();
+            table1.destroy();
+            $("#tablapais").show();
+            $("#tablanavieras").show();
+            $("#tablaciudad").hide();
+            $("#tabladeposito").hide();
+            $("#Tb_Inventariodisponible_pais").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetContenedoresByPais","Contenedores")',
+                data: { IdPais: $("#Pais").val() },
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    var data = [];
+                    var datanavieras = [];
+                    var CuentaNavieras = json.Navieras.length;
+                    for (var i = 0; i < CuentaNavieras; i++) {
+                        datanavieras.push([json.Navieras[i], json.Contenedores[i], json.ContenedoresWS[i]]);
+                    }
+                    data.push([$("#Pais option:selected").text(), json.CantidadContenedores, json.CantidadScrubber]);
+
+                    var table = $('#Tb_Inventariodisponible_pais').DataTable({
+                        data: data,
+                        searching: false,
+                        paging: false,
+                        info: false,
+                    });
+
+                    var table1 = $('#Tb_Navieras').DataTable({
+                        data: datanavieras,
+                        searching: false,
+                        paging: false,
+                        info: false,
+                    });
+                },
+            });
+        } else if ($("#Ciudad").val() != 0 && $("#Deposito").val() == 0) {
+            var table = $('#Tb_Inventariodisponible_ciudad').DataTable();
+            table.destroy();
+            var table1 = $('#Tb_Navieras').DataTable();
+            table1.destroy();
+            $("#tablapais").hide();
+            $("#tabladeposito").hide();
+            $("#tablaciudad").show();
+            $("#tablanavieras").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetContenedoresByCiudad", "Contenedores")',
+                data: { IdCiudad: $("#Ciudad").val() },
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    var data = [];
+                    var datanavieras = [];
+                    var CuentaNavieras = json.Navieras.length;
+                    for (var i = 0; i < CuentaNavieras; i++) {
+                        datanavieras.push([json.Navieras[i], json.Contenedores[i], json.ContenedoresWS[i]]);
+                    }
+                    data.push([$("#Pais option:selected").text(), $("#Ciudad option:selected").text(), json.CantidadContenedores, json.CantidadScrubber]);
+
+                    var table = $('#Tb_Inventariodisponible_ciudad').DataTable({
+                        data: data,
+                        searching: false,
+                        paging: false,
+                        info: false,
+                    });
+
+                    var table1 = $('#Tb_Navieras').DataTable({
+                        data: datanavieras,
+                        searching: false,
+                        paging: false,
+                        info: false,
+                    });
+                },
+            });
+
+        } else if ($("#Deposito").val() != 0) {
+            var table = $('#Tb_Inventariodisponible_deposito').DataTable();
+            table.destroy();
+            var table1 = $('#Tb_Navieras').DataTable();
+            table1.destroy();
+            $("#tablaciudad").hide();
+            $("#tablapais").hide();
+            $("#tabladeposito").show();
+            $("#tablanavieras").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetContenedoresByDeposito", "Contenedores")',
+                data: { IdDeposito: $("#Deposito").val() },
+                success: function (response) {
+                    var json = JSON.parse(response);
+                    var data = [];
+                    var datanavieras = [];
+                    var CuentaNavieras = json.Navieras.length;
+                    for (var i = 0; i < CuentaNavieras; i++) {
+                        datanavieras.push([json.Navieras[i], json.Contenedores[i], json.ContenedoresWS[i]]);
+                    }
+                    data.push([$("#Pais option:selected").text(), $("#Ciudad option:selected").text(), $("#Deposito option:selected").text(), json.CantidadContenedores, json.CantidadScrubber]);
+
+                    var table = $('#Tb_Inventariodisponible_deposito').DataTable({
+                        data: data,
+                        searching: false,
+                        paging: false,
+                        info: false,
+                    });
+
+                    var table1 = $('#Tb_Navieras').DataTable({
+                        data: datanavieras,
+                        searching: false,
+                        paging: false,
+                        info:false,
+                    });
+                },
+            });
+        } else if ($("#Pais").val() == 0 && $("#Ciudad").val() == 0 && $("#Deposito").val() == 0) {
+            swal("Error", "<span class='alerta' key='errorfiltrocontenedores'>Debe seleccionar al menos un campo</span>", "error");
+        }
+    });
+
+    $("#Limpiar").click(function () {
+        location.reload();
+    });
+
+    function ObtenerCiudades() {
+        //OBTENER CIUDADES
+        if (@PerfilInterior == 1020 || @PerfilInterior == 1021 || @PerfilInterior == 1022) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCiudadesSP", "Ciudad")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                    }
+                    $('#Ciudad').append(optionsAsString);
+                    $('#Ciudad').selectpicker('refresh');
+                },
+            });
+        }else
+        {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                    }
+                    $('#Ciudad').append(optionsAsString);
+                    $('#Ciudad').selectpicker('refresh');
+                },
+            });
+        }
+        //OBTENER CIUDADES
+    }
+
+    function ObtenerPaises() {
+        //OBTENER PAISES
+
+        if (@PerfilInterior == 1020 || @PerfilInterior == 1021 || @PerfilInterior == 1022) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPaisesSP", "Paises")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    var optionsAsString1 = "";
+                    var optionsAsString2 = "";
+                    var optionsAsString3 = "";
+
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+
+                    $('#Pais').append(optionsAsString);
+                    $('#Pais').selectpicker('refresh');
+
+                },
+            });
+        }else
+        {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPaisesActivos", "Paises")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    var optionsAsString1 = "";
+                    var optionsAsString2 = "";
+                    var optionsAsString3 = "";
+
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+
+                    $('#Pais').append(optionsAsString);
+                    $('#Pais').selectpicker('refresh');
+
+                },
+            });
+        }
+        //OBTENER PAISES
+    }
+
+
+    function ObtenerDepositos() {
+        //OBTENER DEPOSITO
+        if (@PerfilInterior == 1020 || @PerfilInterior == 1021 || @PerfilInterior == 1022) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDepositosSP", "Deposito")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $('#Deposito').append(optionsAsString);
+                        $('#Deposito').selectpicker('refresh');
+                    }
+                },
+            });
+        }else
+        {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $('#Deposito').append(optionsAsString);
+                        $('#Deposito').selectpicker('refresh');
+                    }
+                },
+            });
+        }
+        //OBTENER DEPOSITO
+        
+    }
+</script>

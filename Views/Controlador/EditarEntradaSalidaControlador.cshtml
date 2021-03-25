@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "EditarEntradaSalidaControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar Entrada/Salida Controlador <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Controlador <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" name="controlador" id="controlador" value="@ViewBag.Controlador" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Tipo Registro <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="tipo_registro" value="@ViewBag.TipoRegistro" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                               Ultimo Estado Tecnico<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="estado_tecnico" value="@ViewBag.EstadoTecnico" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Ultimo Estado Logistico <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="estado_logistico" value="@ViewBag.EstadoLogistico" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Booking Asociado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="booking" value="@ViewBag.Booking" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Contenedor Asociado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="contenedor" value="@ViewBag.Contenedor" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Fecha Registro <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="fecha_registro" name="fecha_registro" value="@ViewBag.Fecha" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Origen<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="origen" value="@ViewBag.Origen" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Destino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="destino" value="@ViewBag.Destino" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Dias de Viaje <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="dias" value="@ViewBag.Dias" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                                Courier <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="courier" value="@ViewBag.Courier" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                                Ticket de envio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <input type="text" id="ticket" value="@ViewBag.Ticket" class="form-control col-md-4 col-xs-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                            <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Enviar</button>
+                            <button class="btn btn-warning" type="reset">Limpiar</button>
+                            <button class="btn btn-primary" type="reset">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function ValidarFormulario() {
+        var Booking = $("#Booking").val();
+        var Nave = $("#Nave").val();
+        var Naviera = $("#Naviera").val();
+        var Exportador = $("#Exportador").val();
+        var Producto = $("#Producto").val();
+        var Destino = $("#Destino").val();
+        var Origen = $("#Origen").val();
+        var Contenedor = $("#Contenedor").val();
+        var Viaje = $("#Viaje").val();
+        var Eta = $("#Eta").val();
+        var Etd = $("#Etd").val();
+        var CantidadCo = $("#C02").val();
+        var CantidadO = $("#O2").val();
+        var Temperatura = $("#Temperatura").val();
+        var Tamano = $("#TamContenedor").val();
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Nave == "") {
+            swal('Error...', 'Campo Nave Obligatorio', 'error')
+        } else if (Naviera == "") {
+            swal('Error...', 'Campo Naviera Obligatorio', 'error')
+        } else if (Exportador == "") {
+            swal('Error...', 'Campo Exportador Obligatorio', 'error')
+        } else if (Producto == "") {
+            swal('Error...', 'Campo Producto Obligatorio', 'error')
+        } else if (Destino == "") {
+            swal('Error...', 'Campo Destino Obligatorio', 'error')
+        } else if (Origen == "") {
+            swal('Error...', 'Campo Origen Obligatorio', 'error')
+        } else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        } else if (Viaje == "") {
+            swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        } else if (Eta == "") {
+            swal('Error...', 'Campo Eta Obligatorio', 'error')
+        } else if (Etd == "") {
+            swal('Error...', 'Campo Etd Obligatorio', 'error')
+        } else if (CantidadCo == "") {
+            swal('Error...', 'Campo CantidadCo2 Obligatorio', 'error')
+        } else if (CantidadO == "") {
+            swal('Error...', 'Campo CantidadO2 Obligatorio', 'error')
+        } else if (Temperatura == "") {
+            swal('Error...', 'Campo Temperatura Obligatorio', 'error')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/IngresarDatos",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Nave: Nave,
+                Naviera: Naviera,
+                Exportador: Exportador,
+                Producto: Producto,
+                Destino: Destino,
+                Origen: Origen,
+                Viaje: Viaje,
+                FechaArribo: Eta,
+                FechaSalida: Etd,
+                CantidadCO: CantidadCo,
+                CantidadO: CantiadO,
+                Temperatura: Temperatura,
+                Tamano: Tamano
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Has introducido un nuevo coche!!');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    $(function () {
+        $("#fecha_awb").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#fecha_recepcion").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>
+

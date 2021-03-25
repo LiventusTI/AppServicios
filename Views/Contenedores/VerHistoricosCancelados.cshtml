@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "VerHistoricosCancelados";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Historico de Contenedores Cancelados</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <table id="Tb_Historicocancelado" class="display table table-striped table-bordered" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID CONTENEDOR</th>
+                            <th>N° CONTENEDOR</th>
+                            <th>PAIS</th>
+                            <th>CIUDAD</th>
+                            <th class="tr" key="depositotabla"></th>
+                            <th class="tr" key="navieratabla"></th>
+                            <th class="tr" key="idreserva"></th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID CONTENEDOR</th>
+                            <th>N° CONTENEDOR</th>
+                            <th>PAIS</th>
+                            <th>CIUDAD</th>
+                            <th class="tr" key="depositotabla"></th>
+                            <th class="tr" key="navieratabla"></th>
+                            <th class="tr" key="idreserva"></th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="IdContenedor" class="control-label">ID Contenedor</label>
+                        <input type="text" class="input form-control" id="IdContenedor" disabled="disabled" style="text-align:center; text-align-last:center;" />
+                    </div>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+
+        $('#Tb_Historicocancelado tfoot th').each(function (i) {
+            var title = $('#Tb_Historicocancelado thead th').eq($(this).index()).text();
+            if (lenguaje == "es") {
+                $(this).html('<input class="form-control" type="text" placeholder="BUSCAR ' + title + '" data-index="' + i + '" />');
+
+            } else {
+                $(this).html('<input class="form-control" type="text" placeholder="SEARCH ' + title + '" data-index="' + i + '" />');
+
+            }
+        });
+
+        if (lenguaje == "es") {
+            var table = $('#Tb_Historicocancelado').DataTable({
+                data: "",
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ reservas por pagina",
+                    "zeroRecords": "No hay reservas para mostrar",
+                    "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                    "infoEmpty": "No hay reservas disponibles",
+                    "search": "Buscar: ",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        } else {
+            var table = $('#Tb_Historicocancelado').DataTable({
+                data: ""
+            });
+        }
+
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+        $('#Tb_Historicocancelado tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $("#IdContenedor").val(this.children[0].innerText);
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $("#IdContenedor").val(this.children[0].innerText);
+                $(this).addClass('selected');
+            }
+        });
+    });
+
+    $("#InvetarioContenedor").click(function () {
+        if ($("#InvetarioContenedor").val() != "") {
+            swal("", "El contenedor fue inventariado con exito", "success");
+        } else {
+            swal("Error", "Debe seleccionar un contenedor para inventariarlo", "error");
+        }
+    });
+</script>

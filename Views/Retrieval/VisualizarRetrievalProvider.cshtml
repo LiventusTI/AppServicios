@@ -1,0 +1,924 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarRetrievalProvider";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2 class="tr" key="mantenedorretrievalprovider">Gestionar / Visualizar Retrieval Provider</h2>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-success editar tr" id="CrearRetrievalProvider" key="botonagregarretrieval">Agregar Retrieval Provider</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table id="Tb_RetrievalProvider" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID RETRIEVAL PROVIDER</th>
+                                <th class="tr" key="tablanombrecourier">NOMBRE</th>
+                                <th class="tr" key="tablaestado">ESTADO</th>
+                                <th class="tr" key="tablaopciones">OPCIONES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal para Asociar Naviera-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog" role="document" style="width:50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> Navieras asociadas</h4>
+            </div>
+            <div class="modal-body">
+                <div class="x_panel" id="Log_ingreso">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <table id="Tb_Naviera" class="table table-striped table-bordered" width="100%"> 
+                                <thead>
+                                    <tr>
+                                        <th class="tr" key="tablaidnaviera">ID NAVIERA</th>
+                                        <th class="tr" key="tablanombre">NOMBRE</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <label class="control-label alerta" key="navieracontenedor">Naviera</label>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <select class="selectpicker form-control" id="Naviera" data-live-search="true"></select>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <a title="Agregar Naviera"><i id="agregarnaviera" class="fa fa-plus fa-2x" style="display:none;" ></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para Asociar Naviera-->
+
+<!--Modal para Asociar Nodo-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog" role="document" style="width:50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"> Nodos asociados</h4>
+            </div>
+            <div class="modal-body">
+                <div class="x_panel" id="Log_ingreso">
+                    <form class="form-horizontal">
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <table id="Tb_Nodo" class="table table-striped table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>TIPO NODO</th>
+                                        <th>NOMBRE NODO</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <label class="control-label tr">Tipo Nodo</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <select class="selectpicker form-control" id="TipoNodo" data-live-search="true"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <label class="control-label tr">Nodo</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <select class="selectpicker form-control" id="Nodo" data-live-search="true"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <label class="control-label tr">N° Dias calculo ETR</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <input type="number" id="Dias_etr" min="0" placeholder="Ingrese dias para ETR" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <button type="button" class="btn btn-success editar alerta" id="CrearAsociacion" key="botonasociar">Asociar</button>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para Asociar Nodo-->
+
+<!--Modal para agregar datos-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width:100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="Retrieval" class="alerta col-sm-3 control-label" style="text-align:left">Retrieval Provider (*)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Retrieval" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="alerta col-sm-1 control-label" style="text-align:left">Email (*)</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="Email" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                        <label for="Email1" class="alerta col-sm-1 control-label" style="text-align:left">Email</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="Email1" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                        <label for="Email2" class="alerta col-sm-1 control-label" style="text-align:left">Email</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="Email2" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="alerta col-sm-2 control-label" key="telefonoretrieval" style="text-align:left">Telefono (*)</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="Telefono">
+                        </div>
+                        <label for="Telefono1" class="alerta col-sm-2 control-label" key="telefonoretrievalopcional" style="text-align:left">Telefono</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="Telefono1">
+                        </div>
+                        <label for="Telefono2" class="alerta col-sm-2 control-label" key="telefonoretrievalopcional" style="text-align:left">Telefono</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="Telefono2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Diasprearribo" class="alerta col-sm-3 control-label" key="diasprearriboretrieval" style="text-align:left">Días Notificacion Pre-Arribo (*)</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="Diasprearribo">
+                        </div>
+                        <label for="Diasprearribo1" class="alerta col-sm-3 control-label" key="diasprearriboretrievalopcional" style="text-align:left">Días Notificacion Pre-Arribo</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="Diasprearribo1">
+                        </div>
+                        <label for="Diasprearribo2" class="alerta col-sm-3 control-label" key="diasprearriboretrievalopcional" style="text-align:left">Días Notificacion Pre-Arribo</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="Diasprearribo2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Diaspostarribo" class="alerta col-sm-4 control-label" key="diaspostarriboretrieval" style="text-align:left">Días Notificacion Post-Arribo (*)</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="Diaspostarribo">
+                        </div>
+                    </div>                  
+                    <div class="form-group">
+                        <label for="Estado" class="alerta col-sm-2 control-label" key="estado" style="text-align:left">Estado</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="Estado">
+                                <option value="0">Activo</option>
+                                <option value="1">Deshabilitado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success tr" id="IngresarInformacion" key="botonagregarretrieval">Agregar Retrieval Provider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para agregar datos-->
+
+<!--Modal para editar datos-->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width:100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="RetrievalEditar" class="alerta col-sm-3 control-label" style="text-align:left">Retrieval Provider (*)</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="RetrievalEditar" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="EmailEditar" class="alerta col-sm-1 control-label" style="text-align:left">Email (*)</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="EmailEditar" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                        <label for="EmailEditar1" class="alerta col-sm-1 control-label" style="text-align:left">Email</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="EmailEditar1" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                        <label for="EmailEditar2" class="alerta col-sm-1 control-label" style="text-align:left">Email</label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" id="EmailEditar2" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="TelefonoEditar" class="alerta col-sm-2 control-label" key="telefonoretrieval" style="text-align:left">Telefono (*)</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="TelefonoEditar">
+                        </div>
+                        <label for="TelefonoEditar1" class="alerta col-sm-2 control-label" key="telefonoretrievalopcional" style="text-align:left">Telefono</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="TelefonoEditar1">
+                        </div>
+                        <label for="TelefonoEditar2" class="alerta col-sm-2 control-label" key="telefonoretrievalopcional" style="text-align:left">Telefono</label>
+                        <div class="col-sm-2">
+                            <input type="tel" class="form-control" id="TelefonoEditar2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DiasprearriboEditar" class="alerta col-sm-3 control-label" key="diasprearriboretrieval" style="text-align:left">Días Notificacion Pre-Arribo (*)</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="DiasprearriboEditar">
+                        </div>
+                        <label for="DiasprearriboEditar1" class="alerta col-sm-3 control-label" key="diasprearriboretrievalopcional" style="text-align:left">Días Notificacion Pre-Arribo</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="DiasprearriboEditar1">
+                        </div>
+                        <label for="DiasprearriboEditar2" class="alerta col-sm-3 control-label" key="diasprearriboretrievalopcional" style="text-align:left">Días Notificacion Pre-Arribo</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="DiasprearriboEditar2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DiaspostarriboEditar" class="alerta col-sm-4 control-label" key="diaspostarriboretrieval" style="text-align:left">Días Notificacion Post-Arribo (*)</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="DiaspostarriboEditar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="EstadoEditar" class="alerta col-sm-2 control-label" key="estado" style="text-align:left">Estado</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="EstadoEditar">
+                                <option value="0">Activo</option>
+                                <option value="1">Deshabilitado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success tr" id="EditarInformacion" key="botoneditarretrieval">Editar Retrieval Provider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal para editar datos-->
+
+
+<input type="text" class="input form_control" id="idretrievalprovider" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="AsociarNavieras" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="AsociarNodos" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal3" id="CrearRetrievalModal" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal4" id="EditarRetrievalModal" style="display:none;"></button>
+
+<script>
+
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetRetrievalProvider", "Retrieval")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                $('#Tb_RetrievalProvider').show(500);
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].Activo == 0) {
+                        var estado = 'Activo';
+                    } else {
+                        var estado = 'No Activo';
+                    }
+                    data.push([json[i].IdRetrievalProvider, json[i].NombreRetrievalProvider.toUpperCase(), estado]);
+                }
+                if (lenguaje == "es") {
+                    var table = $('#Tb_RetrievalProvider').DataTable({
+                        data: data,
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                        },
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i id='EditarRP' class='fa fa-edit fa-2x' title='Editar Retrieval Provider'></i> <i id='AgregarNaviera' class='fa fa-ship fa-2x' title='Asociar Naviera'></i> <i id='AgregarNodo' class='fa fa-map-marker fa-2x' title='Asociar Nodo'></i>"
+                        }],
+                        "rowCallback": function (row, data, index) {
+                            if (data[0] == 0) {
+                                $('td:eq(3)', row).html(' ');
+                            }
+                        }
+                    });
+                } else {
+                    var table = $('#Tb_RetrievalProvider').DataTable({
+                        data: data,
+                        fixedColumns: true,
+                        "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent": "<i id='EditarRP' class='fa fa-edit fa-2x' title='Editar Retrieval Provider'></i> <i id='AgregarNaviera' class='fa fa-ship fa-2x' title='Asociar Naviera'></i> <i id='AgregarNodo' class='fa fa-map-marker fa-2x' title='Asociar Nodo'></i>"
+                        }],
+                        "rowCallback": function (row, data, index) {
+                            if (data[0] == 0) {
+                                $('td:eq(3)', row).html(' ');
+                            }
+                        }
+                    });
+                }
+
+
+                $('#Tb_RetrievalProvider tbody').on('click', '#EditarRP', function () {
+                    var data = table.row($(this).parents('tr')).data();
+
+                    $("#idretrievalprovider").val(data[0]);
+                    $("#RetrievalEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $("#EmailEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $("#TelefonoEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $("#DiasprearriboEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    $("#DiaspostarriboEditar").css("background-color", "rgba(255, 0, 0, 0)");
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetRetrievalProviderById", "Retrieval")',
+                        data: { IdRetrieval: data[0] },
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            
+                            $("#RetrievalEditar").val(json.NombreRetrievalProvider);
+                            $("#EmailEditar").val(json.Correo);
+                            $("#EmailEditar1").val(json.Correo1);
+                            $("#EmailEditar2").val(json.Correo2);
+                            $("#TelefonoEditar").val(json.Telefono);
+                            $("#TelefonoEditar1").val(json.Telefono1);
+                            $("#TelefonoEditar2").val(json.Telefono2);
+                            $("#TelefonoEditar").val(json.Telefono);
+                            $("#TelefonoEditar1").val(json.Telefono1);
+                            $("#TelefonoEditar2").val(json.Telefono2);
+                            $("#DiasprearriboEditar").val(json.Diaprearribo);
+                            $("#DiasprearriboEditar1").val(json.Diaprearribo1);
+                            $("#DiasprearriboEditar2").val(json.Diaprearribo2);
+                            $("#DiaspostarriboEditar").val(json.Diapostarribo);
+                           
+                        },
+                    });                 
+                    $('#EditarRetrievalModal').trigger('click');
+                });
+
+                $('#Tb_RetrievalProvider tbody').on('click', '#AgregarNaviera', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    var table1 = $('#Tb_Naviera').DataTable();
+                    table1.destroy();
+                    $("#idretrievalprovider").val(data[0]);
+                    //ajax para obtener navieras asociadas al retrieval//
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetNavierasRetrieval", "Retrieval")',
+                        data: { IdRetrieval: data[0] },
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            for (var i = 0 ; i < cuenta ; i++) {
+                                data.push([json[i].Id, json[i].Nombre.toUpperCase()]);
+                            }
+                            if (lenguaje == "es") {
+                                var table1 = $('#Tb_Naviera').DataTable({
+                                    data: data,
+                                    "language": {
+                                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                                    },
+                                    fixedColumns: true,
+                                    searching: false,
+                                    info: false,
+                                    paging: false,
+                                    bLengthChange: false,
+                                    ordering: false
+                                });
+                            } else {
+                                var table1 = $('#Tb_Naviera').DataTable({
+                                    data: data,
+                                    fixedColumns: true,
+                                    searching: false,
+                                    info: false,
+                                    paging: false,
+                                    bLengthChange: false,
+                                    ordering: false
+                                });
+                            }
+                        },
+                    });
+                    //ajax para obtener navieras asociadas al retrieval//
+
+                    //ajax para obtener navieras//
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetNavierasActivas", "Naviera")',
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            var optionsAsString = "";
+                            optionsAsString += "<option value='0'>Seleccione Naviera</option>";
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                            $('#Naviera').append(optionsAsString);
+                            $('#Naviera').selectpicker('refresh');
+                        },
+                    });
+                    //ajax para obtener navieras//
+
+                    $('#AsociarNavieras').trigger('click');
+                });
+
+                $('#Tb_RetrievalProvider tbody').on('click', '#AgregarNodo', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    var table1 = $('#Tb_Nodo').DataTable();
+                    table1.destroy();
+                    $("#idretrievalprovider").val(data[0]);
+                    $('#TipoNodo').empty();
+                    $('#TipoNodo').selectpicker('refresh');
+                    //ajax para obtener nodos asociados al retrieval//
+                   $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetNodosRetrieval", "Retrieval")',
+                        data: { IdRetrieval: data[0] },
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            for (var i = 0 ; i < cuenta ; i++) {
+                                var TipoLugar = "";
+                                if (json[i].IdTipoLugar == 1) {
+                                    TipoLugar = "DEPOSITO";
+                                } else if (json[i].IdTipoLugar == 2) {
+                                    TipoLugar = "PACKING";
+                                } else if (json[i].IdTipoLugar == 3) {
+                                    TipoLugar = "ANTEPUERTO";
+                                } else if (json[i].IdTipoLugar == 4) {
+                                    TipoLugar = "PUERTO ORIGEN";
+                                } else if (json[i].IdTipoLugar == 5) {
+                                    TipoLugar = "PUERTO DESTINO";
+                                } else if (json[i].IdTipoLugar == 6) {
+                                    TipoLugar = "BODEGA";
+                                }
+                                data.push([TipoLugar, json[i].NombreNodo.toUpperCase()]);
+                            }
+                            if (lenguaje == "es") {
+                                var table1 = $('#Tb_Nodo').DataTable({
+                                    data: data,
+                                    "language": {
+                                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                                    },
+                                    fixedColumns: true,
+                                    searching: false,
+                                    info: false,
+                                    paging: false,
+                                    bLengthChange: false,
+                                    ordering: false
+                                });
+                            } else {
+                                var table1 = $('#Tb_Nodo').DataTable({
+                                    data: data,
+                                    fixedColumns: true,
+                                    searching: false,
+                                    info: false,
+                                    paging: false,
+                                    bLengthChange: false,
+                                    ordering: false
+                                });
+                            }
+                        },
+                    });
+                    //ajax para obtener nodos asociados al retrieval//
+
+                    //ajax para obtener tipo lugares//
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetTipoLugares", "TipoLugar")',
+                        success: function (response) {
+                            var data = [];
+                            var json = JSON.parse(response);
+                            var cuenta = json.length;
+                            var optionsAsString = "";
+                            optionsAsString += "<option value='0'>Seleccione Tipo Lugar</option>";
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                            }
+                            $('#TipoNodo').append(optionsAsString);
+                            $('#TipoNodo').selectpicker('refresh');
+                        },
+                    });
+                    //ajax para obtener navieras//
+
+
+                    $('#AsociarNodos').trigger('click');
+                });
+            },
+        });
+    });
+
+
+    //boton crear courier//
+    $("#CrearRetrievalProvider").click(function () {
+        $('#CrearRetrievalModal').trigger('click');
+        $("#Retrieval").val("");
+        $("#Retrieval").css("background-color", "rgba(255, 0, 0, 0)");
+        $('#Retrieval').focus();
+
+        $("#Email").val("");
+        $("#Email").css("background-color", "rgba(255, 0, 0, 0)");
+        $("#Email1").val("");
+        $("#Email2").val("");
+
+        $("#Telefono").val("");
+        $("#Telefono").css("background-color", "rgba(255, 0, 0, 0)");
+        $("#Telefono1").val("");
+        $("#Telefono2").val("");
+
+        $("#Diasprearribo").val("");
+        $("#Diasprearribo").css("background-color", "rgba(255, 0, 0, 0)");
+        $("#Diasprearribo1").val("");
+        $("#Diasprearribo2").val("");
+
+        $("#Diaspostarribo").val("");
+        $("#Diaspostarribo").css("background-color", "rgba(255, 0, 0, 0)");
+    });
+    //boton crear courier//
+
+    //Ingresar Información//
+    $("#IngresarInformacion").click(function () {
+        if ($("#Retrieval").val() != "") {
+            $("#Retrieval").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#Email").val() != "") {
+                $("#Email").css("background-color", "rgba(255, 0, 0, 0)");
+                if ($("#Telefono").val() != "") {
+                    $("#Telefono").css("background-color", "rgba(255, 0, 0, 0)");
+                    if ($("#Diasprearribo").val() != "") {
+                        $("#Diasprearribo").css("background-color", "rgba(255, 0, 0, 0)");
+                        if ($("#Diaspostarribo").val() != ""){
+                            $("#Diaspostarribo").css("background-color", "rgba(255, 0, 0, 0)");
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("CrearRetrievalProvider", "Retrieval")',
+                                data: {
+                                    NombreRetrievalProvider: $("#Retrieval").val(),
+                                    Email: $("#Email").val(), Telefono: $("#Telefono").val(), Diasprearribo: $("#Diasprearribo").val(),
+                                    Diaspostarribo: $("#Diaspostarribo").val(),Estado: $("#Estado").val(),
+                                    Email1: $("#Email1").val(), Email2: $("#Email2").val(),
+                                    Telefono1: $("#Telefono1").val(), Telefono2: $("#Telefono2").val(),
+                                    Diasprearribo1: $("#Diasprearribo1").val(), Diasprearribo2: $("#Diasprearribo2").val()
+                                },
+                                success: function (response) {
+                                    var json = JSON.parse(response);
+                                    if (json.validador == 0) {
+                                        var aux = 'success';
+                                    } else {
+                                        var aux = 'warning';
+                                    }
+                                    swal({
+                                        title: '',
+                                        text: json.Mensaje,
+                                        type: aux,
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        location.reload();
+                                    })
+                                }
+                            });
+                        }else{
+                            $("#Diaspostarribo").css("background-color", "rgba(255, 0, 0, 0.4)");
+                        }
+                    } else {
+                        $("#Diasprearribo").css("background-color", "rgba(255, 0, 0, 0.4)");
+                    }
+                } else {
+                    $("#Telefono").css("background-color", "rgba(255, 0, 0, 0.4)");
+                }
+            } else {
+                $("#Email").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#Retrieval").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Ingresar Información//
+
+    //Editar Información//
+    $("#EditarInformacion").click(function () {
+        if ($("#RetrievalEditar").val() != "") {
+            $("#RetrievalEditar").css("background-color", "rgba(255, 0, 0, 0)");
+            if ($("#EmailEditar").val() != "") {
+                $("#EmailEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                if ($("#TelefonoEditar").val() != "") {
+                    $("#TelefonoEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                    if ($("#DiasprearriboEditar").val() != "") {
+                        $("#DiasprearriboEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                        if ($("#DiaspostarriboEditar").val() != "") {
+                            $("#DiaspostarriboEditar").css("background-color", "rgba(255, 0, 0, 0)");
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("EditarRetrievalProvider", "Retrieval")',
+                                data: {
+                                    NombreRetrievalProvider: $("#RetrievalEditar").val(),
+                                    Email: $("#EmailEditar").val(), Telefono: $("#TelefonoEditar").val(), Diasprearribo: $("#DiasprearriboEditar").val(),
+                                    Diaspostarribo: $("#DiaspostarriboEditar").val(), Estado: $("#EstadoEditar").val(), idRetrievalProvider : $("#idretrievalprovider").val(),
+                                    Email1: $("#EmailEditar1").val(), Email2: $("#EmailEditar2").val(),
+                                    Telefono1: $("#TelefonoEditar1").val(), Telefono2: $("#TelefonoEditar2").val(),
+                                    Diasprearribo1: $("#DiasprearriboEditar1").val(), Diasprearribo2: $("#DiasprearriboEditar2").val()
+                                },
+                                success: function (response) {
+                                    var json = JSON.parse(response);
+                                    if (json.validador == 0) {
+                                        var aux = 'success';
+                                    } else {
+                                        var aux = 'warning';
+                                    }
+                                    swal({
+                                        title: '',
+                                        text: json.Mensaje,
+                                        type: aux,
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        location.reload();
+                                    })
+                                }
+                            });
+                        } else {
+                            $("#DiaspostarriboEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+                        }
+                    } else {
+                        $("#DiasprearriboEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+                    }
+                } else {
+                    $("#TelefonoEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+                }
+            } else {
+                $("#EmailEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+            }
+        } else {
+            $("#RetrievalEditar").css("background-color", "rgba(255, 0, 0, 0.4)");
+        }
+    });
+    //Editar Información//
+
+    //mostrar agregar naviera//
+    $("#Naviera").change(function () {
+        if ($("#Naviera").val() != 0) {
+            $("#agregarnaviera").show();
+        } else {
+            $("#agregarnaviera").hide();
+        }
+    });
+    //mostrar agregar naviera//
+
+    //boton asociar naviera//
+    $("#agregarnaviera").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AgregarNavieraRetrieval", "Retrieval")',
+            data: {
+                IdNaviera: $("#Naviera").val(), IdRetrieval: $("#idretrievalprovider").val()
+            },
+            success: function (response) {
+                var json = JSON.parse(response);
+                if (json.validador == 0) {
+                    var aux = 'success';
+                } else {
+                    var aux = 'warning';
+                }
+                swal({
+                    title: '',
+                    text: json.Mensaje,
+                    type: aux,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    location.reload();
+                })
+            }
+        });
+    }); 
+    //boton asociar naviera//
+
+    //boton asociar nodo//
+    $("#CrearAsociacion").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AgregarNodoRetrieval", "Retrieval")',
+            data: {
+                IdTipoLugar: $("#TipoNodo").val(), IdNodo: $("#Nodo").val(), Dias: 0, IdRetrieval : $("#idretrievalprovider").val()
+            },
+            success: function (response) {
+                var json = JSON.parse(response);
+                if (json.validador == 0) {
+                    var aux = 'success';
+                } else {
+                    var aux = 'warning';
+                }
+                swal({
+                    title: '',
+                    text: json.Mensaje,
+                    type: aux,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    location.reload();
+                })
+            }
+        });
+    });
+    //boton asociar nodo//
+
+    //mostrar nodo segun tipo lugar//
+    $("#TipoNodo").change(function () {
+        if ($("#TipoNodo").val() == 1) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+            //obtener depositos//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDepositos", "Deposito")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener depositos//          
+        } else if ($("#TipoNodo").val() == 2) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+            //obtener packings//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPacking", "Packing")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener packings//           
+        } else if ($("#TipoNodo").val() == 3) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');          
+            //obtener antepuertos//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetAntepuertos", "Antepuerto")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener antepuertos//
+        } else if ($("#TipoNodo").val() == 4) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+            //obtener puerto origen//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPuertos", "Puertos")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener puerto origen//
+        } else if ($("#TipoNodo").val() == 5) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+            //obtener puerto destino//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPuertos", "Puertos")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener puerto destino//
+        } else if ($("#TipoNodo").val() == 6) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+            //obtener puerto bodegas//
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetBodegas", "Bodega")',
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    optionsAsString += "<option value='0'>Seleccione Nodo</option>";
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                    $('#Nodo').append(optionsAsString);
+                    $('#Nodo').selectpicker('refresh');
+                },
+            });
+            //obtener puerto bodegas//
+        } else if ($("#TipoNodo").val() == 0) {
+            $('#Nodo').empty();
+            $('#Nodo').selectpicker('refresh');
+        }
+    });
+    //mostrar nodo segun tipo lugar//
+
+    
+
+
+</script>
+

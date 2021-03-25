@@ -1,0 +1,676 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarResumenControladores";
+    Layout = "~/Views/MasterPage.cshtml";
+    int PerfilInterior = Convert.ToInt32(Session["PerfilInterior"]);
+    string Usuario = Session["User"].ToString().ToUpper();
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="verinventariocontroladores">Ver Stock Controladores</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <form class="form-horizontal">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-6 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="Pais" class="control-label tr" key="pais">País</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Pais">
+                                    <option value="0" selected class="tr" key="selectpais">Seleccione Pais</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="Ciudad" class="control-label tr" key="ciudad">Ciudad</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Ciudad">
+                                    <option value="0" selected class="tr" key="selectciudad">Seleccione Ciudad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="TipoLocalidad" class="control-label tr" key="tipolocalidad">Tipo Localidad</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="TipoLocalidad">
+                                    <option value="0" selected class="tr" key="selecttipolocalidad">Seleccione Tipo Localidad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-12" style="text-align:center">
+                            <label for="Localidad" class="control-label tr" key="localidad">Localidad</label>
+                            <div>
+                                <select class="selectpicker form-control" data-live-search="true" id="Localidad">
+                                    <option value="0" selected class="tr" key="selectlocalidad">Seleccione Localidad</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="divider"></div>
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-6">
+                        <button type="button" class="btn btn-success tr" key="filtrar" id="Filtrar" style="margin-bottom: 0px;">Filtrar</button>
+                        <button type="button" class="btn btn-warning tr" key="limpiar" id="Limpiar" style="margin-bottom: 0px;">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="x_panel" id="tablanodotransito" style="display:none">
+                <table id="Tb_Nodotransito" class="display table table-striped table-bordered" cellspacing="0" width:"100%">
+                    <thead>
+                        <tr>
+                            <th class="tr"></th>
+                            <th class="tr" colspan="4">ESTADOS DE RECUPERACIÓN</th>
+                            <th class="tr"></th>
+                        </tr>
+                        <tr>
+                            <th class="tr" key="cantidadPorTipoMov">TIPO MOVIMIENTO</th>
+                            <th class="tr" key="contadorEstado1">N.A.</th>
+                            <th class="tr" key="contadorEstado2">NOT ARRIVED</th>
+                            <th class="tr" key="contadorEstado3">ARRIVED</th>
+                            <th class="tr" key="contadorEstado4">RECOVERED</th>
+                            <th class="tr" key="contadorEstado5">TOTAL</th>
+                        </tr>
+                        <!--tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr-->
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/build/js/Perfiles.js"></script>
+<script>
+    var lenguaje = document.cookie;
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        var data = [];
+        ObtenerPaises();
+        ObtenerCiudades();
+        ObtenerTiposLocalidad();
+    });
+
+    $("#Filtrar").click(function () {
+        $("#tablanodotransito").show();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCountMatriz", "Controlador")',
+            data: {
+                IdPais: $("#Pais").val(),
+                IdCiudad: $("#Ciudad").val(),
+                IdTipoLocalidad: $("#TipoLocalidad").val(),
+                IdLocalidad: $("#Localidad").val()
+            },
+            success: function (response) {
+                var data = [];
+                var datatabla = [];
+                var contar_total;
+                var total;
+                for (var i = 0; i < 2; i++) {
+                    if (i == 1) i = i + 4;
+                    if (response[i] == 1) response[i] = '<strong>EN NODO</strong>';
+                    if (response[i] == 2) response[i] = '<strong>EN TRANSITO</strong>';
+                    contar_total = response[i + 1] + response[i + 2] + response[i + 3] + response[i + 4];
+                    total = '<strong>' + contar_total + '</strong>';
+                    datatabla.push([response[i], response[i + 1], response[i + 2], response[i + 3], response[i + 4], total]);
+                }
+
+                var table = $('#Tb_Nodotransito').DataTable();
+                table.destroy();
+
+                table = $('#Tb_Nodotransito').DataTable({
+                    data: datatabla,
+                    searching: false,
+                    paging: false,
+                    info: false,
+                });
+            },
+        });
+    });
+
+    $("#Limpiar").click(function () {
+        location.reload();
+    });
+
+
+    //OBTENER CIUDADES/LOCALIDADES A PARTIR DE PAIS SELECCIONADO
+    $("#Pais").change(function () {
+        //$('#Ciudad').removeAttr('disabled');
+        if ($("#Pais").val() == "0") {
+            $('#Ciudad').empty();
+            optionsAsString = "<option value='0'>Seleccione Ciudad</option>";
+            $("#Ciudad").append(optionsAsString);
+            $("#Ciudad").selectpicker('refresh');
+            ObtenerCiudades();
+            //$("#Ciudad").selectpicker('refresh');
+            if ($("#TipoLocalidad").val() == 0) {
+                $('#Localidad').empty();
+                optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                $("#Localidad").append(optionsAsString);
+                $("#Localidad").selectpicker('refresh');
+            } else {
+
+                if ($("#TipoLocalidad").val() == "1") {
+                    url = '@Url.Action("GetDepositos", "Deposito")';
+                } else if ($("#TipoLocalidad").val() == "2") {
+                    url = '@Url.Action("GetPacking", "Packing")';
+                } else if ($("#TipoLocalidad").val() == "3") {
+                    url = '@Url.Action("GetAntepuertos", "AntePuerto")';
+                } else if ($("#TipoLocalidad").val() == "4") {
+                    url = '@Url.Action("GetPuertos", "Puertos")';
+                } else if ($("#TipoLocalidad").val() == "6") {
+                    url = '@Url.Action("GetBodegas", "Bodega")';
+                }
+
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: url,
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        $("#Localidad").empty();
+                        var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + /*" - " + json[i].NombreCiudad +*/ "</option>";
+                            }
+                            $("#Localidad").append(optionsAsString);
+                            $("#Localidad").selectpicker('refresh');
+                        }
+                    },
+                });
+            }
+        } else {
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                data: { IdPais: $("#Pais").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    var optionsAsString = "";
+                    if (cuenta != 0) {
+                        $("#Ciudad").empty();
+                        optionsAsString = "<option value='0'>Seleccione Ciudad</option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "-" + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                        $('#Localidad').empty();
+                        optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+
+            if ($("#TipoLocalidad").val() != 0) {
+                var url2 = '';
+                var optionsAsString9 = '';
+
+                if ($("#TipoLocalidad").val() == "1") {
+                    url2 = '@Url.Action("GetDepositoPais", "Deposito")';
+                } else if ($("#TipoLocalidad").val() == "2") {
+                    url2 = '@Url.Action("GetPackingPais", "Packing")';
+                } else if ($("#TipoLocalidad").val() == "3") {
+                    url2 = '@Url.Action("GetAntepuertoPais", "AntePuerto")';
+                } else if ($("#TipoLocalidad").val() == "4") {
+                    url2 = '@Url.Action("GetPuertosOrigenPais", "Puertos")';
+                } else if ($("#TipoLocalidad").val() == "6") {
+                    url2 = '@Url.Action("GetBodegasPais", "Bodega")';
+                }
+
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: url2,
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+
+                        optionsAsString9 = "<option value='0'>Seleccione Localidad</option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString9 += "<option value='" + json[i].Id + "'>" + json[i].Nombre +/* "-" + json[i].NombreCiudad + */"</option>";
+                            }
+                            $("#Localidad").append(optionsAsString9);
+                            $("#Localidad").selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Localidad').empty();
+                optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                $("#Localidad").append(optionsAsString2);
+                $("#Localidad").selectpicker('refresh');
+            } //CAMBIO
+        }
+
+    });
+    //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+
+
+    //OBTENER PAIS Y LOCALIDADES A PARTIR DE CIUDAD SELECCIONADA
+    $("#Ciudad").change(function () {
+        var optionsAsString2 = '';
+
+        if ($("#Ciudad").val() != "0") {
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: '@Url.Action("GetInfoCiudad", "Ciudad")',
+                data: { IdCiudad: $("#Ciudad").val() },
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    if (cuenta != 0) {
+                        $("#Pais").val(json[0].IdPais);
+                        $("#Pais").selectpicker('refresh');
+                        $("#Ciudad").selectpicker('refresh');
+                        $("#Localidad").empty();
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+
+            if ($("#TipoLocalidad").val() != "0") {
+                var url2 = '';
+                if ($("#TipoLocalidad").val() == "1") {
+                    url2 = '@Url.Action("GetDepositoCiudad", "Deposito")';
+
+                } else if ($("#TipoLocalidad").val() == "2") {
+                    url2 = '@Url.Action("GetPackingCiudad", "Packing")';
+
+                } else if ($("#TipoLocalidad").val() == "3") {
+                    url2 = '@Url.Action("GetAntepuertoCiudad", "AntePuerto")';
+
+                } else if ($("#TipoLocalidad").val() == "4") {
+                    url2 = '@Url.Action("GetPuertosOrigenCiudad", "Puertos")';
+
+                } else if ($("#TipoLocalidad").val() == "6") {
+                    url2 = '@Url.Action("GetBodegasCiudad", "Bodega")';
+
+                }
+
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: url2,
+                    data: { IdCiudad: $("#Ciudad").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        $("#Localidad").empty();
+                        optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString2 += "<option value='" + json[i].Id + "'>" + json[i].Nombre + /*" - " + json[i].NombreCiudad +*/ "</option>";
+                        }
+
+                        $('#Localidad').append(optionsAsString2);
+                        $('#Localidad').selectpicker('refresh');
+                    },
+                });
+
+            } else {
+                $('#Localidad').empty();
+                optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                $("#Localidad").append(optionsAsString2);
+                $("#Localidad").selectpicker('refresh');
+            }
+
+        } else if ($("#Pais").val() != "0") { // si el filtro ciudad esta vacio y el pais no
+
+
+            if ($("#TipoLocalidad").val() != "0") {
+                var url2 = '';
+                if ($("#TipoLocalidad").val() == "1") {
+                    url2 = '@Url.Action("GetDepositoPais", "Deposito")';
+
+                } else if ($("#TipoLocalidad").val() == "2") {
+                    url2 = '@Url.Action("GetPackingPais", "Packing")';
+
+                } else if ($("#TipoLocalidad").val() == "3") {
+                    url2 = '@Url.Action("GetAntepuertoPais", "AntePuerto")';
+
+                } else if ($("#TipoLocalidad").val() == "4") {
+                    url2 = '@Url.Action("GetPuertosOrigenPais", "Puertos")';
+
+                } else if ($("#TipoLocalidad").val() == "6") {
+                    url2 = '@Url.Action("GetBodegasPais", "Bodega")';
+                }
+
+
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: url2,
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        $("#Localidad").empty();
+                        optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString2 += "<option value='" + json[i].Id + "'>" + json[i].Nombre +/* "-" + json[i].NombreCiudad + */"</option>";
+                            }
+                            $("#Localidad").append(optionsAsString2);
+                            $("#Localidad").selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Localidad').empty();
+                optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                $("#Localidad").append(optionsAsString2);
+                $("#Localidad").selectpicker('refresh');
+            }  ///CAMBIO
+        }
+    });    //OBTENER PAIS Y LOCALIDADES A PARTIR DE CIUDAD SELECCIONADA
+
+
+    $("#TipoLocalidad").change(function () {
+        var optionsAsString = "";
+
+        if ($("#TipoLocalidad").val() == "0") {
+
+            $('#Localidad').empty();
+            optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+            $("#Localidad").append(optionsAsString);
+            $("#Localidad").selectpicker('refresh');
+
+        } else if ($("#TipoLocalidad").val() == "1") { //OBTENER DEPOSITO
+
+            var url = '', parametro = '';
+
+            if ($("#Ciudad").val() != "0") {
+                url = '@Url.Action("GetDepositoCiudad", "Deposito")'; // si tiene filtro ciudad
+                parametro = { IdCiudad: $("#Ciudad").val() };
+            } else if ($("#Pais").val() != "0") {
+                url = '@Url.Action("GetDepositoPais", "Deposito")'; // si tiene filtro pais, pero no ciudad
+                parametro = { IdPais: $("#Pais").val() };
+            } else {
+                url = '@Url.Action("GetDepositos", "Deposito")'; // si no tiene filtro pais ni ciudad, pero si de tipo localidad
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: parametro,
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    $("#Localidad").empty();
+                    var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+
+            //OBTENER DEPOSITOS
+
+        } else if ($("#TipoLocalidad").val() == "2") {   //OBTENER PACKINGS
+
+            var url = '';
+            if ($("#Ciudad").val() != "0") {
+                url = '@Url.Action("GetPackingCiudad", "Packing")'; //GetPackingCiudad No trae NombreCiudad
+                parametro = { IdCiudad: $("#Ciudad").val() };
+
+            } else if ($("#Pais").val() != "0") {
+                url = '@Url.Action("GetPackingPais", "Packing")';
+                parametro = { IdPais: $("#Pais").val() };
+
+            } else {
+                url = '@Url.Action("GetPacking", "Packing")';
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: parametro,
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    $("#Localidad").empty();
+                    var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + /*" - " + json[i].NombreCiudad +*/ "</option>";
+                        }
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+        }
+            //OBTENER PACKINGS
+
+        else if ($("#TipoLocalidad").val() == "3") {    //OBTENER ANTEPUERTOS
+
+            var url = '';
+            if ($("#Ciudad").val() != "0") {
+                url = '@Url.Action("GetAntepuertoCiudad", "AntePuerto")';
+                parametro = { IdCiudad: $("#Ciudad").val() };
+
+            } else if ($("#Pais").val() != "0") {
+                url = '@Url.Action("GetAntepuertoPais", "AntePuerto")';
+                parametro = { IdPais: $("#Pais").val() };
+
+            } else {
+                url = '@Url.Action("GetAntepuertos", "AntePuerto")';
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: parametro,
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    $("#Localidad").empty();
+                    var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+        }
+            //OBTENER ANTEPUERTOS
+
+
+        else if ($("#TipoLocalidad").val() == "4") {    //OBTENER PUERTOS
+
+            var url = '';
+            if ($("#Ciudad").val() != "0") {
+                url = '@Url.Action("GetPuertosOrigenCiudad", "Puertos")';
+                parametro = { IdCiudad: $("#Ciudad").val() };
+
+            } else if ($("#Pais").val() != "0") {
+                url = '@Url.Action("GetPuertosOrigenPais", "Puertos")';
+                parametro = { IdPais: $("#Pais").val() };
+
+            } else {
+                url = '@Url.Action("GetPuertos", "Puertos")';
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: parametro,
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    $("#Localidad").empty();
+                    var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+        }
+            //OBTENER PUERTOS
+
+
+        else if ($("#TipoLocalidad").val() == "6") {  //OBTENER BODEGAS
+
+            var url = '';
+            if ($("#Ciudad").val() != "0") {
+                url = '@Url.Action("GetBodegasCiudad", "Bodega")';
+                parametro = { IdCiudad: $("#Ciudad").val() };
+
+            } else if ($("#Pais").val() != "0") {
+                url = '@Url.Action("GetBodegasPais", "Bodega")';
+                parametro = { IdPais: $("#Pais").val() };
+
+            } else {
+                url = '@Url.Action("GetBodegas", "Bodega")';
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: parametro,
+                success: function (response) {
+                    var data = [];
+                    var json = JSON.parse(response);
+                    var cuenta = json.length;
+                    $("#Localidad").empty();
+                    var optionsAsString = "<option value='0'>Seleccione Localidad</option>";
+                    if (cuenta != 0) {
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                        }
+                        $("#Localidad").append(optionsAsString);
+                        $("#Localidad").selectpicker('refresh');
+                    }
+                },
+            });
+        }
+        //OBTENER BODEGAS
+    });
+
+    function ObtenerCiudades() {
+        //OBTENER CIUDADES
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = '';
+                //var optionsAsString = "<option value='0'>Seleccione Ciudad</option>";
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                }
+                $('#Ciudad').append(optionsAsString);
+                $('#Ciudad').selectpicker('refresh');
+            },
+        });
+
+        //OBTENER CIUDADES
+    }
+
+    //OBTENER PAISES
+    function ObtenerPaises() {
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '@Url.Action("GetPaisesActivos", "Paises")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                var optionsAsString1 = "";
+                var optionsAsString2 = "";
+                var optionsAsString3 = "";
+                //var optionsAsString = "<option value='0'>Seleccione Pais</option>";
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+
+                $('#Pais').append(optionsAsString);
+                $('#Pais').selectpicker('refresh');
+
+            },
+        });
+
+    }
+    //OBTENER PAISES
+
+    //OBTENER TIPO LUGARES
+    function ObtenerTiposLocalidad() {
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '@Url.Action("GetTipoLugares", "TipoLugar")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "<option value='0'>Seleccione un Tipo de Localidad</option>";
+                $("#TipoLocalidad").empty();
+                $('#Localidad').empty();
+                optionsAsString2 = "<option value='0'>Seleccione Localidad</option>";
+                $("#Localidad").append(optionsAsString2);
+                $("#Localidad").selectpicker('refresh');
+                for (var i = 1; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $("#TipoLocalidad").append(optionsAsString);
+                $("#TipoLocalidad").selectpicker("refresh");
+            },
+        });
+    }
+    //OBTENER TIPO LUGARES
+
+
+</script>

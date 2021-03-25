@@ -1,0 +1,613 @@
+﻿
+@{
+    ViewBag.Title = "AgregarSalidaControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ingresar Salida Controlador <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Tipo Nodo Salida<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control" id="TipoNodo_salida">
+                                    <option selected value="0"> Seleccione Tipo Nodo</option>
+                                    <option value="1">DEPOSITO</option>
+                                    <option value="2">ANTEPUERTO</option>
+                                    <option value="3">PUERTO</option>
+                                    <option value="4">LABORATORIO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                País<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control">
+                                    <option selected> Seleccione País</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Nodo Salida<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control Nodo_salida" id="Nodo_salida" disabled>
+                                    <option selected value="0">Seleccione Nodo</option>
+                                    <option value="1">NODO 1</option>
+                                    <option value="2">NODO 2</option>
+                                    <option value="3>NODO 3</option>
+                                    <option value="4">NODO 4</option>
+                                    <option value="5">NODO 5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Transporte <span class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select id="TipoTransporte" class="custom-select form-control">
+                                    <option value="0">Seleccione Tipo Transporte</option>
+                                    <option value="1">AEREO</option>
+                                    <option value="2">MARITIMO</option>
+                                    <option value="3">TERRESTRE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Entidad <span class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select id="Entidad" class="custom-select form-control">
+                                    <option value="0">Seleccione Entidad Transportadora</option>
+                                    <option value="1">COURIER</option>
+                                    <option value="2">FREIGHTFORWARDER</option>
+                                    <option value="3">NAVIERA</option>
+                                    <option value="4">OTRO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 Courier" id="div_courier" hidden>
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Courier <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select id="Courier" class="custom-select form-control">
+                                    <option selected>Seleccione Courier</option>
+                                    <option value="1">BLUEX</option>
+                                    <option value="2">CHILEXPRESS</option>
+                                    <option value="3">DHL</option>
+                                    <option value="4">TLC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 Naviera" id="div_naviera" hidden>
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Naviera <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select id="Courier" class="custom-select form-control">
+                                    <option selected>Seleccione Naviera</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 FreightForwarder" id="div_ff" hidden>
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                FreightForwarder <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select id="Courier" class="custom-select form-control">
+                                    <option selected>Seleccione FreightForwarder</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 Transportista" id="div_transportista" hidden>
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Transportista<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <input type="text" value="" class="form-control" id="transportista" placeholder="Ingrese Transportista" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Fecha Recepción<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <input type="text" name="fecha_recepcion" id="fecha_recepcion" class="form-control" placeholder="Ingrese Fecha Recepción">
+                            </div>
+                        </div>
+                        <div class="Aereo" id="div_aereo" hidden>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    AWB<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="AWB" id="AWB" class="form-control" placeholder="Ingrese AWB">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Fecha AWB<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="FechaAWB" id="FechaAWB" class="form-control" placeholder="Ingrese Fecha AWB">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Maritimo" id="div_maritimo" hidden>
+                            <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Ticket Marítimo<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="TicketMaritimo" id="TicketMaritimo" class="form-control" placeholder="Ingrese Ticket Maritimo">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12 Maritimo">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Fecha Ticket<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="FechaMaritimo" id="FechaMaritimo" class="form-control" placeholder="Ingrese Fecha de Ticket">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Terrestre" id="div_terrestre" hidden>
+                            <div class="col-md-4 col-sm-4 col-xs-12 Terrestre">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Guía Envío<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="GuiaEnvio" id="GuiaEnvio" class="form-control" placeholder="Ingrese Numero de Guia">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12 Terrestre">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                    Fecha Guía<span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-6">
+                                    <input type="text" name="FechaGuia" id="FechaGuia" class="form-control" placeholder="Ingrese Fecha de Guia">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Tipo Nodo Entrada<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control" id="TipoNodo_entrada">
+                                    <option selected value="0"> Seleccione Tipo Nodo</option>
+                                    <option value="1">DEPOSITO</option>
+                                    <option value="2">ANTEPUERTO</option>
+                                    <option value="3">PUERTO</option>
+                                    <option value="4">LABORATORIO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                País<span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control">
+                                    <option selected> Seleccione País</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-6">
+                                Nodo Entrada<span class="required">*</span>
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-6">
+                                <select class="form-control Nodo_entrada" id="Nodo_entrada" disabled>
+                                    <option selected value="0">Seleccione Nodo</option>
+                                    <option value="1">NODO 1</option>
+                                    <option value="2">NODO 2</option>
+                                    <option value="3>NODO 3</option>
+                                    <option value="4">NODO 4</option>
+                                    <option value="5">NODO 5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <table id="Tb_Controlador" class="table table-striped table-bordered" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Controlador (ESN)</th>
+                                    <th>Tipo Nodo Salida</th>
+                                    <th>Nodo Salida</th>
+                                    <th>Fecha Salida</th>
+                                    <th>Tipo Nodo Entrada</th>
+                                    <th>Nodo Entrada</th>
+                                    <th>Fecha Entrada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>8DB55642K0</td>
+                                    <td>LABORATORIO</td>
+                                    <td>LABORATORIO</td>
+                                    <td>21-12-2017</td>
+                                    <td>PUERTO ORIGEN</td>
+                                    <td>VALPARAISO</td>
+                                    <td>28-12-2017</td>
+                                </tr>
+                                <tr>
+                                    <td>8DB55642K0</td>
+                                    <td>LABORATORIO</td>
+                                    <td>LABORATORIO</td>
+                                    <td>21-12-2017</td>
+                                    <td>PUERTO ORIGEN</td>
+                                    <td>VALPARAISO</td>
+                                    <td>28-12-2017</td>
+                                </tr>
+                                <tr>
+                                    <td>8DB55642K0</td>
+                                    <td>LABORATORIO</td>
+                                    <td>LABORATORIO</td>
+                                    <td>21-12-2017</td>
+                                    <td>PUERTO ORIGEN</td>
+                                    <td>VALPARAISO</td>
+                                    <td>28-12-2017</td>
+                                </tr>
+                                <tr>
+                                    <td>8DB55642K0</td>
+                                    <td>LABORATORIO</td>
+                                    <td>LABORATORIO</td>
+                                    <td>21-12-2017</td>
+                                    <td>PUERTO ORIGEN</td>
+                                    <td>VALPARAISO</td>
+                                    <td>28-12-2017</td>
+                                </tr>
+                                <tr>
+                                    <td>8DB55642K0</td>
+                                    <td>LABORATORIO</td>
+                                    <td>LABORATORIO</td>
+                                    <td>21-12-2017</td>
+                                    <td>PUERTO ORIGEN</td>
+                                    <td>VALPARAISO</td>
+                                    <td>28-12-2017</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Controlador (ESN)</th>
+                                    <th>Tipo Nodo Salida</th>
+                                    <th>Nodo Salida</th>
+                                    <th>Fecha Salida</th>
+                                    <th>Tipo Nodo Entrada</th>
+                                    <th>Nodo Entrada</th>
+                                    <th>Fecha Entrada</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                                Controladores (ESN)<span class="required">*</span>
+                            </label>
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                <input type="text" name="n_controlador" id="Controlador" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-lg btn-success pull-right">Generar Salida Controladores Seleccionados</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+   
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+
+        $("#TipoNodo_entrada").change(function () {
+            if ($("#TipoNodo_entrada").val() == "0") {
+                $("#Nodo_entrada").attr("disabled", "disabled");
+            } else {
+                $(".Nodo_entrada").removeProp('disabled');
+            }
+        });
+
+        $("#TipoNodo_salida").change(function () {
+            if ($("#TipoNodo_salida").val() == "0") {
+                $("#Nodo_salida").attr("disabled", "disabled");
+            } else {
+                $(".Nodo_salida").removeProp('disabled');
+            }
+        });
+
+        $('#Tb_Controlador tfoot th').each(function () {
+            var title = $(this).text();
+            if (title == "Tipo Nodo Salida" || title == "Tipo Nodo Entrada" || title == "Damage Report" || title == "Vencido") {
+                $(this).html('<select id="' + title.replace(/\s/g, '') + '" class="form-control" style="margin: 0.5em 0;"><option selected>Seleccione</option></select>');
+            } else {
+                $(this).html('<input class="form-control" type="text" placeholder="Buscar" />');
+            }
+
+        });
+
+        var table = $('#Tb_Controlador').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel'
+            ]
+        });
+
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+
+            $('select', this.footer()).on('change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+    $('#Entidad').change(function () {
+        var valor = $(this).val();
+
+        if (valor == 1) {
+            $(".Courier").show();
+            $(".Naviera").hide();
+            $(".FreightForwarder").hide();
+            $(".Transportista").hide();
+        } else if (valor == 2) {
+            $(".Courier").hide();
+            $(".Naviera").hide();
+            $(".FreightForwarder").show();
+            $(".Transportista").hide();
+        } else if (valor == 3) {
+            $(".Courier").hide();
+            $(".Naviera").show();
+            $(".FreightForwarder").hide();
+            $(".Transportista").hide();
+        } else if( valor == 4)  {
+            $(".Courier").hide();
+            $(".Naviera").hide();
+            $(".FreightForwarder").hide();
+            $(".Transportista").show();
+        }else {
+            $(".Courier").hide();
+            $(".Naviera").hide();
+            $(".FreightForwarder").hide();
+            $(".Transportista").hide();
+        }
+    });
+
+    $('#TipoTransporte').change(function () {
+        var valor = $(this).val();
+
+        if (valor == 1) {
+            $(".Aereo").show();
+            $(".Maritimo").hide();
+            $(".Terrestre").hide();
+        } else if (valor == 2) {
+            $(".Aereo").hide();
+            $(".Maritimo").show();
+            $(".Terrestre").hide();
+        } else if (valor == 3) {
+            $(".Aereo").hide();
+            $(".Maritimo").hide();
+            $(".Terrestre").show();
+        } else {
+            $(".Aereo").hide();
+            $(".Maritimo").hide();
+            $(".Terrestre").hide();
+        }
+    });
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#recuperacion').click(function () {
+            if ($(this).is(':checked')) {
+                MostrarRetrieval();
+            }
+            else {
+                OcultarRetrieval();
+            }
+        });
+    });
+
+    function MostrarRetrieval() {
+        document.getElementById("div2").style.visibility = "visible";
+    }
+
+    function OcultarRetrieval() {
+        document.getElementById("div2").style.visibility = "hidden";
+    }
+
+    function ValidarFormulario() {
+        var Booking = $("#Booking").val();
+        var Nave = $("#Nave").val();
+        var Naviera = $("#Naviera").val();
+        var Exportador = $("#Exportador").val();
+        var Producto = $("#Producto").val();
+        var Destino = $("#Destino").val();
+        var Origen = $("#Origen").val();
+        var Contenedor = $("#Contenedor").val();
+        var Viaje = $("#Viaje").val();
+        var Eta = $("#Eta").val();
+        var Etd = $("#Etd").val();
+        var CantidadCo = $("#C02").val();
+        var CantidadO = $("#O2").val();
+        var Temperatura = $("#Temperatura").val();
+        var Tamano = $("#TamContenedor").val();
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Nave == "") {
+            swal('Error...', 'Campo Nave Obligatorio', 'error')
+        } else if (Naviera == "") {
+            swal('Error...', 'Campo Naviera Obligatorio', 'error')
+        } else if (Exportador == "") {
+            swal('Error...', 'Campo Exportador Obligatorio', 'error')
+        } else if (Producto == "") {
+            swal('Error...', 'Campo Producto Obligatorio', 'error')
+        } else if (Destino == "") {
+            swal('Error...', 'Campo Destino Obligatorio', 'error')
+        } else if (Origen == "") {
+            swal('Error...', 'Campo Origen Obligatorio', 'error')
+        } else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        } else if (Viaje == "") {
+            swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        } else if (Eta == "") {
+            swal('Error...', 'Campo Eta Obligatorio', 'error')
+        } else if (Etd == "") {
+            swal('Error...', 'Campo Etd Obligatorio', 'error')
+        } else if (CantidadCo == "") {
+            swal('Error...', 'Campo CantidadCo2 Obligatorio', 'error')
+        } else if (CantidadO == "") {
+            swal('Error...', 'Campo CantidadO2 Obligatorio', 'error')
+        } else if (Temperatura == "") {
+            swal('Error...', 'Campo Temperatura Obligatorio', 'error')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/IngresarDatos",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Nave: Nave,
+                Naviera: Naviera,
+                Exportador: Exportador,
+                Producto: Producto,
+                Destino: Destino,
+                Origen: Origen,
+                Viaje: Viaje,
+                FechaArribo: Eta,
+                FechaSalida: Etd,
+                CantidadCO: CantidadCo,
+                CantidadO: CantiadO,
+                Temperatura: Temperatura,
+                Tamano: Tamano
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Has introducido un nuevo coche!!');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    $(function () {
+        $("#fecha_entrega").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#fecha_entrega").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#FechaMaritimo").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+        $("#FechaGuia").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+        $("#FechaAWB").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>
+

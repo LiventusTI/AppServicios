@@ -1,0 +1,2233 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarReservasLeaktest";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="col-sm-12">
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="gestionarsolicitud">Gestionar Solicitudes y Resultados</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 class="tr" key="filtrofechas">Filtro de Fechas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <select class="selectpicker form-control" data-live-search="true" id="Filtro">
+                                    <option value="0" class="tr" key="filtrarpor">FILTER BY ...</option>
+                                    <option value="1" class="tr" key="filtrarcrear">DATE CREATION REQUEST</option>
+                                    <option value="2" class="tr" key="filtrarejecución">ESTIMATED DATE EXECUTION</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Fecha_inicio" class="control-label tr" key="fechainicio">Fecha Inicio</label>
+                                <input type="text" autocomplete="off" class="form-control" id="Fecha_inicio" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Fecha_termino" class="control-label tr" key="entre">Entre</label>
+                                <input type="text" autocomplete="off" class="form-control" id="Fecha_termino" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary tr" key="filtrar" id="FiltroFechas">Filtrar</button>
+                        <button class="btn btn-warning tr" key="limpiar" id="Limpiar">Limpiar</button>
+                    </div>
+                </div>
+            </div>                         
+            <div class="x_panel">
+                <table id="Tb_ReservasLeaktest" class="table table-striped table-bordered display nowrap">
+                    <thead>
+                        <tr>
+                            <th class="tr" key="idsolicitud">ID SOLICITUD</th>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                            <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                            <th class="tr" key="navierasolicitud">NAVIERA</th>
+                            <th class="tr" key="tiposolicitud">TIPO SOLICITUD</th>
+                            <th class="tr" key="cantidadsolicitudaprobar">CANTIDAD POR APROBAR</th>
+                            <th class="tr" key="cantidadsolicitudcontenedores">CANTIDAD POR CONTENEDORES</th>
+                            <th class="tr" key="RealizadosLeaktest">REALIZADOS</th>
+                            <th class="tr" key="creacionsolicitud">FECHA CREACION SOLICITUD</th>
+                            <th class="tr" key="ejecucionsolicitud">FECHA ESTIMADA EJECUCION SOLICITUD</th>
+                            <th class="tr" key="horasolicitud">HORA EJECUCION</th>
+                            <th class="tr" key="scrubbersolicitud">LLEVA SCRUBBER</th>
+                            <th class="tr" key="cantidudadscrubbersolicitud">C/SCRUBBER</th>
+                            <th class="tr" key="ComentariosLeaktest">COMENTARIOS</th>
+                            <th class="tr" key="estadosolicitud">ESTADO SOLICITUD</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                            <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                            <th class="tr" key="navierasolicitud">NAVIERA</th>                           
+                            <th class="tr" key="tiposolicitud">TIPO SOLICITUD</th>
+                            <th class="tr" key="cantidadsolicitudaprobar">CANTIDAD POR APROBAR</th>
+                            <th class="tr" key="cantidadsolicitudcontenedores">CANTIDAD POR CONTENEDORES</th>
+                            <th class="tr" key="RealizadosLeaktest">REALIZADOS</th>
+                            <th class="tr" key="creacionsolicitud">FECHA CREACION SOLICITUD</th>
+                            <th class="tr" key="ejecucionsolicitud">FECHA ESTIMADA EJECUCION SOLICITUD</th>
+                            <th class="tr" key="horasolicitud">HORA EJECUCION</th>
+                            <th class="tr" key="scrubbersolicitud">LLEVA SCRUBBER</th>
+                            <th class="tr" key="cantidudadscrubbersolicitud">C/SCRUBBER</th>
+                            <th class="tr" key="ComentariosLeaktest">COMENTARIOS</th>
+                            <th class="tr" key="estadosolicitud">ESTADO SOLICITUD</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="tr" key="idsolicitud">ID SOLICITUD</th>
+                            <th class="tr" key="paissolicitud">PAIS</th>
+                            <th class="tr" key="ciudadsolicitud">CIUDAD</th>
+                            <th class="tr" key="depositosolicitud">DEPOSITO</th>
+                            <th class="tr" key="navierasolicitud">NAVIERA</th>
+                            <th class="tr" key="tiposolicitud">TIPO SOLICITUD</th>
+                            <th class="tr" key="cantidadsolicitudaprobar">CANTIDAD POR APROBAR</th>
+                            <th class="tr" key="cantidadsolicitudcontenedores">CANTIDAD POR CONTENEDORES</th>
+                            <th class="tr" key="RealizadosLeaktest">REALIZADOS</th>
+                            <th class="tr" key="creacionsolicitud">FECHA CREACION SOLICITUD</th>
+                            <th class="tr" key="ejecucionsolicitud">FECHA ESTIMADA EJECUCION SOLICITUD</th>
+                            <th class="tr" key="horasolicitud">HORA EJECUCION</th>
+                            <th class="tr" key="scrubbersolicitud">LLEVA SCRUBBER</th>
+                            <th class="tr" key="cantidudadscrubbersolicitud">C/SCRUBBER</th>
+                            <th class="tr" key="ComentariosLeaktest">COMENTARIOS</th>
+                            <th class="tr" key="estadosolicitud">ESTADO SOLICITUD</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="IdReserva" class="control-label tr" key="idsolicitud">ID SOLICITUD</label>
+                            <input type="text" class="form-control" id="IdReserva" disabled="disabled" style="text-align:center; text-align-last:center;" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col-lg-11 col-lg-offset-1">
+                    <button type="button" class="btn btn-primary tr editar" id="EditarReserva" key="botoneditar" style="margin-bottom: 0px;">Editar Solicitud</button>
+                    <button type="button" class="btn btn-info tr detalle" id="DetalleReserva" key="botondetalle" style="margin-bottom: 0px;">Detalle Solicitud</button>
+                    <button type="button" class="btn btn-danger tr cancelar" id="CancelarReserva" key="botoncancelar" style="margin-bottom: 0px;">Cancelar Solicitud</button>
+                    <button type="button" class="btn btn-warning tr" id="LeaktestReport" key="botonleaktestreport" style="margin-bottom: 0px;">Generar Leak test Report</button>
+                    <button type="button" class="btn btn-success tr" id="AgregarResultados" key="botonresultados" style="margin-bottom: 0px;">Gestionar / Agregar Resultados</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para visualizar detalle de la reserva de leaktest-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog" role="document" style="width:100%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tr" id="myModalLabel" key="titulodetallereserva"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row poraprobar" hidden="hidden">
+                        <div class="col-lg-3 col-md-3 col-sm-3 divmaquinaria">
+                            <h4 class="tr" key="maquinariatabla">MAQUINARIA</h4>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Maquinaria0" readonly hidden="hidden" style="display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Maquinaria1" readonly hidden="hidden" style="display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Maquinaria2" readonly hidden="hidden" style="display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Maquinaria3" readonly hidden="hidden" style="display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Maquinaria4" readonly hidden="hidden" style="display:none;">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 divcantidad">
+                            <h4 class="tr" key="cantidadaprobar">CANTIDAD A APROBAR</h4>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Cantidad0" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Cantidad1" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Cantidad2" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Cantidad3" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Cantidad4" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 divrealizados">
+                            <h4 class="tr" key="totalrealizados">TOTAL REALIZADOS</h4>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Realizados0" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Realizados1" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Realizados2" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Realizados3" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Realizados4" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 divaprobados">
+                            <h4 class="tr" key="totalaprobados">TOTAL APROBADOS</h4>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Aprobados0" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Aprobados1" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Aprobados2" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Aprobados3" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Aprobados4" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 divrechazados">
+                            <h4 class="tr" key="totalrechazados">TOTAL RECHAZADOS</h4>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Rechazados0" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Rechazados1" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Rechazados2" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Rechazados3" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="Rechazados4" readonly style="text-align:center; text-align-last:center; display:none;">
+                            </div>
+                        </div>
+                        <div class="row" id="MotivoReserva" style="display:none;">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4>Motivo de Reserva Cancelada</h4>
+                                <textarea id="MotivoCancelacion" class="form-control" readonly style="width:100%; resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row porcontenedores" hidden="hidden">
+                        <table id="DetalleContenedores" class="table table-striped table-bordered display nowrap" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ID CONTENEDOR</th>
+                                    <th>CONTENEDOR</th>
+                                    <th>MAQUINARIA</th>
+                                    <th>ESTADO</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <h4>Contenedores con scrubber</h4>
+                            <input type="number" class="form-control" id="CantidadScrubber" readonly style="text-align:center; text-align-last:center;">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger tr" data-dismiss="modal" key="cerrardetalle">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para visualizar detalle de la reserva de leaktest-->
+    <!--Modal para editar datos de la reserva de leaktest-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left:80px; margin-right:10px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="width:100%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label alerta" key="naviera">Naviera(*)</label>
+                                    <select class="selectpicker form-control col-md-7 col-xs-12" data-live-search="true" id="Naviera"></select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label tr" key="pais">País</label>
+                                    <select class="selectpicker form-control col-md-7 col-xs-12" data-live-search="true" id="Pais"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label tr" key="ciudad">Ciudad</label>
+                                    <select class="selectpicker form-control col-md-7 col-xs-12" data-live-search="true" id="Ciudad"></select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label tr" key="deposito">Deposito (*)</label>
+                                    <select class="selectpicker form-control col-md-7 col-xs-12" data-live-search="true" id="Deposito"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label tr" key="eta">Fecha Estimada (*)</label>
+                                    <input type="text" name="Stacking" id="FechaEstimada" class="form-control col-md-7 col-xs-12" autocomplete="off">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                    <label class="control-label tr" key="horaejecucion">Hora Ejecución</label>
+                                    <input type="time" name="Hora" id="Hora" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center">
+                                        <label class="control-label tr" key="cantidadscrubber">Cantidad scrubber</label>
+                                        <input type="number" name="CantidadScrubber" id="CantidadScrubberEditar" class="form-control" style="margin: 4px 0 0;" placeholder="Ingrese Cantidad Scrubber" />
+                                    </div>
+                                </div>
+                            </div>
+                        <br />
+                        <div class="poraprobar" hidden="hidden">
+                            <div class="row" id="div_ingreso0" hidden="hidden">
+                                <div class="form-group">
+                                    <label id="lb_tipo_contenedor" class="control-label col-sm-1 tr" key="maquinariacontenedor">Maquinaria</label>
+                                    <div class="col-sm-3">
+                                        <select class="custom-select form-control Maquinaria" id="Maquinariaeditar0" disabled>
+                                            <option value="0" class="tr" key="Seleccionemaquinaria">Seleccione Maquinaria</option>
+                                        </select>
+                                    </div>
+                                    <label id="lb_contenedor" class="control-label col-sm-2 tr" key="reservados">Reservados</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" min="1" id="contenedoreseditar0" class="form-control">
+                                    </div>
+                                    <label id="Realizados" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                                    <div class="col-sm-1">
+                                        <input type="number" class="form-control" id="realizadoseditar0" style="text-align:center; text-align-last:center;" value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div_ingreso1" class="row" hidden="hidden">
+                                <div class="form-group">
+                                    <label id="lb_tipo_contenedor" class="control-label col-sm-1 tr" key="maquinariacontenedor">Maquinaria</label>
+                                    <div class="col-sm-3">
+                                        <select class="custom-select form-control Maquinaria1" id="Maquinariaeditar1">
+                                            <option value="0" class="tr" key="Seleccionemaquinaria">Seleccione Maquinaria</option>
+                                        </select>
+                                    </div>
+                                    <label id="lb_contenedor" class="control-label col-sm-2 tr" key="reservados">Reservados</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" min="1" id="contenedoreseditar1" class="form-control">
+                                    </div>
+                                    <label id="Realizados" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                                    <div class="col-sm-1">
+                                        <input type="number" class="form-control" id="realizadoseditar1" style="text-align:center; text-align-last:center;" value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div_ingreso2" class="row" hidden="hidden">
+                                <div class="form-group">
+                                    <label id="lb_tipo_contenedor" class="control-label col-sm-1 tr" key="maquinariacontenedor">Maquinaria</label>
+                                    <div class="col-sm-3">
+                                        <select class="custom-select form-control Maquinaria2" id="Maquinariaeditar2">
+                                            <option value="0" class="tr" key="Seleccionemaquinaria">Seleccione Maquinaria</option>
+                                        </select>
+                                    </div>
+                                    <label id="lb_contenedor" class="control-label col-sm-2 tr" key="reservados">Reservados</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" min="1" id="contenedoreseditar2" class="form-control">
+                                    </div>
+                                    <label id="Realizados" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                                    <div class="col-sm-1">
+                                        <input type="number" class="form-control" id="realizadoseditar2" style="text-align:center; text-align-last:center;" value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div_ingreso3" class="row" hidden="hidden">
+                                <div class="form-group">
+                                    <label id="lb_tipo_contenedor" class="control-label col-sm-1 tr" key="maquinariacontenedor">Maquinaria</label>
+                                    <div class="col-sm-3">
+                                        <select class="custom-select form-control Maquinaria3" id="Maquinariaeditar3">
+                                            <option value="0" class="tr" key="Seleccionemaquinaria">Seleccione Maquinaria</option>
+                                        </select>
+                                    </div>
+                                    <label id="lb_contenedor" class="control-label col-sm-2 tr" key="reservados">Reservados</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" min="1" id="contenedoreseditar3" class="form-control">
+                                    </div>
+                                    <label id="Realizados" class="control-label col-sm-2 tr" key="cantidad">Cantidad</label>
+                                    <div class="col-sm-1">
+                                        <input type="number" class="form-control" id="realizadoseditar3" style="text-align:center; text-align-last:center;" value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="porcontenedores">
+                            <table class="table table-bordered table-hover" id="tab_logic">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center tr" key="contenedortabla">Número Contenedor</th>
+                                        <th class="text-center tr" key="maquinariatabla">Maquinaria</th>
+                                        <th class="text-center tr" key="estadotabla">Estado</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="botonporaprobar" hidden="hidden">
+                        <button type="button" class="btn btn-success tr" id="EditarReservaLeaktest" key="botoneditar">Editar Solicitud Leak test</button>
+                    </div>
+                    <div class="botonporcontenedores" hidden="hidden">
+                        <button type="button" class="btn btn-success tr" id="EditarReservaLeaktestContenedores" key="botoneditar">Editar Solicitud Leak test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal para editar datos de la reserva de leaktest-->
+</div>
+
+<input type="text" class="input form_control" id="Estado" disabled="disabled" placeholder="ESTADO" style="text-align:center; text-align-last:center;" hidden />
+<input type="text" class="input form_control" id="TipoReserva" disabled="disabled" placeholder="ESTADO" style="text-align:center; text-align-last:center;" hidden />
+<input type="text" class="input form_control" id="NavieraReporte" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+<input type="text" class="input form_control" id="DepositoReporte" disabled="disabled" style="text-align:center; text-align-last:center;" hidden />
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="Detalles" style="display:none;"></button>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" id="Editar" style="display:none;"></button>
+
+<script src="~/build/js/Perfiles.js"></script>
+<script src="~/build/js/PerfilGestionSolicitudLeaktest.js"></script>
+
+<script type="text/javascript">
+    var lenguaje = getCookie("Lenguaje");
+
+    $(document).ready(function () {
+        $('#Tb_ReservasLeaktest thead tr:eq(1) th').each(function (i) {
+            var title = $('#example thead tr:eq(0) th').eq($(this).index()).text();
+                $(this).html('<input type="text" class="form-control" placeholder="FILTER" data-index="' + i + '"/>');
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetLeaktest", "Leaktest")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.Reservas.length;
+                var estadoscrubber = "";
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json.Reservas[i].CantidadScrubber != 0) {
+                        estadoscrubber = "SI";
+                    } else {
+                        estadoscrubber = "NO";
+                    }
+
+                    if (json.Reservas[i].FechaEstimadaRealizacion != null) {
+                        var fechaestimada = formatDate(json.Reservas[i].FechaEstimadaRealizacion);
+                    } else
+                    {
+                        var fechaestimada = "";
+                    }
+                    var fecharegistro = formatDate(json.Reservas[i].FechaRegistro);
+                    
+                    if (json.Reservas[i].TipoReserva.trim() == "TO PERFORM") {
+                        data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                    json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(),
+                                    json.CantidadTotal[i], json.CantidadPorContenedores[i],json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber,json.Reservas[i].Comentario, json.Estado[i]]);
+                    } else if (json.Reservas[i].TipoReserva.trim() == "TO BE APPROVED") {
+                        data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                            json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), json.CantidadTotal[i], 0, json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                    } else {
+                        data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                            json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), 0, json.CantidadPorContenedores[i], json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                    }
+                }
+
+                if (lenguaje == "es") {
+
+                    $("#FechaEstimada,#Fecha_inicio,#Fecha_termino").datepicker({
+                        dateFormat: "dd-mm-yy",
+                        firstDay: 1,
+                        dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                        dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                        monthNames:
+                            ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                        monthNamesShort:
+                            ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                            "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                        showWeek: true
+                    });
+
+                    var table = $('#Tb_ReservasLeaktest').DataTable({
+                        data: data,
+                        "language": {
+                            "lengthMenu": "Mostrar _MENU_ Resultados por pagina",
+                            "zeroRecords": "No hay Resultados para mostrar",
+                            "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                            "infoEmpty": "No hay Resultados disponibles",
+                            "search": "Buscar: ",
+                            "paginate": {
+                                "first": "Primera",
+                                "last": "Última",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            }
+                        },
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        scrollY:        "500px",
+                        scrollX:        true,
+                        scrollCollapse: true,
+                        paging:         false,
+                        orderCellsTop: true,
+                        "rowCallback": function (row, data, index) {
+                            if (data[15] == "FINISHED LEAK TEST REQUEST") {
+                                $('td', row).css("background-color", "RGB(144, 238, 144)");
+                            } else if ((data[15] == "LEAK TEST REQUEST PENDING OUT TIME" || data[15] == "LEAK TEST REQUEST PENDING ON TIME") && data[8] != 0) {
+                                $('td', row).css("background-color", "RGB(135, 206, 250)");
+                            } else if (data[15] == "CANCELLED LEAK TEST REQUEST") {
+                                $('td', row).css("background-color", "RGB(255,255,0)");
+                            }
+                        },
+                        "footerCallback": function (row, data, start, end, display) {
+                            var api = this.api(), data;
+
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function (i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+                            // Total over all pages
+                            total = api
+                                .column(6)
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0);
+
+                            // Total over this page
+                            pageTotal = api
+                                .column(6, { page: 'current' })
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0);
+
+                            // Update footer
+                            $(api.column(6).footer()).html(
+                                pageTotal + ' (' + total + ' CONTENEDORES)'
+                            );
+
+                            var intVal1 = function (i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total1 = api
+                                .column(7)
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal1(a) + intVal1(b);
+                                }, 0);
+
+                            // Total over this page
+                            pageTotal1 = api
+                                .column(7, { page: 'current' })
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal1(a) + intVal1(b);
+                                }, 0);
+
+                            // Update footer
+                            $(api.column(7).footer()).html(
+                                pageTotal1 + ' (' + total1 + ' CONTENEDORES)'
+                            );
+
+                            var intVal2 = function (i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total2 = api
+                                .column(8)
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal2(a) + intVal2(b);
+                                }, 0);
+
+                            // Total over this page
+                            pageTotal2 = api
+                                .column(8, { page: 'current' })
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal2(a) + intVal2(b);
+                                }, 0);
+
+                            // Update footer
+                            $(api.column(8).footer()).html(
+                                pageTotal1 + ' (' + total1 + ' REALIZADOS)'
+                            );
+                        }
+                    });
+                } else {
+                    $("#FechaEstimada,#Fecha_inicio,#Fecha_termino").datepicker({
+                        dateFormat: "dd-mm-yy",
+                        firstDay: 1,
+                        showWeek: true
+                    });
+                    var table = $('#Tb_ReservasLeaktest').DataTable({
+                        data: data,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel'
+                        ],
+                        scrollY: "500px",
+                        scrollX: true,
+                        scrollCollapse: true,
+                        paging: false,
+                        orderCellsTop: true,
+                        "rowCallback": function (row, data, index) {
+                            var validar = 0;
+                            if (data[15] == "FINISHED LEAK TEST REQUEST") {
+                                $('td', row).css("background-color", "RGB(144, 238, 144)");
+                            } else if ((data[15] == "LEAK TEST REQUEST PENDING OUT TIME" || data[15] == "LEAK TEST REQUEST PENDING ON TIME") && data[8] != 0) {
+                                $('td', row).css("background-color", "RGB(135, 206, 250)");
+                            } else if (data[15] == "CANCELLED LEAK TEST REQUEST") {
+                                $('td', row).css("background-color", "RGB(255,255,0)");
+                            }
+                        },
+                        "footerCallback": function (row, data, start, end, display) {
+                            var api = this.api(), data;
+
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function (i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+                            // Total over all pages
+                            total = api
+                                .column(6)
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0);
+
+                            // Total over this page
+                            pageTotal = api
+                                .column(6, { page: 'current' })
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0);
+
+                            // Update footer
+                            $(api.column(6).footer()).html(
+                                pageTotal + ' (' + total + ' CONTAINERS)'
+                            );
+
+                            var intVal1 = function (i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total1 = api
+                                .column(7)
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal1(a) + intVal1(b);
+                                }, 0);
+
+                            // Total over this page
+                            pageTotal1 = api
+                                .column(7, { page: 'current' })
+                                .data()
+                                .reduce(function (a, b) {
+                                    return intVal1(a) + intVal1(b);
+                                }, 0);
+
+                            // Update footer
+                            $(api.column(7).footer()).html(
+                                pageTotal1 + ' (' + total1 + ' CONTAINERS)'
+                            );
+                        }
+                    });
+                }
+
+                $(table.table().container()).on('keyup', 'thead input', function () {
+                    table
+                        .column($(this).data('index'))
+                        .search(this.value)
+                        .draw();
+                });
+
+                $('#Tb_ReservasLeaktest tbody').on('click', 'tr', function () {
+                    if (cuenta != 0) {
+                        if ($(this).hasClass('selected')) {
+                            $("#IdReserva").val(this.children[0].innerText);
+                            $("#NavieraReporte").val(this.children[4].innerText);
+                            $("#DepositoReporte").val(this.children[3].innerText);
+                            $("#TipoReserva").val(this.children[5].innerText.trim());
+                            $("#Estado").val(this.children[15].innerText);
+                            $(this).removeClass('selected');
+                        }
+                        else {
+                            table.$('tr.selected').removeClass('selected');
+                            $("#IdReserva").val(this.children[0].innerText);
+                            $("#NavieraReporte").val(this.children[4].innerText);
+                            $("#DepositoReporte").val(this.children[3].innerText);
+                            $("#TipoReserva").val(this.children[5].innerText.trim());
+                            $("#Estado").val(this.children[15].innerText);
+                            $(this).addClass('selected');
+                        }
+                    }
+                });
+            },
+        });
+
+    });
+
+
+
+    $("#EditarReserva").click(function () {
+
+        if ($("#IdReserva").val() == "") {
+            swal('Ups!', '<span class="alerta" key="erroreditarsolicitudvacio">Debe Seleccionar una Reserva para Editarla</span>', 'error');
+            return false;
+        }
+
+        if ($("#Estado").val() == "CANCELLED LEAK TEST REQUEST") {
+            swal('Ups!', '<span class="alerta" key="erroreditarsolicitudcancelada">No puede Editar una Reserva que ha Sido Cancelada</span>', 'error');
+            return false;
+        }
+
+        //OBTENER NAVIERAS
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetNavierasActivas", "Naviera")',
+            async: false,
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Naviera').empty();
+                if(lenguaje == "es"){
+                    optionsAsString += "<option value='0'>Seleccione Naviera</option>";
+                }else{
+                    optionsAsString += "<option value='0'>Select Shipping Line</option>";
+                }
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Naviera').append(optionsAsString);
+                $('#Naviera').selectpicker('refresh');
+            },
+        });
+        //OBTENER NAVIERAS
+
+        //OBTENER MAQUINARIAS
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+            async: false,
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Maquinariaeditar0').empty();
+                $('#Maquinariaeditar1').empty();
+                $('#Maquinariaeditar2').empty();
+                $('#Maquinariaeditar3').empty();
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Maquinariaeditar0').append(optionsAsString);
+                $('#Maquinariaeditar1').append(optionsAsString);
+                $('#Maquinariaeditar2').append(optionsAsString);
+                $('#Maquinariaeditar3').append(optionsAsString);
+            },
+        });
+        //OBTENER MAQUINARIAS
+
+        //OBTENER PAISES
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetPaisesActivos", "Paises")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Pais').empty();
+
+                if (lenguaje == "es") {
+                    optionsAsString += "<option value='0'>Seleccione País</option>";
+                } else {
+                    optionsAsString += "<option value='0'>Select Country</option>";
+                }
+
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                }
+                $('#Pais').append(optionsAsString);
+                $('#Pais').selectpicker('refresh');
+            },
+        });
+        //OBTENER PAISES
+
+        //OBTENER CIUDADES
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Ciudad').empty();
+                if (lenguaje == "es") {
+                    optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                } else {
+                    optionsAsString += "<option value='0'>Select City</option>";
+                }
+                for (var i = 0; i < cuenta; i++) {
+                    optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                }
+                $('#Ciudad').append(optionsAsString);
+                $('#Ciudad').selectpicker('refresh');
+            },
+        });
+        //OBTENER CIUDADES
+
+        //OBTENER DEPOSITOS
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: '@Url.Action("GetDepositosActivos", "Deposito")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('#Deposito').empty();
+
+                if (lenguaje == "es") {
+                    optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                } else {
+                    optionsAsString += "<option value='0'>Select Depot</option>";
+                }
+
+                if (cuenta != 0) {
+                    for (var i = 0; i < cuenta; i++) {
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                    }
+                    $('#Deposito').append(optionsAsString);
+                    $('#Deposito').selectpicker('refresh');
+                }
+            },
+        });
+        //OBTENER DEPOSITOS
+
+        //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+        $("#Pais").change(function () {
+            if ($("#Pais").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesPais", "Ciudad")',
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        var optionsAsString1 = "";
+                        if (cuenta != 0) {
+                            $('#Ciudad').empty();
+                            if (lenguaje == "es") {
+                                optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                            } else {
+                                optionsAsString += "<option value='0'>Select City</option>";
+                            }
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                            }
+                            $('#Ciudad').append(optionsAsString);
+                            $('#Ciudad').selectpicker('refresh');
+                        } else {
+                            $('#Ciudad').empty();
+                            if (lenguaje == "es") {
+                                optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                            } else {
+                                optionsAsString += "<option value='0'>Select City</option>";
+                            }
+                            $('#Ciudad').append(optionsAsString);
+                            $('#Ciudad').selectpicker('refresh');
+                            $('#Deposito').empty();
+                            if (lenguaje == "es") {
+                                optionsAsString1 += "<option value='0'>Seleccione Deposito</option>";
+                            } else {
+                                optionsAsString1 += "<option value='0'>Select Depot</option>";
+                            }
+                            $('#Deposito').append(optionsAsString1);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositoByPais", "Deposito")',
+                    data: { IdPais: $("#Pais").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        if (cuenta != 0) {
+                            $('#Deposito').empty();
+                            if (lenguaje == "es") {
+                                optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                            } else {
+                                optionsAsString += "<option value='0'>Select Depot</option>";
+                            }
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        } else {
+                            $('#Deposito').empty();
+                            if (lenguaje == "es") {
+                                optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                            } else {
+                                optionsAsString += "<option value='0'>Select Depot</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Ciudad').empty();
+                $('#Deposito').empty();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select City</option>";
+                        }
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                    },
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select Depot</option>";
+                        }
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            }
+        });
+        //OBTENER CIUDADES A PARTIR DE PAIS SELECCIONADO
+
+        //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+        $("#Ciudad").change(function () {
+            if ($("#Ciudad").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetInfoCiudad", "Ciudad")',
+                    data: { IdCiudad: $("#Ciudad").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        if (cuenta != 0) {
+                            $("#Pais").val(json[0].IdPais);
+                            $("#Pais").selectpicker('refresh');
+                        }
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositoCiudad", "Deposito")',
+                    data: { IdCiudad: $("#Ciudad").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Deposito').empty();
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select Depot</option>";
+                        }
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        } else {
+                            $('#Deposito').empty();
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $('#Deposito').empty();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select Depot</option>";
+                        }
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+            }
+        });
+        //OBTENER DEPOSITOS A PARTIR DE CIUDAD SELECCIONADA
+
+        //CARGAR DATOS SEGUN DEPOSITO
+        $("#Deposito").change(function () {
+            if ($("#Deposito").val() != "0") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetInfoDeposito", "Deposito")',
+                    data: { IdDeposito: $("#Deposito").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        if (cuenta != 0) {
+                            $("#Pais").val(json[0].IdPais);
+                            $("#Pais").selectpicker('refresh');
+                            $("#Ciudad").val(json[0].IdCiudad);
+                            $("#Ciudad").selectpicker('refresh');
+                        }
+                    },
+                });
+            } else {
+                $("#Pais").val(0);
+                $("#Pais").selectpicker('refresh');
+                $("#Ciudad").val(0);
+                $("#Ciudad").selectpicker('refresh');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDepositosActivos", "Deposito")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Deposito').empty();
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Deposito</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select Depot</option>";
+                        }
+                        if (cuenta != 0) {
+                            for (var i = 0; i < cuenta; i++) {
+                                optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombreCiudad + "</option>";
+                            }
+                            $('#Deposito').append(optionsAsString);
+                            $('#Deposito').selectpicker('refresh');
+                        }
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCiudadesActivas", "Ciudad")',
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        var optionsAsString = "";
+                        $('#Ciudad').empty();
+                        if (lenguaje == "es") {
+                            optionsAsString += "<option value='0'>Seleccione Ciudad</option>";
+                        } else {
+                            optionsAsString += "<option value='0'>Select City</option>";
+                        }
+                        for (var i = 0; i < cuenta; i++) {
+                            optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + " - " + json[i].NombrePais + "</option>";
+                        }
+                        $('#Ciudad').append(optionsAsString);
+                        $('#Ciudad').selectpicker('refresh');
+                    },
+                });
+            }
+        });
+        //CARGAR DATOS SEGUN DEPOSITO
+
+        if ($("#TipoReserva").val().trim() == "TO BE APPROVED") {
+                $("#div_ingreso0").hide();
+                $("#div_ingreso1").hide();
+                $("#div_ingreso2").hide();
+                $("#div_ingreso3").hide();
+                $(".poraprobar").show();
+                $(".botonporaprobar").show();
+                $(".porcontenedores").hide();
+                $(".botonporcontenedores").hide();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetReservaById", "Leaktest")',
+                    data: { IdReserva: $("#IdReserva").val() },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        var cuenta = 0;
+                        cuenta = json.length;
+                        $("#Naviera").val(json[0].IdNaviera);
+                        $('#Naviera').selectpicker('refresh');
+                        $("#FechaEstimada").val(formatDate(json[0].FechaEstimada));
+                        $("#Hora").val(json[0].Hora);
+                        $("#Deposito").val(json[0].IdDeposito);
+                        $('#Deposito').selectpicker('refresh');
+                        $("#CantidadScrubberEditar").val(json[0].CantidadScrubber);
+                        if (json[0].IdTipoReserva == 2) {
+                            var aux = true;
+                            $("#TipoReserva").val("TO BE APPROVED");
+                            for (i = 0 ; i < cuenta; i++){
+                                if (json[i].IdMaquinaria == 5) {
+                                    var aux = false;
+                                }
+                            }
+                            if (aux == true) {
+                                for (j = 0; j < cuenta; j++) {
+                                    $("#Maquinariaeditar" + j).val(json[j].IdMaquinaria);
+                                    $("#Maquinariaeditar" + j).prop('disabled', 'disabled');
+                                    $("#Maquinariaeditar" + j).selectpicker('refresh');
+                                    $("#realizadoseditar" + j).val(json[j].Aprobados);
+                                    $("#contenedoreseditar" + j).val(json[j].Cantidad);
+                                    $("#div_ingreso" + j).show();
+                                }
+                            } else {
+                                for (k = 0; k < cuenta; k++) {
+                                    if (json[k].IdMaquinaria == 5) {
+                                        $("#Maquinariaeditar" + k).val(json[k].IdMaquinaria);
+                                        $("#Maquinariaeditar" + k).prop('disabled', 'disabled');
+                                        $("#Maquinariaeditar" + k).selectpicker('refresh');
+                                        $("#realizadoseditar" + k).val(json[k].Aprobados);
+                                        $("#contenedoreseditar" + k).val(json[k].Cantidad);
+                                        $("#div_ingreso" + k).show();
+                                    }
+                                }
+                            }
+
+                        } else {
+                            $("#Maquinariaeditar0").val(json[cuenta - 1].IdMaquinaria);
+                            $("#Maquinariaeditar0").prop('disabled', 'disabled');
+                            $("#realizadoseditar0").val(json[cuenta - 1].Aprobados);
+                            $("#contenedoreseditar0").val(json[cuenta - 1].Cantidad);
+                            $("#div_ingreso").show();
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetReservaById", "Leaktest")',
+                    data: { IdReserva: $("#IdReserva").val() },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        $("#Naviera").val(json[0].IdNaviera);
+                        $('#Naviera').selectpicker('refresh');
+                        $("#FechaEstimada").val(formatDate(json[0].FechaEstimada));
+                        $("#Hora").val(json[0].Hora);
+                        $("#Deposito").val(json[0].IdDeposito);
+                        $("#Deposito").selectpicker('refresh');
+                        $("#CantidadScrubberEditar").val(json[0].CantidadScrubber);
+                    }
+                });
+                cargarcontenedores();
+                $(".poraprobar").hide();
+                $(".botonporaprobar").hide();
+                $(".porcontenedores").show();
+                $(".botonporcontenedores").show();
+        }
+
+        $('#Editar').trigger('click');
+    });
+    
+
+    function cargarcontenedores() {
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '@Url.Action("GetDetalleReservaContenedores", "Leaktest")',
+            data: { IdReserva: $("#IdReserva").val() },
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                for (var i = 0 ; i < cuenta ; i++) {
+                    if (json[i].IdEstado == 0) {
+                        var estado = "APROBADO";
+                    } else if (json[i].IdEstado == 1) {
+                        var estado = "RECHAZADO";
+                    } else {
+                        var estado = "NO REALIZADO";
+                    }
+                    $('#tab_logic').append('<tr id="addr' + (i) + '"></tr>');
+                    $('#addr' + i).html("<td><input name='name" + i + "' type='text' class='form-control input-md' value='" + json[i].Contenedor + "'/></td><td><select name='maquinaria" + i + "' class='form-control MaquinariaContenedorUnico" + i + "'></select></td><td><input name='estado" + i + "' type='text' class='form-control input-md' value='" + estado + "'/></td>");
+                    cargarMaquinaria(i, json[i].IdMaquinaria);
+                    $("#CantidadScrubber" + i).val(json[0].CantidadScrubber);
+                    //$(".MaquinariaContenedorUnico" + i).val(json[i].IdMaquinaria);
+                    $("input[name=estado" + i + "]").attr("disabled", "disabled");
+                    $("input[name=name" + i + "]").attr("disabled", "disabled");
+                    $(".MaquinariaContenedorUnico" + i).attr("disabled", "disabled");
+                }
+            }
+        });
+    }
+
+    function cargarMaquinaria(aux, maquinaria) {
+
+        //OBTENER MAQUINARIAS
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '@Url.Action("GetMaquinariasActivas", "Maquinaria")',
+            success: function (response) {
+                var data = [];
+                var json = JSON.parse(response);
+                var cuenta = json.length;
+                var optionsAsString = "";
+                $('.MaquinariaContenedorUnico' + aux).empty();
+                for (var i = 0; i < cuenta; i++) {
+                    if (json[i].Id != 5) {
+                        if (json[i].Id == maquinaria) {
+                            optionsAsString += "<option value='" + json[i].Id + "' selected>" + json[i].Nombre + "</option>";
+                        }
+                        optionsAsString += "<option value='" + json[i].Id + "'>" + json[i].Nombre + "</option>";
+                    }
+                }
+
+                $('.MaquinariaContenedorUnico' + aux).append(optionsAsString);
+            },
+        });
+        //OBTENER MAQUINARIAS
+    }
+
+    $("#DetalleReserva").click(function () {
+
+        for (var i = 0; i < 5; i++) {
+            $("#Maquinaria" + i).val(0);
+            $("#Maquinaria" + i).hide();
+            $("#Cantidad" + i).hide();
+            $("#Cantidad" + i).val(0);
+            $("#Realizados" + i).hide();
+            $("#Realizados" + i).val(0);
+            $("#Aprobados" + i).hide();
+            $("#Aprobados" + i).val(0);
+            $("#Rechazados" + i).hide();
+            $("#Rechazados" + i).val(0);
+        }
+        //enviar datos para agregar Naviera
+        if ($("#IdReserva").val() != "") {
+
+            if ($("#TipoReserva").val().trim() == "TO PERFORM") {
+                $("#Cantidad").text("CANTIDAD A REALIZAR");
+            } else {
+                $("#Cantidad").text("CANTIDAD A APROBAR");
+            }
+
+            if ($("#TipoReserva").val().trim() == "TO PERFORM" || $("#TipoReserva").val().trim() == "TO BE APPROVED") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DetalleReservaLeaktest", "Leaktest")',
+                    data: { IdReserva: $("#IdReserva").val() },
+                    success: function (response) {
+                        var json = JSON.parse(response);
+                        var cuenta = json.NombreMaquinaria.length;
+                        if (cuenta != 0) {
+
+                            $('#Detalles').trigger('click');
+                            var aprobadototal = 0;
+                            var rechazadototal = 0;
+
+                            for (var i = 0; i < cuenta; i++) {
+                                $("#Maquinaria" + i).show();
+                                $("#Maquinaria" + i).val(json.NombreMaquinaria[i]);
+                                $("#Cantidad" + i).show();
+                                $("#Cantidad" + i).val(json.Cantidad[i]);
+                                $("#Realizados" + i).show();
+                                $("#Realizados" + i).val(json.Realizados[i]);
+                                $("#Aprobados" + i).show();
+                                $("#Aprobados" + i).val(json.Aprobados[i]);
+                                $("#Rechazados" + i).show();
+                                $("#Rechazados" + i).val(json.Rechazados[i]);
+                                if (cuenta == 5) {
+                                    aprobadototal = aprobadototal + json.Aprobados[i];
+                                    rechazadototal = rechazadototal + json.Rechazados[i];
+                                    $("#Aprobados0").val(aprobadototal);
+                                    $("#Rechazados0").val(rechazadototal);
+                                }
+                            }
+
+                            if (json.Motivo != "") {
+                                $("#MotivoReserva").show();
+                                $("#MotivoCancelacion").val(json.Motivo);
+                            }
+                            $("#CantidadScrubber").val(json.cantidadscrubber);
+                            $(".poraprobar").show();
+                            $(".porcontenedores").hide();
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="detallevacio">No existe Detalle</span>', 'error');
+                        }
+                    }
+                });
+            } else if ($("#TipoReserva").val().trim() == "BY CONTAINER NUMBER") {
+                var table = $('#DetalleContenedores').DataTable();
+                table.destroy();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetDetalleReservaContenedores", "Leaktest")',
+                    data: { IdReserva: $("#IdReserva").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.length;
+                        if (cuenta != 0) {
+                            for (var i = 0 ; i < cuenta ; i++) {
+                                var estado = "";
+                                if (json[i].IdEstado == 0) {
+                                    var estado = "APROBADO";
+                                } else if (json[i].IdEstado == 1) {
+                                    var estado = "RECHAZADO";
+                                } else {
+                                    var estado = "NO REALIZADO";
+                                }
+                                data.push([json[i].IdContenedor, json[i].Contenedor, json[i].NombreMaquinaria, estado]);
+                            }
+                            var table = $('#DetalleContenedores').DataTable({
+                                data: data,
+                                searching: false,
+                                paging: false
+                            });
+                            $("#CantidadScrubber").val(json[0].CantidadScrubber);
+                            $(".poraprobar").hide();
+                            $(".porcontenedores").show();
+                            $('#Detalles').trigger('click');
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="detallevacio">No existe Detalle</span>', 'error');
+                        }
+                    }
+                });
+
+            }
+
+        } else {
+            swal('Ups!', '<span class="alerta" key="errordetallesolicitud">Debe seleccionar una solicitud para visualizar detalles</span>', 'error');
+        }
+    });
+
+    $("#LeaktestReport").click(function () {
+        if ($("#IdReserva").val() != "") {
+            var url = '@Url.Action("GenerarLeaktestReportVacio","Leaktest")?Naviera=' + $("#NavieraReporte").val() + '&Deposito=' + $("#DepositoReporte").val() + '&Solicitud=' + $("#IdReserva").val();
+            window.location.href = url;
+        } else {
+            swal('Ups!', '<span class="alerta" key="detallevacio">No existe Detalle</span>', 'error');
+        }
+    });
+
+    //EDITAR SOLICITUD LEAKTEST
+    $("#EditarReservaLeaktest").click(function () {
+        var auxinfo = "";
+        if ($("#Naviera").val() != 0) {
+            if ($("#Deposito").val() != 0) {
+                if ($("#FechaEstimada").val() != "") {
+
+                    if ($("#div_ingreso0").is(':visible')) {
+                        if ($("#contenedoreseditar0").val() != "") {
+                            if ($("#contenedoreseditar0").val() >= $("#realizadoseditar0").val()) {
+                                auxinfo = { IdReserva: $("#IdReserva").val(), Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#FechaEstimada").val(), Maquinaria: $("#Maquinariaeditar0").val(), Hora: $("#Hora").val(), Cantidad: $("#contenedoreseditar0").val(), CantidadScrubber: $("#CantidadScrubber").val() };
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="ErrorCantidadContenedores">Cantidad de contenedores no puede ser menor a la cantidad ya guardada para la Maquinaria: </span>' + $("#Maquinariaeditar0 option:selected").text(), 'warning');
+                                return;
+                            }
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="ErrorCantidadMaquinaria">Campo Cantidad Obligatorio para la Maquinaria: </span>' + $("#Maquinariaeditar0 option:selected").text(), 'error');
+                            return;
+                        }
+                    }
+                    if ($("#div_ingreso1").is(':visible')) {
+                        if ($("#contenedoreseditar1").val() != "") {
+                            if ($("#contenedoreseditar1").val() >= $("#realizadoseditar1").val()) {
+                                auxinfo = { IdReserva: $("#IdReserva").val(), Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#FechaEstimada").val(), Maquinaria: $("#Maquinariaeditar0").val(), Hora: $("#Hora").val(), Cantidad: $("#contenedoreseditar0").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinariaeditar1").val(), Cantidad1: $("#contenedoreseditar1").val() };
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="ErrorCantidadContenedores">Cantidad de contenedores no puede ser menor a la cantidad ya guardada para la Maquinaria: </span>' + $("#Maquinariaeditar1 option:selected").text(), 'warning');
+                                return;
+                            }
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="ErrorCantidadMaquinaria">Campo Cantidad Obligatorio para la Maquinaria: </span>' + $("#Maquinariaeditar1 option:selected").text(), 'error');
+                            return;
+                        }
+                    }
+                    if ($("#div_ingreso2").is(':visible')) {
+                        if ($("#contenedoreseditar2").val() != "") {
+                            if ($("#contenedoreseditar2").val() >= $("#realizadoseditar2").val()) {
+                                auxinfo = { IdReserva: $("#IdReserva").val(), Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#FechaEstimada").val(), Maquinaria: $("#Maquinariaeditar0").val(), Hora: $("#Hora").val(), Cantidad: $("#contenedoreseditar0").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinariaeditar1").val(), Cantidad1: $("#contenedoreseditar1").val(), Maquinaria2: $("#Maquinariaeditar2").val(), Cantidad2: $("#contenedoreseditar2").val() };
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="ErrorCantidadContenedores">Cantidad de contenedores no puede ser menor a la cantidad ya guardada para la Maquinaria: </span>' + $("#Maquinariaeditar2 option:selected").text(), 'warning');
+                                return;
+                            }
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="ErrorCantidadMaquinaria">Campo Cantidad Obligatorio para la Maquinaria: </span>' + $("#Maquinariaeditar2 option:selected").text(), 'error');
+                            return;
+                        }
+                    }
+                    if ($("#div_ingreso3").is(':visible')) {
+                        if ($("#contenedoreseditar3").val() != "") {
+                            if ($("#contenedoreseditar3").val() >= $("#realizadoseditar3").val()) {
+                                var auxinfo = { IdReserva: $("#IdReserva").val(), Naviera: $("#Naviera").val(), Deposito: $("#Deposito").val(), Eta: $("#FechaEstimada").val(), Maquinaria: $("#Maquinariaeditar0").val(), Hora: $("#Hora").val(), Cantidad: $("#contenedoreseditar0").val(), CantidadScrubber: $("#CantidadScrubber").val(), Maquinaria1: $("#Maquinariaeditar1").val(), Cantidad1: $("#contenedoreseditar1").val(), Maquinaria2: $("#Maquinariaeditar2").val(), Cantidad2: $("#contenedoreseditar2").val(), Maquinaria3: $("#Maquinariaeditar3").val(), Cantidad3: $("#contenedoreseditar3").val() }
+                            } else {
+                                swal('Ups!', '<span class="alerta" key="ErrorCantidadContenedores">Cantidad de contenedores no puede ser menor a la cantidad ya guardada para la Maquinaria: </span>' + $("#Maquinariaeditar3 option:selected").text(), 'warning');
+                                return;
+                            }
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="ErrorCantidadMaquinaria">Campo Cantidad Obligatorio para la Maquinaria: </span>' + $("#Maquinariaeditar3 option:selected").text(), 'error');
+                            return;
+                        }
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("EditarReservaLeaktest", "Leaktest")',
+                        data: auxinfo,
+                        success: function (response) {
+                            var json = JSON.parse(response);
+                            if (json.validador == 0) {
+                                var aux = 'success';
+                            } else {
+                                var aux = 'warning';
+                            }
+                            swal({
+                                title: '',
+                                text: json.Mensaje,
+                                type: aux,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    });
+                } else {
+                    swal('Ups!', '<span class="alerta" key="EtaLeaktest">Campo Eta Obligatorio</span>', 'error');
+                }
+            } else {
+                swal('Ups!', '<span class="alerta" key="DepositoLeaktest">Campo Deposito Obligatorio</span>', 'error');
+            }
+        } else {
+                swal('Ups!', '<span class="alerta" key="NavieraLeaktest">Campo Naviera Obligatorio</span>', 'error');
+        }
+    });
+
+    $("#EditarReservaLeaktestContenedores").click(function () {
+        var count = $('#tab_logic tr').length - 1;
+        var ContenedoresAntiguos = [];
+        var MaquinariasAntiguas = [];
+        if ($("#Naviera").val() != 0) {
+            if ($("#Deposito").val() != 0) {
+                if ($("#FechaEstimada").val() != "") {
+
+                    var count = $('#tab_logic tr').length - 1;
+                    var Contenedores = [];
+                    var Maquinarias = [];
+
+
+                    for (i = 0; i < count ; i++) {
+                        if ($("input[name=name" + i + "]").val() != "") {
+                            Contenedores.push($("input[name=name" + i + "]").val());
+                            Maquinarias.push($("select[name=maquinaria" + i + "]").val());
+                        } else {
+                            swal('Ups!', 'No pueden haber Números de Contenedores vacios', 'error');
+                            return false;
+                        }
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("EditarReservaLeaktestContenedores", "Leaktest")',
+                        data: { IdReserva: $("#IdReserva").val(), IdNaviera: $("#Naviera").val(), IdDeposito: $("#Deposito").val(), Fecha: $("#FechaEstimada").val(), Contenedor: Contenedores, Maquinaria: Maquinarias, Hora: $("#Hora").val(), CantidadScrubber: $("#CantidadScrubber").val() },
+                        success: function (response) {
+                            var json = JSON.parse(response);
+                            if (json.validador == 0) {
+                                var aux = 'success';
+                            } else {
+                                var aux = 'warning';
+                            }
+                            swal({
+                                title: '',
+                                text: json.Mensaje,
+                                type: aux,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                location.reload();
+                            })
+                        }
+                    });
+
+                } else {
+                    swal('Ups!', '<span class="alerta" key="EtaLeaktest">Campo Eta Obligatorio</span>', 'error');
+                }
+            } else {
+                swal('Ups!', '<span class="alerta" key="DepositoLeaktest">Campo Deposito Obligatorio</span>', 'error');
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="NavieraLeaktest">Campo Naviera Obligatorio</span>', 'error');
+        }
+    });
+    //EDITAR SOLICITUD LEAKTEST
+
+
+
+    //AGREGAR RESULTADOS LEAKTEST
+    $("#AgregarResultados").click(function () {
+        var estado = 0;
+
+        if ($("#Estado").val() == "CANCELLED LEAK TEST REQUEST" || $("#Estado").val() == "FINISHED LEAK TEST REQUEST") {
+            estado = 3;
+        }
+
+        if ($("#IdReserva").val() != "") {
+            if ($("#Estado").val() != "CANCELLED LEAK TEST REQUEST") {
+                var url = '@Url.Action("ConsultarResultadosLeaktest", "Leaktest")?IdReserva=' + $("#IdReserva").val() + '&TipoReserva=' + $("#TipoReserva").val().trim() + '&Estado=' + estado;
+                window.location.href = url;
+            } else {
+                swal('Ups!', '<span ></span>', 'error');
+                swal('Ups!', '<span class="alerta" key="ResultadoSolicitudCancelada">No pueden agregar resultados a una solicitud cancelada.</span>', 'error');
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="erroragregarresultadossolicitud">Para agregar resultados de leak test debe seleccionar una solicitud.</span>', 'error');
+        }
+    });
+    //AGREGAR RESULTADOS LEAKTEST
+
+    //FORMATO DE FECHA
+    function formatDate(date) {
+        var fecha = date.substring(0, 10);
+        var ano = date.substring(0, 4);
+        var mes = date.substring(5, 7);
+        var dia = date.substring(8, 10);
+        return dia +"/"+ mes +"/"+ ano;
+    }
+    //FORMATO DE FECHA
+
+    //FILTRO DE FECHAS
+    $("#FiltroFechas").click(function () {
+        var table = $('#Tb_ReservasLeaktest').DataTable();
+        if ($("#Filtro").val() != 0 && $("#Fecha_inicio").val() != "" && $("#Fecha_termino").val() != "") {
+            var fechainicio = new Date($('#Fecha_inicio').val()).getTime();
+            var fechatermino = new Date($('#Fecha_termino').val()).getTime();
+            if (fechatermino < fechainicio) {
+                swal('Ups!', 'La fecha final no puede ser menor a la fecha inicial.', 'warning');
+                return false;
+            }
+            table.destroy();
+            if ($("#Filtro").val() == 1) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetReservasByFechaCreacion", "Leaktest")',
+                    data: { FechaInicial: $("#Fecha_inicio").val(), FechaFin: $("#Fecha_termino").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.Reservas.length;
+                        for (var i = 0 ; i < cuenta ; i++) {
+                            if (json.Reservas[i].CantidadScrubber != 0) {
+                                estadoscrubber = "SI";
+                            } else {
+                                estadoscrubber = "NO";
+                            }
+                            var fecharegistro = formatDate(json.Reservas[i].FechaRegistro);
+                            var fechaestimada = formatDate(json.Reservas[i].FechaEstimadaRealizacion);
+                            if (json.Reservas[i].TipoReserva.trim() == "TO PERFORM") {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                            json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(),
+                                            json.CantidadTotal[i], json.CantidadPorContenedores[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                            } else if (json.Reservas[i].TipoReserva.trim() == "TO BE APPROVED") {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                    json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), json.CantidadTotal[i], 0, fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].Comentario, json.Reservas[i].CantidadScrubber, json.Estado[i]]);
+                            } else {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                    json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), 0, json.CantidadPorContenedores[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                            }
+
+                        }
+
+                        if (lenguaje == "es") {
+                            var table = $('#Tb_ReservasLeaktest').DataTable({
+                                data: data,
+                                "language": {
+                                    "lengthMenu": "Mostrar _MENU_ Resultados por pagina",
+                                    "zeroRecords": "No hay Resultados para mostrar",
+                                    "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                                    "infoEmpty": "No hay Resultados disponibles",
+                                    "search": "Buscar: ",
+                                    "paginate": {
+                                        "first": "Primera",
+                                        "last": "Última",
+                                        "next": "Siguiente",
+                                        "previous": "Anterior"
+                                    }
+                                },
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'excel'
+                                ],
+                                scrollY: "500px",
+                                scrollX: true,
+                                scrollCollapse: true,
+                                paging: false,
+                                orderCellsTop: true,
+                                "rowCallback": function (row, data, index) {
+                                    var validar = 0;
+                                    if (data[15] == "FINISHED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(144, 238, 144)");
+                                    } else if ((data[15] == "LEAK TEST REQUEST PENDING OUT TIME" || data[15] == "LEAK TEST REQUEST PENDING ON TIME") && data[8] != 0) {
+                                        $('td', row).css("background-color", "RGB(135, 206, 250)");
+                                    } else if (data[15] == "CANCELLED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(255,255,0)");
+                                    }
+                                },
+                                "footerCallback": function (row, data, start, end, display) {
+                                    var api = this.api(), data;
+
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+                                    // Total over all pages
+                                    total = api
+                                        .column(6)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal = api
+                                        .column(6, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(6).footer()).html(
+                                        pageTotal + ' (' + total + ' CONTENEDORES)'
+                                    );
+
+                                    var intVal1 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total1 = api
+                                        .column(7)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal1 = api
+                                        .column(7, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(7).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' CONTENEDORES)'
+                                    );
+
+                                    var intVal2 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total2 = api
+                                        .column(8)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal2 = api
+                                        .column(8, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(8).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' REALIZADOS)'
+                                    );
+                                }
+                            });
+                        } else {
+                            var table = $('#Tb_ReservasLeaktest').DataTable({
+                                data: data,
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'excel'
+                                ],
+                                scrollY: "500px",
+                                scrollX: true,
+                                scrollCollapse: true,
+                                paging: false,
+                                orderCellsTop: true,
+                                "rowCallback": function (row, data, index) {
+                                    var validar = 0;
+                                    if (data[15] == "FINISHED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(144, 238, 144)");
+                                    } else if ((data[15] == "LEAK TEST REQUEST PENDING OUT TIME" || data[15] == "LEAK TEST REQUEST PENDING ON TIME") && data[8] != 0) {
+                                        $('td', row).css("background-color", "RGB(135, 206, 250)");
+                                    } else if (data[15] == "CANCELLED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(255,255,0)");
+                                    }
+                                },
+                                "footerCallback": function (row, data, start, end, display) {
+                                    var api = this.api(), data;
+
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+                                    // Total over all pages
+                                    total = api
+                                        .column(6)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal = api
+                                        .column(6, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(6).footer()).html(
+                                        pageTotal + ' (' + total + ' CONTAINERS)'
+                                    );
+
+                                    var intVal1 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total1 = api
+                                        .column(7)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal1 = api
+                                        .column(7, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(7).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' CONTAINERS)'
+                                    );
+
+                                    var intVal2 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total2 = api
+                                        .column(8)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal2 = api
+                                        .column(8, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(8).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' PERFORMED)'
+                                    );
+                                }
+                            });
+                        }
+                        table.columns().every(function () {
+                            var that = this;
+                            $('input', this.footer()).on('keyup change', function () {
+                                if (that.search() !== this.value) {
+                                    that
+                                        .search(this.value)
+                                        .draw();
+                                }
+                            });
+                        });
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetReservasByFechaEstimada", "Leaktest")',
+                    data: { FechaInicial: $("#Fecha_inicio").val(), FechaFin: $("#Fecha_termino").val() },
+                    success: function (response) {
+                        var data = [];
+                        var json = JSON.parse(response);
+                        var cuenta = json.Reservas.length;
+                        for (var i = 0 ; i < cuenta ; i++) {
+                            if (json.Reservas[i].CantidadScrubber != 0) {
+                                estadoscrubber = "SI";
+                            } else {
+                                estadoscrubber = "NO";
+                            }
+                            var fecharegistro = formatDate(json.Reservas[i].FechaRegistro);
+                            var fechaestimada = formatDate(json.Reservas[i].FechaEstimadaRealizacion);
+                            if (json.Reservas[i].TipoReserva.trim() == "TO PERFORM") {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                            json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(),
+                                            json.CantidadTotal[i], json.CantidadPorContenedores[i], json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, json.Reservas[i].CantidadScrubber, estadoscrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                            } else if (json.Reservas[i].TipoReserva.trim() == "TO BE APPROVED") {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                    json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), json.CantidadTotal[i], 0, json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                            } else {
+                                data.push([json.Reservas[i].Id, json.Reservas[i].NombrePais, json.Reservas[i].NombreCiudad, json.Reservas[i].NombreDeposito.toUpperCase(),
+                                    json.Reservas[i].NombreNaviera.toUpperCase(), json.Reservas[i].TipoReserva.trim(), 0, json.CantidadPorContenedores[i], json.Ralizados[i], fecharegistro, fechaestimada, json.Reservas[i].Hora, estadoscrubber, json.Reservas[i].CantidadScrubber, json.Reservas[i].Comentario, json.Estado[i]]);
+                            }
+
+                        }
+
+                        if (lenguaje == "es") {
+                            var table = $('#Tb_ReservasLeaktest').DataTable({
+                                data: data,
+                                "language": {
+                                    "lengthMenu": "Mostrar _MENU_ Resultados por pagina",
+                                    "zeroRecords": "No hay Resultados para mostrar",
+                                    "info": "Mostrando pagina _PAGE_ de _PAGES_ paginas",
+                                    "infoEmpty": "No hay Resultados disponibles",
+                                    "search": "Buscar: ",
+                                    "paginate": {
+                                        "first": "Primera",
+                                        "last": "Última",
+                                        "next": "Siguiente",
+                                        "previous": "Anterior"
+                                    }
+                                },
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'excel'
+                                ],
+                                scrollX: true,
+                                "footerCallback": function (row, data, start, end, display) {
+                                    var api = this.api(), data;
+
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+                                    // Total over all pages
+                                    total = api
+                                        .column(6)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal = api
+                                        .column(6, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(6).footer()).html(
+                                        pageTotal + ' (' + total + ' CONTENEDORES)'
+                                    );
+
+                                    var intVal1 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total1 = api
+                                        .column(7)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal1 = api
+                                        .column(7, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(7).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' CONTENEDORES)'
+                                    );
+
+                                    var intVal2 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total2 = api
+                                        .column(8)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal2 = api
+                                        .column(8, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(8).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' REALIZADOS)'
+                                    );
+                                }
+                            });
+                        } else {
+                            var table = $('#Tb_ReservasLeaktest').DataTable({
+                                data: data,
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'excel'
+                                ],
+                                scrollY: "500px",
+                                scrollX: true,
+                                scrollCollapse: true,
+                                paging: false,
+                                orderCellsTop: true,
+                                "rowCallback": function (row, data, index) {
+                                    var validar = 0;
+                                    if (data[15] == "FINISHED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(144, 238, 144)");
+                                    } else if ((data[15] == "LEAK TEST REQUEST PENDING OUT TIME" || data[15] == "LEAK TEST REQUEST PENDING ON TIME") && data[8] != 0) {
+                                        $('td', row).css("background-color", "RGB(135, 206, 250)");
+                                    } else if (data[15] == "CANCELLED LEAK TEST REQUEST") {
+                                        $('td', row).css("background-color", "RGB(255,255,0)");
+                                    }
+                                },
+                                "footerCallback": function (row, data, start, end, display) {
+                                    var api = this.api(), data;
+
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+                                    // Total over all pages
+                                    total = api
+                                        .column(6)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal = api
+                                        .column(6, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(6).footer()).html(
+                                        pageTotal + ' (' + total + ' CONTAINERS)'
+                                    );
+
+                                    var intVal1 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total1 = api
+                                        .column(7)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal1 = api
+                                        .column(7, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal1(a) + intVal1(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(7).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' CONTAINERS)'
+                                    );
+
+                                    var intVal2 = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    total2 = api
+                                        .column(8)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Total over this page
+                                    pageTotal2 = api
+                                        .column(8, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal2(a) + intVal2(b);
+                                        }, 0);
+
+                                    // Update footer
+                                    $(api.column(8).footer()).html(
+                                        pageTotal1 + ' (' + total1 + ' PERFORMED)'
+                                    );
+                                }
+                            });
+                        }
+
+                        table.columns().every(function () {
+                            var that = this;
+                            $('input', this.footer()).on('keyup change', function () {
+                                if (that.search() !== this.value) {
+                                    that
+                                        .search(this.value)
+                                        .draw();
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="errorfiltrarsolicitud">Debe completar el formulario para filtrar las solicitudes.</span>', 'warning');
+        }
+    });
+    //FILTRO DE FECHAS
+
+    $("#Limpiar").click(function () {
+        location.reload();
+    });
+
+    //CANCELAR RESERVA
+    $("#CancelarReserva").click(function () {
+        if ($("#IdReserva").val() != "") {
+            if ($("#Estado").val() != "RESERVA LEAKTEST CANCELADA") {
+                if ($("#Estado").val() != "RESERVA LEAKTEST FINALIZADA") {
+                    swal({
+                        title: '<span class="alerta" key="titulocancelar">¿Estás seguro de cancelar la solicitud?</span>',
+                        type: 'warning',
+                        html:
+                            '<div>' +
+                                '<input type="text" name="Motivo" id="Motivo" class="form-control col-md-7 col-xs-12">' +
+                            '</div>',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '<span class="alerta" key="cancelarresereva">Si, Cancelar!</span>'
+                    }).then((result) => {
+                        if ($("#Motivo").val() != "") {
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("CancelarReservaLeaktest", "Leaktest")',
+                                data: { IdReserva: $("#IdReserva").val(), Motivo: $("#Motivo").val(), TipoReserva: $("#TipoReserva").val().trim() },
+                                success: function (response) {
+                                    var json = JSON.parse(response);
+                                    if (json.validador == 0) {
+                                        var aux = 'success';
+                                    } else {
+                                        var aux = 'warning';
+                                    }
+                                    swal({
+                                        title: '',
+                                        text: json.Mensaje,
+                                        type: aux,
+                                        showCancelButton: false,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        location.reload();
+                                    })
+                                }
+                            });
+                        } else {
+                            swal('Ups!', '<span class="alerta" key="errormotivo">Debes indicar el motivo para cancerlar la Reserva</span>', 'error');
+                        }
+                    });
+                } else {
+                    swal('Ups!', '<span class="alerta" key="errorsolicitudcancelarfinalizada">No puede cancelar la solicitud seleccionada porque ya ha sido finalizada.</span>', 'error');
+                }
+            } else {
+                swal('Ups!', '<span class="alerta" key="errorsolicitudcancelarcancelada">No puede cancelar la solicitud seleccionada porque ya ha sido cancelada.</span>', 'error');
+            }
+        } else {
+            swal('Ups!', '<span class="alerta" key="errorsolicitudcancelar">Debes seleccionar una solicitud para que sea cancelada.</span>', 'error');
+        }
+    });
+    //CANCELAR RESERVA
+
+</script>

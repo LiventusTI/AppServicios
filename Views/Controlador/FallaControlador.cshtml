@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "FallaControlador";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Controladores con fallas<small></small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+
+            <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_booking" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Controlador (ESN)
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="booking" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Ubicacion
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="naviera" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                        <button type="button" class="btn btn-success" onclick="MostrarIngresoPrestacionServicio()">Buscar</button>
+                    </div>
+                </div>
+                <br />
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Controlador (ESN)</th>
+                                <th>Estado Tecnico</th>
+                                <th>Estado Logistico</th>
+                                <th>Estado Fisico</th>
+                                <th>Version Firmware</th>
+                                <th>Ubicacion</th>
+                                <th>Falla</th>
+                                <th>Comentario Falla</th>
+                                <th colspan="1">Ver Damage Report</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>000710A37179</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>TRAVELING</td>
+                                <td>ACTIVE TRANSIT</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>000780A37179</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                            <tr>
+                                <td>886B0F02C89D</td>
+                                <td>SLEEP</td>
+                                <td>USED WOUT/DATA</td>
+                                <td>CON FALLA</td>
+                                <td>1.2.8</td>
+                                <td>LABORATORIO</td>
+                                <td>VALVULA TRABADA</td>
+                                <td>VALVULA SE TRABA AL MOMENTO DE PROGRAMAR EL CONTROLLER</td>
+                                <td style="font-size:18px; text-align:center"><i class="fa fa-search" title="Ver Damage Report" id="Ver"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+            //Botón Agregar Ver//
+    $("#Ver").click(function () {
+        var Controlador = "55446DDF45"
+        var Contenedor = "88GGKDLL50";
+        var Bateria = "80544DDHHF";
+        var Maquinaria = "CARRIER";
+        var Naviera = "MSC";
+        var Nave = "MSC SASHA";
+        var Viaje = "ISA7545SDSD";
+        var Commodity = "AVOCADOS";
+        var PuertoOrigen = "VALPARAISO";
+        var PueroDestino = "ROTTERDAM";
+        var PuertoExtraccion = "ROTTERDAM";
+        var Co2 = "8";
+        var O2 = "12";
+        var Temperatura = "4.5";
+        var Tecnologia = "LIVENTUS";
+        var Ubicacion = "LABORATORIO";
+
+        var url = '@Url.Action("ExportarDamageReport", "Reservas")?controlador=' + Controlador + "&contenedor=" + Contenedor + "&bateria=" + Bateria + "&maquinaria=" + Maquinaria + "&naviera=" + Naviera + "&nave=" + Nave + "&viaje=" + Viaje + "&commodity=" + Commodity + "&puertoOrigen=" + PuertoOrigen + "&puertoDestino=" + PueroDestino + "&puertoExtraccion=" + PuertoExtraccion + "&co2=" + Co2 + "&o2=" + O2 + "&temperatura=" + Temperatura + "&tecnologia=" + Tecnologia + "&ubicacion=" + Ubicacion;
+        window.location.href = url;
+    });
+            //Botón Agregar Nota//
+
+</script>
+
+
+

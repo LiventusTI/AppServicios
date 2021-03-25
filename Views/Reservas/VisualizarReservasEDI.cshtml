@@ -1,0 +1,299 @@
+﻿@{
+    ViewBag.Title = "VisualizarReservasEDI";
+    Layout = "~/Views/MasterPage.cshtml";
+    int PerfilInterior = Convert.ToInt32(Session["PerfilInterior"]);
+    string Usuario = Session["User"].ToString().ToUpper();
+}
+
+<div class="col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="tr" key="gestionreservas">Visualizar Reservas EDI MSC</h2>
+            <div class="clearfix"></div>
+        </div>
+        <label id="UltimaConexion" class="UltimaConexion" style="color: red;"></label>
+        <div class="x_content">
+            <div class="x_panel">
+                <table id="Tb_Reservas" class="table table-striped table-bordered display nowrap">
+                    <thead>
+                        <tr>
+                            <th class="tr">BOOKING</th>
+                            <th class="tr">CLAUSULA</th>
+                            <th class="tr">CONTENEDOR</th>
+                            <th class="tr">CANTIDAD SERVICIOS</th>
+                            <th class="tr">NAVE</th>
+                            <th class="tr">VIAJE</th>
+                            <th class="tr">PUERTO ORIGEN</th>
+                            <th class="tr">PUERTO DESTINO</th>
+                            <th class="tr" key="commodityreserva">COMMODITY</th>
+                            <th class="tr">CO2</th>
+                            <th class="tr" key="commodityreserva">O2</th>
+                            <th class="tr">FREIGHTFORWARDER</th>
+                            <th class="tr">EXPORTADOR</th>
+                            <th class="tr">CONSIGNATARIO</th>
+                            <th class="tr">ETD</th>
+                            <th class="tr">ETA</th>
+                            <th class="tr">TEMPERATURA</th>
+                            <th class="tr">DEPÓSITO</th>
+                            <th class="tr">TERMINAL</th>
+                            <th class="tr">FECHA ACTUALIZACION</th>
+                            <th class="tr">NOMBRE EDI</th>
+                        </tr>
+                        <tr>
+                            <th class="tr">BOOKING</th>
+                            <th class="tr">CLAUSULA</th>
+                            <th class="tr">CONTENEDOR</th>
+                            <th class="tr">CANTIDAD SERVICIOS</th>
+                            <th class="tr">NAVE</th>
+                            <th class="tr">VIAJE</th>
+                            <th class="tr">PUERTO ORIGEN</th>
+                            <th class="tr">PUERTO DESTINO</th>
+                            <th class="tr" key="commodityreserva">COMMODITY</th>
+                            <th class="tr">CO2</th>
+                            <th class="tr" key="commodityreserva">O2</th>
+                            <th class="tr">FREIGHTFORWARDER</th>
+                            <th class="tr">EXPORTADOR</th>
+                            <th class="tr">CONSIGNATARIO</th>
+                            <th class="tr">ETD</th>
+                            <th class="tr">ETA</th>
+                            <th class="tr">TEMPERATURA</th>
+                            <th class="tr">DEPÓSITO</th>
+                            <th class="tr">TERMINAL</th>
+                            <th class="tr">FECHA ACTUALIZACION</th>
+                            <th class="tr">NOMBRE EDI</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="tr">BOOKING</th>
+                            <th class="tr">CLAUSULA</th>
+                            <th class="tr">CONTENEDOR</th>
+                            <th class="tr">CANTIDAD SERVICIOS</th>
+                            <th class="tr">NAVE</th>
+                            <th class="tr">VIAJE</th>
+                            <th class="tr">PUERTO ORIGEN</th>
+                            <th class="tr">PUERTO DESTINO</th>
+                            <th class="tr" key="commodityreserva">COMMODITY</th>
+                            <th class="tr">CO2</th>
+                            <th class="tr" key="commodityreserva">O2</th>
+                            <th class="tr">FREIGHTFORWARDER</th>
+                            <th class="tr">EXPORTADOR</th>
+                            <th class="tr">CONSIGNATARIO</th>
+                            <th class="tr">ETD</th>
+                            <th class="tr">ETA</th>
+                            <th class="tr">TEMPERATURA</th>
+                            <th class="tr">DEPÓSITO</th>
+                            <th class="tr">TERMINAL</th>
+                            <th class="tr">FECHA ACTUALIZACION</th>
+                            <th class="tr">NOMBRE EDI</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/build/js/Perfiles.js"></script>
+<script src="~/build/js/PerfilGestionReserva.js"></script>
+<script type="text/javascript">
+
+     var lenguaje = document.cookie;
+
+     $(function () {
+         $("#Inicio_stacking, #Termino_stacking, #Eta, #Etd, #Fecha_inicio, #Fecha_termino").datepicker({
+             dateFormat: "dd-mm-yy",
+             firstDay: 1,
+             dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+             dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+             monthNames:
+                 ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                 "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+             monthNamesShort:
+                 ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                 "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+             showWeek: true
+         });
+     });
+
+     $(document).ready(function () {
+
+         $('#Tb_Reservas thead tr:eq(1) th').each( function (i) {
+             var title = $('#example thead tr:eq(0) th').eq( $(this).index() ).text();
+                 $(this).html( '<input type="text" class="form-control" placeholder="FILTER" data-index="'+i+'"/>' );
+         } );
+
+         $.ajax({
+             type: "POST",
+             url: '@Url.Action("GetReservasEDI", "Reservas")',
+             success: function (response) {
+                 var data = [];
+                 var json = JSON.parse(response);
+                 var cuenta = json.length;
+                 var d = new Date(json[0].FechaRegistro);
+
+                 // calling the function
+
+                 var fecharegistro = formatDate2(d,4);
+                 var fecha2=fecharegistro;
+
+                 for (var i = 0 ; i < cuenta ; i++) {
+                     d = new Date(json[i].FechaRegistro);
+
+                     fecharegistro = formatDate2(d,4);
+                     if(fecharegistro>=fecha2)
+                     {
+
+                         $("#UltimaConexion").text("Ultima Conexión: " + fecharegistro);
+                         fecha2=fecharegistro;
+                     }
+
+
+
+                     if (json[i].FechaIniStacking == null)
+                     {
+                         var fechainistacking = "";
+                     } else
+                     {
+                         var fechainistacking = formatDate(json[i].FechaIniStacking);
+                     }
+
+                     if (json[i].FechaFinStacking == null) {
+                         var fechafinstacking = "";
+                     } else {
+                         var fechafinstacking = formatDate(json[i].FechaFinStacking);
+                     }
+
+                     if (json[i].Etd == null) {
+                         var etd = "";
+                     } else {
+                         var etd = formatDate(json[i].Etd);
+                     }
+
+                     if (json[i].Eta == null) {
+                         var eta = "";
+                     } else {
+                         var eta = formatDate(json[i].Eta);
+                     }
+
+                     if (json[i].ContenedorValido==0)
+                     {
+                         var contenedorValido="NO";
+                     }else if(json[i].ContenedorValido==1)
+                     {
+                         var contenedorValido="SI";
+                     }else
+                     {
+                         var contenedorValido="N/A";
+                     }
+
+
+                     if(@PerfilInterior == 16){
+                         var user = "@Usuario";
+                         if(json[i].Naviera == user ){
+                             data.push([json[i].Booking.toUpperCase(), json[i].Clausula, json[i].Contenedor,
+                            json[i].CantidadContenedores, json[i].Nave,
+                            json[i].Viaje, json[i].PuertoOrigen, json[i].PuertoDestino, json[i].Commodity, json[i].CO2, json[i].O2,
+                            json[i].FreightForwarder, json[i].Exportador, json[i].Consignatario.toUpperCase(),
+                            etd, eta, json[i].Temperatura,
+                            json[i].DepositoContenedor, json[i].Terminal,
+                            fecharegistro, json[i].NombreEDI]);
+                         }
+                     }else{
+                         data.push([json[i].Booking.toUpperCase(), json[i].Clausula, json[i].Contenedor,
+                            json[i].CantidadContenedores, json[i].Nave,
+                            json[i].Viaje, json[i].PuertoOrigen, json[i].PuertoDestino, json[i].Commodity, json[i].CO2, json[i].O2,
+                            json[i].FreightForwarder, json[i].Exportador, json[i].Consignatario.toUpperCase(),
+                            etd, eta, json[i].Temperatura,
+                            json[i].DepositoContenedor, json[i].Terminal,
+                            fecharegistro, json[i].NombreEDI]);
+                     }
+
+                 }
+
+                 var table = $('#Tb_Reservas').DataTable({
+                    data: data,
+                    dom: 'Bfrtip',
+                    pageLength: 15,
+                    buttons: [
+                        'copy', 'csv', 'excel'
+                    ],
+                    scrollY:        "500px",
+                    scrollX:        true,
+                    scrollCollapse: true,
+                    paging:         true
+                });
+
+
+                 table.columns().every(function () {
+                     var that = this;
+                     $( table.table().container() ).on('keyup', 'thead input', function () {
+                         table
+                             .column( $(this).data('index'))
+                             .search( this.value )
+                             .draw();
+                     } );
+                 });
+
+                 $('#Tb_Reservas tbody').on('click', 'tr', function () {
+                     //if (cuenta != 0) {
+                     if ($(this).hasClass('selected')) {
+                         $(this).removeClass('selected');
+                     }else {
+                         table.$('tr.selected').removeClass('selected');
+                         $(this).addClass('selected');
+                     }
+                     //}
+                 });
+             },
+         });
+     });
+
+     function formatDate(date) {
+         var fecha = date.substring(0, 10);
+         var ano = date.substring(0, 4);
+         var mes = date.substring(5, 7);
+         var dia = date.substring(8, 10);
+         return dia + "-" + mes + "-" + ano;
+     }
+
+     function formatDate2(dateObj,format)
+     {
+         var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+         var curr_date = dateObj.getDate();
+         var curr_month = dateObj.getMonth();
+         curr_month = curr_month + 1;
+         var curr_year = dateObj.getFullYear();
+         var curr_min = dateObj.getMinutes();
+         var curr_hr= dateObj.getHours();
+         var curr_sc= dateObj.getSeconds();
+         if(curr_month.toString().length == 1)
+             curr_month = '0' + curr_month;
+         if(curr_date.toString().length == 1)
+             curr_date = '0' + curr_date;
+         if(curr_hr.toString().length == 1)
+             curr_hr = '0' + curr_hr;
+         if(curr_min.toString().length == 1)
+             curr_min = '0' + curr_min;
+
+         if(format ==1)//dd-mm-yyyy
+         {
+             return curr_date + "-"+curr_month+ "-"+curr_year;
+         }
+         else if(format ==2)//yyyy-mm-dd
+         {
+             return curr_year + "-"+curr_month+ "-"+curr_date;
+         }
+         else if(format ==3)//dd/mm/yyyy
+         {
+             return curr_date + "/"+curr_month+ "/"+curr_year;
+         }
+         else if(format ==4)// MM/dd/yyyy HH:mm:ss
+         {
+             return curr_date +"-"+curr_month +"-"+curr_year+ " "+curr_hr+":"+curr_min+":"+curr_sc;
+         }
+     }
+</script>
+
+

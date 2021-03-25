@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "IngresarClaim";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    @*<div class="col-md-12 col-sm-12 col-xs-12">*@
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Ingresar Claim <small></small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+            <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Id Claim <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="id_claim" value="1" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_naviera" class="control-label col-md3 col-sm-3 col-xs-6">
+                            Fecha Notificación  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="fecha_notificacion" name="fecha_notificacion" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Involucrado <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="involucrado" name="involucrado" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_exportador" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Motivo <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="dol" name="dol" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Estado <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="custom-select form-control col-md-7 col-xs-12">
+                                <option selected>Seleccione un Estado</option>
+                                <option value="1">PREVENTIVO</option>
+                                <option value="2">ABIERTO</option>
+                                <option value="3">CERRADO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_exportador" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            DOL <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="dol" name="dol" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_viaje" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Deadline <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="deadline" name="deadline" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label id="lb_exportador" class="control-label col-md-3 col-sm-3 col-xs-6">
+                            Vigencia <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" id="vigencia" name="vigencia" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                        <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Ingresar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*</div>*@
+
+<script type="text/javascript">
+
+    function MostrarIngresoServicio()
+    {
+        var Booking = $("#booking").val();
+        var Viaje = $("#viaje").val();
+
+        //if (Booking == "") {
+        //    swal('Error...', 'Campo Booking Obligatorio', 'error')
+        //} else if (Nave == "") {
+        //    swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        //}
+
+        document.getElementById("lb_contenedor").style.visibility = "visible";
+        document.getElementById("contenedor").style.visibility = "visible";
+        document.getElementById("lb_fecha_servicio").style.visibility = "visible";
+        document.getElementById("fecha_servicio").style.visibility = "visible";
+        document.getElementById("lb_hora_llegada").style.visibility = "visible";
+        document.getElementById("hora_llegada").style.visibility = "visible";
+    }
+
+    function ValidarFormulario() {
+        var Booking = $("#booking").val();
+        var Contenedor = $("#contenedor").val();
+        var Viaje = $("#viaje").val();
+        var FechaServicio = $("#fecha_servicio").val();
+        var HoraLlegada = $("#hora_llegada").val();
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        } else if (Viaje == "") {
+            swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        } else if (FechaServicio == "") {
+            swal('Error...', 'Campo Fecha Servicio Obligatorio', 'error')
+        } else if (HoraLlegada == "") {
+            swal('Error...', 'Campo Hora Llegada Obligatorio', 'error')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/IngresarDatos",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Nave: Nave,
+                Naviera: Naviera,
+                Exportador: Exportador,
+                Producto: Producto,
+                Destino: Destino,
+                Origen: Origen,
+                Viaje: Viaje,
+                FechaArribo: Eta,
+                FechaSalida: Etd,
+                CantidadCO: CantidadCo,
+                CantidadO: CantiadO,
+                Temperatura: Temperatura,
+                Tamano: Tamano
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Has introducido un nuevo coche!!');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    $(function () {
+        $("#fecha_notificacion").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#dol").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#deadline").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>
+
+

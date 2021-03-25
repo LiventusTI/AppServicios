@@ -1,0 +1,513 @@
+﻿@{
+    ViewBag.Title = "MasterPage";
+    int Perfil = Convert.ToInt32(Session["Perfil"]);
+    int PerfilInterior = Convert.ToInt32(Session["PerfilInterior"]);
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liventus Web Application</title>
+    <!--SweetAlert-->
+    <script src="~/Vendors/sweetalert/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="~/Vendors/sweetalert/sweetalert2.min.css">
+    <script src="~/Vendors/sweetalert/core.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.css" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href="~/Vendors/bootstrap-select.min.css" />
+
+    <!-- jQuery -->
+    <script src="~/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Vendors/jquery/dist/jquery-ui.css">
+    <link rel="stylesheet" href="~/build/css/prueba.css">
+    @*<script src="~/Vendors/jquery/jquery-1.12.4.js"></script>*@
+    <script src="~/Vendors/jquery/dist/jquery-ui.js"></script>
+    <script src="~/build/js/idioma.js?12"></script>
+    <script src="~/build/js/TimeOut.js"></script>
+
+    <script src="~/Vendors/boostrap-select.min.js"></script>
+
+
+
+
+    <style>
+        #dvLoading {
+            background: url(../images/loader.gif) no-repeat center center;
+            height: 50px;
+            width: 50px;
+        }
+
+        #loader {
+            background: #ffffff;
+            opacity: 0.7;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+            float: left;
+            clear: none;
+        }
+
+        #loaderInner {
+            background: url(../images/loading.gif) center center no-repeat;
+            height: 100px;
+            left: 45%;
+            position: absolute;
+            top: 40%;
+            width: 200px;
+        }
+
+        #logoaplicacion {
+            left: 45%;
+            position: absolute;
+            top: 50%;
+        }
+
+        .ui-datepicker table tbody .ui-datepicker-week-col {
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!--menu lateral-->
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index","Home")" class="site_title"><img src="~/images/logo.png" /></a>
+                        <p align="center" style="font-size: smaller; font-family: Arial; color: lightgreen;">INTRANET</p>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="divider"></div>
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side main_menu">
+                        <div class="menu_section">
+                            <ul class="mcd-menu nav side-menu">
+                                <li id="Servicios">
+                                    <a href=""><i class="fa fa-ship"></i><span class="tr" key="AplicacionWeb">Aplicación Web de Servicios AC</span></a>
+                                    <ul>
+                                        <li class="gestionleaktest">
+                                            <a href=""><span class="tr" key="tituloleaktest">Gestión de LeakTest</span></a>
+                                            <ul>
+                                                <li class="gestionarleaktestSP"><a class="tr" key="gestionarleaktest" href="@Url.Action("GestionarLeaktest", "Leaktest")">Gestionar Leaktest SP</a></li>
+                                                <li class="crearsolicitud"><a class="tr" key="crearsolicitud" href="@Url.Action("AgregarReservaLeaktest", "Leaktest")">Ingresar Solicitud Leak test</a></li>
+                                                <li class="gestionarsolicitud"><a class="tr" key="gestionarsolicitud" href="@Url.Action("VisualizarReservasLeaktest", "Leaktest")">Gestionar Solicitudes y Resultados</a></li>
+                                                <li class="historicoresultados"><a class="tr" key="historicoresultados" href="@Url.Action("VerResultadosHistoricos", "Leaktest")">Ver Historico Resultados</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="gestioncontenedores">
+                                            <a href=""><span class="tr" key="titulocontenedores">Gestión Contenedores</span></a>
+                                            <ul>
+                                                <li class="inventariocontenedores"><a class="tr" key="verinventariocontenedores" href="@Url.Action("VisualizarResumenContenedores", "Contenedores")">Ver contenedores leak test aprobados</a></li>
+                                                <li class="disponiblescontenedores"><a class="tr" key="gestionarcontenedores" href="@Url.Action("VisualizarAprobadosDisponibles", "Contenedores")">Gestionar / Visualizar Contenedores </a></li>
+                                                <li class="disponiblescontenedores"><a class="tr" key="historicocancelados" href="@Url.Action("VisualizarHistoricoCancelados", "Contenedores")">Visualizar historico contenedores cancelados </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="gestioncontroladores">
+                                            <a href=""><span class="tr" key="titulocontroladores">Gestión Stock Equipos</span></a>
+                                            <ul>
+                                                <li class="inventariocontroladores"><a class="tr" key="verinventariocontroladores" href="@Url.Action("VisualizarResumenControladores", "Controlador")">Ver stock controladores</a></li>
+                                                <li class="inventariomodem"><a class="tr" key="verinventariomodem" href="@Url.Action("VisualizarResumenModems", "Modem")">Ver stock modems</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="gestionservicios">
+                                            <a href=""><span class="tr" key="tituloreservas">Gestión Servicios</span></a>
+                                            <ul>
+                                                <li class="gestionarreserva"><a href="@Url.Action("GestionarServicios","Reservas")" class="tr" key="gestionreservas">Gestionar Servicios</a></li>
+                                                <li class="historicoservicios"><a href="@Url.Action("VisualizarHistorico","Reservas")" class="tr" key="historicoservicios">Visualizar Historico Servicios</a></li>
+                                                <li class="historicoserviciosPorSemana"><a href="@Url.Action("VisualizarHistoricoPorSemanas","Reservas")" class="tr" key="historicoserviciosporsemana">Visualizar Historico Por Semana</a></li>
+                                                <li class="gestionarreservaSP"><a href="@Url.Action("GestionarServiciosSP","Reservas")" class="tr" key="gestionreservasSP">Gestionar Servicios SP</a></li>
+                                                <li class="historicoserviciosSP"><a href="@Url.Action("VisualizarHistoricoSP","Reservas")" class="tr" key="historicoserviciosSP">Visualizar Historico Servicios SP</a></li>
+                                                <li class="historicoserviciosNaviera"><a href="@Url.Action("VisualizarHistoricoServicios","Reservas")" class="tr" key="historicoserviciosmsc">Visualizar Servicios</a></li>
+                                                <li class="gestionardepositos"><a href="@Url.Action("GestionarDepositos","Reservas")" class="tr" key="gestionserviciosdeposito">Gestionar Servicios Depósitos</a></li>
+                                                <li class="gestionardepositos2"><a href="@Url.Action("GestionarDepositos2","Reservas")" class="tr" key="gestionserviciosdeposito2">Gestionar Servicios Depósitos</a></li>
+                                                <li class="gestionarreservaEdi"><a href="@Url.Action("VisualizarReservasEDI","Reservas")" class="tr" key="reservasEDI">Visualizar Reservas EDI</a></li>
+                                                <li class="aprobacionlegal"><a href="@Url.Action("GestionarServiciosLegal","Reservas")" class="tr" key="aprobarserviciosclientes">Aprobar Servicios Clientes</a></li>
+                                                <li class="comparacionservicios"><a href="@Url.Action("Comparacion","Aplicaciones")" class="tr" key="informegestion">Informes de Gestion</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="gestionfacturacion">
+                                            <a href=""><span class="tr" key="titulofacturacion">Gestión Facturación</span></a>
+                                            <ul>
+                                                <li class="comparacionservicios"><a href="@Url.Action("Facturacion", "Reservas")" class="tr" key="facturacion">Facturación Servicios</a></li>
+                                                <li class="comparacionservicios"><a href="@Url.Action("FacturacionHistorica", "Reservas")" class="tr" key="facturacionhistorica">Historico Facturación Servicios</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menulogistca">
+                                            <a href=""><span class="tr" key="MenuLogistica">Gestión logística</span></a>
+                                            <ul>
+                                                <li><a href="@Url.Action("GestionRetrievalControlador", "Controlador")" class="GestionRetrievalControlador tr" key="retrievallogistica">Gestión Retrieval Controlador/Modem</a></li>
+                                                <li><a href="@Url.Action("GestionarLogisticaControlador", "Controlador")" class="GestionarLogisticaControlador tr" key="controladorlogistica">Gestión Logística Controlador/Modem</a></li>
+                                                <li><a href="@Url.Action("GestionarLogisticaDeposito", "Controlador")" class="GestionarLogisticaDeposito tr" key="depositologistica">Gestión Logística Depósito</a></li>
+                                                <li><a href="@Url.Action("GestionarMovimientoControlador", "Controlador")" class="GestionarMovimientoControlador tr" key="movimientoslogistica">Editar Movimientos Controlador/Modem</a></li>
+                                                <li><a href="@Url.Action("HistorialNotificaciones", "Controlador")" class="HistorialNotificaciones tr" key="controladorlogistica">Historial Notificaciones</a></li>
+                                                <li><a href="@Url.Action("GestionarLogisticaSensores", "Sensor")" class="GestionLogisticaSensores tr" key="sensoreslogistica">Gestión Logística Sensores Externos</a></li>
+                                                @*<li><a href="@Url.Action("ConstruccionServicios", "Aplicaciones")" class="tr">Damage Report</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionServicios", "Aplicaciones")" class="tr">Retrieval Providers</a></li>*@
+                                            </ul>
+                                        </li>
+                                        @*<li class="menuestadistica">
+                                                <a href=""><span class="tr" key="MenuEstadisticas">Estadísticas servicios</span></a>
+                                                <ul>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloTotalServicios">Visualizar total servicios</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloTotalLeaktest">Visualizar total leak test</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloTotalControladores">Visualizar total controladores</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloTotalRecuperaciones">Visualizar total recuperaciones controladores</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloTotalClaims">Visualizar total claims</a></li>
+                                                </ul>
+                                            </li>*@
+                                        @*<li class="menuclaims">
+                                                <a href=""><span class="tr" key="MenuClaims">Gestión claims</span></a>
+                                                <ul>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloIngresoClaimServicio">Ingresar claim a servicio</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloIngresoClaim">Ingresar claim</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloConsultaClaim">Gestión claim</a></li>
+                                                    <li><a href="@Url.Action("ConstruccionModulos", "Aplicaciones")" class="tr" key="TituloClaimPendiente">Claims pendientes de pago</a></li>
+                                                </ul>
+                                            </li>*@
+                                        <li class="gestiondedatos">
+                                            <a href=""><span class="tr" key="MenuDatos">Gestión de datos</span></a>
+                                            <ul>
+                                                <li class="mantenedorviaje"><a href="@Url.Action("VisualizarViajes", "Viaje")" class="tr" key="mantenedorviaje">Gestionar Viajes</a></li>
+                                                <li class="mantenedorantepuerto"><a href="@Url.Action("VisualizarAntepuertos", "Antepuerto")" class="tr" key="mantenedorantepuerto">Gestionar Ante-puertos</a></li>
+                                                <li class="mantenedorciudad"><a href="@Url.Action("VisualizarCiudad", "Ciudad")" class="tr" key="mantenedorciudad">Gestionar Ciudades</a></li>
+                                                @*<li><a href="@Url.Action("VisualizarCommodities", "Commoditie")" class="tr" key="mantenedorcommodity">Gestionar commodity</a></li>*@
+                                                @*<li class="mantenedorcontinente"><a href="@Url.Action("VisualizarContinentes","Paises")" class="tr" key="mantenedorcontinente">Gestionar continentes</a></li>*@
+                                                <li class="mantenedorcourier"><a href="@Url.Action("VisualizarCouriers", "Couriers")" class="tr" key="mantenedorcouriers">Gestionar Couriers</a></li>
+                                                @*<li class="mantenedordeadline"><a href="@Url.Action("VisualizarDeadline", "Deadline")" class="tr" key="mantenedordeadline">Gestionar deadline</a></li>*@
+                                                <li class="mantenedordeposito"><a href="@Url.Action("VisualizarDepositos", "Deposito")" class="tr" key="mantenedordepositos">Gestionar Depositos</a></li>
+                                                <li class="mantenedorexportador"><a href="@Url.Action("VisualizarExportador", "Exportador")" class="tr" key="mantenedorexportador">Gestionar Exportador</a></li>
+                                                <li class="mantenedorfreightforwarder"><a href="@Url.Action("VisualizarFreightForwarder", "FreightForwarder")" class="tr" key="mantenedorfreightForwarder">Gestionar FreigthForwarder</a></li>
+                                                <li class="mantenedormaquinaria"><a href="@Url.Action("VisualizarMaquinarias", "Maquinaria")" class="tr" key="mantenedormaquinaria">Gestionar Maquinarias</a></li>
+                                                <li class="mantenedornave"><a href="@Url.Action("VisualizarNaves", "Nave")" class="tr" key="mantenedornaves">Gestionar Naves</a></li>
+                                                <li class="mantenedornaviera"><a href="@Url.Action("VisualizarNavieras", "Naviera")" class="tr" key="mantenedornaviera">Gestionar Naviera</a></li>
+                                                <li class="mantenedorpacking"><a href="@Url.Action("VisualizarPacking", "Packing")" class="tr" key="mantenedorpacking">Gestionar Packing</a></li>
+                                                <li class="mantenedorpuertos"><a href="@Url.Action("VisualizarPuertos", "Puertos")" class="tr" key="mantenedorpuertodestino">Gestionar Puertos</a></li>
+                                                <li class="mantenedorpais"><a href="@Url.Action("VisualizarPaises", "Paises")" class="tr" key="mantenedorpaises">Gestionar Paises</a></li>
+                                                <li class="mantenedorretrievalprovider"><a href="@Url.Action("VisualizarRetrievalProvider", "Retrieval")" class="tr" key="mantenedorretrievalprovider">Gestionar Retrieval Provider</a></li>
+                                                <li class="mantenedorserviceprovider"><a href="@Url.Action("VisualizarServiceProvider", "ServiceProvider")" class="tr" key="mantenedorserviceprovider">Gestionar Service Provider</a></li>
+                                                <li class="mantenedorterminal"><a href="@Url.Action("VisualizarTerminales", "Terminal")" class="tr" key="mantenedorterminal">Gestionar Terminales</a></li>
+                                                @*<li><a href="@Url.Action("VisualizarSetpoints", "Setpoint")" class="tr" key="mantendorsetpoint">Gestionar Set point</a></li>*@
+                                            </ul>
+                                        </li>
+                                        <li class="gestionbaterias">
+                                            <a href=""><span class="tr" key="titulobaterias">Gestión Baterías</span></a>
+                                            <ul>
+                                                <li class="cargarbaterias"><a class="tr" key="cargarbaterias" href="@Url.Action("CargarBaterias", "Bateria")">Cargar Baterías</a></li>
+                                                <li class="visualizarbaterias"><a class="tr" key="visualizarbaterias" href="@Url.Action("VisualizarBaterias", "Bateria")">Alertas/Agregar/Asociar/Descartar Baterías</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="gestionalertas" hidden>
+                                            <a href=""><span class="tr" key="titulobaterias">Gestión Alertas</span></a>
+                                            <ul>
+                                                <li class="visualizaralertas"><a class="tr" key="visualizaralertas" href="@Url.Action("AlertasEnTransito", "Alertas")">Alertas En Tránsito</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <br />
+                        <div class="menu_section" id="Tecnica">
+                            <ul class="mcd-menu nav side-menu">
+                                <li style="margin-top:25%">
+                                    <a href="@Url.Action("AplicacionTecnica", "Aplicaciones")"><i class="fa fa-wrench"></i><span class="tr" key="AplicacionTecnica">Aplicación Técnica</span> <span class="fa fa-chevron-down"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        @*<br />
+                            <div class="menu_section" id="DMS">
+                                <ul class="mcd-menu nav side-menu">
+                                    <li style="margin-top:25%">
+                                        <a href="@Url.Action("DMS", "Aplicaciones")"><i class="fa fa-folder-open"></i> DMS <span class="fa fa-chevron-down"></span></a>
+
+                                    </li>
+                                </ul>
+                            </div>*@
+                        @*<br />
+                            <div class="menu_section" id="CRM">
+                                <ul class="mcd-menu nav side-menu">
+                                    <li style="margin-top:25%">
+                                        <a href="#"><i class="fa fa-area-chart"></i> CRM <span class="fa fa-chevron-down"></span></a>
+                                        <ul>
+                                            <li>
+                                                <a target="_blank" href="https://MJ366QP3.insight.ly"><span>Abrir CRM</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Informes/CRMCOMERCIAL.pptm" download><span>Capacitación CRM</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>*@
+                        <br />
+                        <div class="menu_section" id="PowerBI" hidden>
+                            <ul class="mcd-menu nav side-menu">
+                                <li style="margin-top:25%">
+                                    @*<a href="@Url.Action("BI", "Aplicaciones")"><i class="fa fa-bar-chart"></i><span class="tr" key="BI">BI</span><span class="fa fa-chevron-down"></span></a>*@
+
+
+                                    <a href=""><i class="fa fa-bar-chart"></i><span class="tr" key="ReporteBI">Reportes BI</span></a>
+                                    <ul>
+                                        <li class="reporte1">
+                                            <a href="@Url.Action("BI", "Aplicaciones")"><span class="tr" key="reporteBI1">Análisis de Fallas</span></a>
+                                        </li>
+                                        <li class="reporte2">
+                                            <a href="@Url.Action("BI2", "Aplicaciones")"><span class="tr" key="reporteBI2">KPIs Gasificación</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <br />
+                        @*<div class="menu_section" id="Planificacion">
+                                <ul class="mcd-menu nav side-menu">
+                                    <li style="margin-top:25%">
+                                        <a href="@Url.Action("ConstruccionServicios", "Aplicaciones")"><i class="fa fa-bar-chart"></i><span class="tr" key="AplicacionPlanificacion">Aplicación de Planificación</span>  <span class="fa fa-chevron-down"></span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br />
+                            <div class="menu_section" id="ALAB">
+                                <ul class="mcd-menu nav side-menu">
+                                    <li style="margin-top:25%">
+                                        <a href="@Url.Action("ConstruccionServicios", "Aplicaciones")"><i class="fa fa-battery-full"></i><span class="tr" key="AplicacionInterna">Aplicación Liventus LAB</span> <span class="fa fa-chevron-down"></span></a>
+                                    </li>
+                                </ul>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <!--menu lateral-->
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-user fa-4x" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="mailto:soporteti@liventusglobal.com"><b>Enviar Correo a Soporte Ti</b></a></li>
+                                    <li id="ModificarDatos"><a href="@Url.Action("ModificarDatos","Usuarios")">Modificar Contraseña</a></li>
+                                    <li><a href="@Url.Action("Login","Home")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="user-profile"> @Session["Nombre"].ToString() </a>
+                                <input type="text" id="perfil" value="@Session["PerfilInterior"]" style="display:none" />
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+            <div id="loader">
+                <div id="loaderInner"></div>
+                <div>
+                    <img id="logoaplicacion" src="~/images/logologin.png" />
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Application Developed by <a href="http://liventusglobal.com"><b>Liventus S.A. </b><span class="fa fa-registered"></span></a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress
+    <script src="../vendors/nprogress/nprogress.js"></script>-->
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!--DataTables-->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="../vendors/dataTables.checkboxes.min.js"></script>
+    <script type="text/javascript" src="../vendors/dataTables.fixedColumns.min.js"></script>
+
+    <script type="text/javascript" src="../vendors/jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="../vendors/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript" src="../vendors/jquery.datetimepicker.min.js"></script>
+    <link type="text/css" href="../vendors/jquery.datetimepicker.min.css" rel="stylesheet" />
+
+    <!--DataTables CSS-->
+    <link type="text/css" href="../vendors/dataTables.checkboxes.css" rel="stylesheet" />
+    <link href="../Vendors/datatables.net/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="../Vendors/datatables.net/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../Vendors/datatables.net/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+    <script src="~/build/js/Perfiles.js"></script>
+
+
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <script type="text/javascript">
+
+                var loading = $('#loader').hide();
+                var loader = $('#loaderInner').hide();
+
+                $(document).ajaxStart(function () {
+                    loading.show();
+                    loader.show();
+                });
+
+                $(document).ajaxStop(function () {
+                    loading.hide();
+                    loader.hide();
+                });
+
+
+        //EN ESTA SECCION SE DETALLAN LAS RESTRICCIONES DE LOS PERFILES DE LA INTRANET
+
+                @*if (@Perfil == 1) {//PERFIL GERENCIAL
+
+                }
+                else if (@Perfil == 2) { //PERFIL ADMINISTRATIVO TECNICO
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 3){ //PERFIL ADMINISTRATIVO
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('Tecnica').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 4){ //PERFIL RESTRINGIDO
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('Servicios').style.display = 'none';
+                    document.getElementById('Tecnica').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 5){ //PERFIL CLIENTE
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('DMS').style.display = 'none';
+                    document.getElementById('Tecnica').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('ModificarDatos').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 6){ //PERFIL ADMINISTRATIVO LAB
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('Servicios').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 7){ //PERFIL GERENCIA LAB
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 8){ // PERFIL GERENCIA COMERCIAL
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                }else if(@Perfil == 9){ // PERFIL SOPORTE LAB
+                    document.getElementById('Servicios').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 10){ //PERFIL SERVICE PROVIDER
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('DMS').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                    document.getElementById('Tecnica').style.display = 'none';
+                }else if(@Perfil == 11){ //PERFIL EXTERNO DEPOSITO
+                    document.getElementById('PowerBI').style.display = 'none';
+                    document.getElementById('DMS').style.display = 'none';
+                    document.getElementById('Tecnica').style.display = 'none';
+                    document.getElementById('CRM').style.display = 'none';
+                    document.getElementById('ALAB').style.display = 'none';
+                    document.getElementById('ModificarDatos').style.display = 'none';
+                    document.getElementById('Planificacion').style.display = 'none';
+                }else if(@Perfil == 12){ //PERFIL EXTERNO BI
+                    $("#Servicios").hide();
+                    $("#Tecnica").hide();
+                    $("#CRM").hide();
+                    $("#DMS").hide();
+                }*@
+    </script>
+</body>
+</html>

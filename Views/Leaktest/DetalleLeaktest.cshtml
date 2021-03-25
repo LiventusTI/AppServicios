@@ -1,0 +1,342 @@
+﻿
+@{
+    ViewBag.Title = "DetalleLeaktest";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Detalle de Resultado de LeakTest <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="FormControl" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Naviera <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-6 col-xs-12">
+                                    <option value="0">Seleccione una Naviera</option>
+                                    <option value="1">MSC</option>
+                                    <option selected>CMA CGM</option>
+                                    <option value="3">HAPAG LLOYD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Deposito <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="deposito" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nave <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione una Nave</option>
+                                    <option value="1">CAP SAN SOUNIO</option>
+                                    <option value="2">MSC SOFIA CELESTE</option>
+                                    <option value="3">MSC FAUSTINA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Exportador <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Exportador</option>
+                                    <option value="1">EXPORTADORA PROPAL S.A.</option>
+                                    <option value="2">SOUTH PACIFIC LOGISTICS SAC</option>
+                                    <option value="3">COMERCIALIZADORA FRUFIVA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Freight Forwarder <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Freight Forwarder</option>
+                                    <option value="1">EXPORTADORA PROPAL S.A.</option>
+                                    <option value="2">SOUTH PACIFIC LOGISTICS SAC</option>
+                                    <option value="3">COMERCIALIZADORA FRUFIVA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Consignatario <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Consignatario" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Commoditie <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Commoditie</option>
+                                    <option value="1">AVOCADO</option>
+                                    <option value="2">BLUEBERRIES</option>
+                                    <option value="3">CAROZO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Porc. Gasificación <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Porcentaje de gasificación</option>
+                                    <option value="1">02 12%, C02 8%</option>
+                                    <option value="2">02 16%, C02 10%</option>
+                                    <option value="3">02 12%, C02 6%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Cantidad Servicios <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="N_Servicios" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Viaje <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Viaje" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                P. Origen <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Puerto de Origen</option>
+                                    <option value="1">VALPARAISO</option>
+                                    <option value="2">MANZANILLO</option>
+                                    <option value="3">CAROZO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                P. Destino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="custom-select form-control col-md-7 col-xs-12">
+                                    <option selected>Seleccione un Puerto de Destino</option>
+                                    <option value="1">LONDON</option>
+                                    <option value="2">ROTTERDAM</option>
+                                    <option value="3">HONG KONG</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--DATEPICKER-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio Stacking <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="inicio_stacking" id="Eta" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Termino Stacking <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="termino_stacking" id="Eta" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                ETA <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="Eta" id="Eta" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                ETD <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="Etd" id="Etd" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <!--DATEPICKER-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Temperatura <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Temperatura" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tecnología <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Tecnologia" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                            <button type="button" class="btn btn-success" onclick="ValidarFormulario()">Enviar</button>
+                            <button class="btn btn-warning" type="reset">Limpiar</button>
+                            <button class="btn btn-primary" type="reset">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function MostrarAgregarLeaktest() {
+
+        document.getElementById("div_ingreso").style.visibility = "visible";
+    }
+
+    function MostrarAgregarLeaktest2() {
+
+        document.getElementById("div_ingreso2").style.visibility = "visible";
+    }
+
+    function ValidarFormulario() {
+        var Booking = $("#Booking").val();
+        var Nave = $("#Nave").val();
+        var Naviera = $("#Naviera").val();
+        var Exportador = $("#Exportador").val();
+        var Producto = $("#Producto").val();
+        var Destino = $("#Destino").val();
+        var Origen = $("#Origen").val();
+        var Contenedor = $("#Contenedor").val();
+        var Viaje = $("#Viaje").val();
+        var Eta = $("#Eta").val();
+        var Etd = $("#Etd").val();
+        var CantidadCo = $("#C02").val();
+        var CantidadO = $("#O2").val();
+        var Temperatura = $("#Temperatura").val();
+        var Tamano = $("#TamContenedor").val();
+
+        if (Booking == "") {
+            swal('Error...', 'Campo Booking Obligatorio', 'error')
+        } else if (Nave == "") {
+            swal('Error...', 'Campo Nave Obligatorio', 'error')
+        } else if (Naviera == "") {
+            swal('Error...', 'Campo Naviera Obligatorio', 'error')
+        } else if (Exportador == "") {
+            swal('Error...', 'Campo Exportador Obligatorio', 'error')
+        } else if (Producto == "") {
+            swal('Error...', 'Campo Producto Obligatorio', 'error')
+        } else if (Destino == "") {
+            swal('Error...', 'Campo Destino Obligatorio', 'error')
+        } else if (Origen == "") {
+            swal('Error...', 'Campo Origen Obligatorio', 'error')
+        } else if (Contenedor == "") {
+            swal('Error...', 'Campo Contenedor Obligatorio', 'error')
+        } else if (Viaje == "") {
+            swal('Error...', 'Campo Viaje Obligatorio', 'error')
+        } else if (Eta == "") {
+            swal('Error...', 'Campo Eta Obligatorio', 'error')
+        } else if (Etd == "") {
+            swal('Error...', 'Campo Etd Obligatorio', 'error')
+        } else if (CantidadCo == "") {
+            swal('Error...', 'Campo CantidadCo2 Obligatorio', 'error')
+        } else if (CantidadO == "") {
+            swal('Error...', 'Campo CantidadO2 Obligatorio', 'error')
+        } else if (Temperatura == "") {
+            swal('Error...', 'Campo Temperatura Obligatorio', 'error')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Reservas/IngresarDatos",
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                Booking: Booking,
+                Nave: Nave,
+                Naviera: Naviera,
+                Exportador: Exportador,
+                Producto: Producto,
+                Destino: Destino,
+                Origen: Origen,
+                Viaje: Viaje,
+                FechaArribo: Eta,
+                FechaSalida: Etd,
+                CantidadCO: CantidadCo,
+                CantidadO: CantiadO,
+                Temperatura: Temperatura,
+                Tamano: Tamano
+            },
+            success: function (d) {
+                if (d.success == true)
+                    alert('Has introducido un nuevo coche!!');
+                else { }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error!!');
+            }
+        });
+    }
+
+    $(function () {
+        $("#Eta").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+
+        $("#Etd").datepicker({
+            dateFormat: "dd-mm-yy",
+            firstDay: 1,
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            monthNames:
+                ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+                "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort:
+                ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+        });
+    });
+</script>
