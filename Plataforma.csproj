@@ -9928,8 +9928,6 @@
     <Content Include="Views\Aplicaciones\Comparacion.cshtml" />
     <Content Include="Views\Viaje\VisualizarViajes.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="_EventRegisterUsersGuide.docx" />
-    <Content Include="_EventSourceUsersGuide.docx" />
     <Content Include="Views\Controlador\GestionarMovimientoControlador.cshtml" />
     <Content Include="Views\Controlador\GestionRetrievalControlador.cshtml" />
     <Content Include="Views\Reservas\Facturacion.cshtml" />
@@ -9950,6 +9948,8 @@
     <Content Include="Views\Alertas\AlertasEnTransito.cshtml" />
     <Content Include="Views\Reservas\GraficoMediciones.cshtml" />
     <Content Include="Views\Bateria\CargarBaterias.cshtml" />
+    <Content Include="_EventRegisterUsersGuide.docx" />
+    <Content Include="_EventSourceUsersGuide.docx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -10047,13 +10047,13 @@
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.110.0\build\net451\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets'))" />
-    <Error Condition="!Exists('packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets'))" />
   </Target>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Import Project="packages\System.Data.SQLite.Core.1.0.110.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Import Project="..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets" Condition="Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" />
-  <Import Project="packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets" Condition="Exists('packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.24\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" />
+  <Import Project="packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets" Condition="Exists('packages\Microsoft.Diagnostics.Tracing.EventRegister.1.1.28\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
